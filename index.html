@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru"> <head>
+<html lang="ru">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Расписание Мастер-классов</title> <script src="https://cdn.tailwindcss.com"></script>
+    <title>Гамельн</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="manifest" href="manifest.json">
@@ -1611,35 +1613,6 @@
             flex-wrap: wrap; 
             margin-bottom: 1rem;
         }
-        .gemini-btn {
-            background-color: #6366f1; /* Indigo-500 */
-            color: white;
-            padding: 0.25rem 0.75rem;
-            font-size: 0.75rem; /* Smaller text */
-            border-radius: 0.375rem;
-            margin-top: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .gemini-btn:hover {
-            background-color: #4f46e5; /* Indigo-600 */
-        }
-        /* Modal Styling */
-        #geminiModal {
-            /* ... existing styles ... */
-        }
-        #geminiModalTitle {
-             /* ... existing styles ... */
-        }
-        #geminiModalContent {
-            max-height: 60vh; /* Limit height and make scrollable */
-            overflow-y: auto;
-            text-align: left; /* Align text to the left for readability */
-            white-space: pre-wrap; /* Preserve line breaks from API response */
-        }
-        #closeGeminiModal {
-             /* ... existing styles ... */
-        }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -1650,7 +1623,7 @@
 
     <div class="container mx-auto max-w-4xl">
         <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-blue-700">Расписание Мастер-классов</h1>
+            <h1 class="text-4xl font-bold text-blue-700">Гамельн</h1>
             <p class="text-xl text-gray-600">Май/Июнь 2025</p>
         </header>
 
@@ -1678,23 +1651,6 @@
 
         <div id="workshopsTabsContainer">
             </div>
-        
-        <div id="geminiModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50">
-            <div class="relative mx-auto p-5 border w-11/12 md:w-1/2 shadow-lg rounded-md bg-white">
-                <div class="mt-3 text-center">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="geminiModalTitle">Детали от ИИ</h3>
-                    <div class="mt-2 px-7 py-3">
-                        <p class="text-sm text-gray-500" id="geminiModalContent">Загрузка деталей от ИИ...</p>
-                    </div>
-                    <div class="items-center px-4 py-3">
-                        <button id="closeGeminiModal" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300">
-                            Закрыть
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <script>
@@ -1705,13 +1661,9 @@
             const tabNavContainer = document.getElementById('tabNavContainer');
             const workshopsTabsContainer = document.getElementById('workshopsTabsContainer');
             const noFavoritesMessage = document.getElementById('noFavoritesMessage');
-            const geminiModal = document.getElementById('geminiModal');
-            const geminiModalTitle = document.getElementById('geminiModalTitle');
-            const geminiModalContent = document.getElementById('geminiModalContent');
-            const closeGeminiModalButton = document.getElementById('closeGeminiModal');
-
-            if (!tabNavContainer || !workshopsTabsContainer || !geminiModal || !geminiModalTitle || !geminiModalContent || !closeGeminiModalButton) {
-                console.error("CRITICAL: Eines oder mehrere Haupt-UI-Elemente nicht im DOM gefunden. Initialisierung abgebrochen.");
+            
+            if (!tabNavContainer || !workshopsTabsContainer ) {
+                console.error("CRITICAL: Tab- oder Workshop-Container nicht im DOM gefunden. Initialisierung abgebrochen.");
                 if (loadingIndicator) loadingIndicator.classList.add('hidden');
                 return;
             }
@@ -1740,79 +1692,9 @@
                     button.setAttribute('aria-label', 'Добавить в избранное');
                 }
             };
-
-            const openGeminiModal = (title) => {
-                geminiModalTitle.textContent = `Детали от ИИ для: ${title}`;
-                geminiModalContent.textContent = 'Загрузка деталей от ИИ...';
-                geminiModal.classList.remove('hidden');
-            };
-
-            const closeGeminiModal = () => {
-                geminiModal.classList.add('hidden');
-            };
-
-            if(closeGeminiModalButton) {
-                closeGeminiModalButton.addEventListener('click', closeGeminiModal);
-            }
             
-            const handleGeminiRequest = async (eventId) => {
-                let eventData = null;
-                for (const dateKey in embeddedTimetableData.schedule) {
-                    const foundEvent = embeddedTimetableData.schedule[dateKey].events.find(e => e.eventId === eventId);
-                    if (foundEvent) {
-                        eventData = foundEvent;
-                        break;
-                    }
-                }
-
-                if (!eventData) {
-                    console.error("Event-Daten nicht gefunden für ID:", eventId);
-                    geminiModalContent.textContent = "Ошибка: Данные о мероприятии не найдены.";
-                    return;
-                }
-
-                openGeminiModal(eventData.title_ru);
-
-                const prompt = `Для мастер-класса с названием "${eventData.title_ru}" ${eventData.description_ru ? `и описанием "${eventData.description_ru}"` : ''}, пожалуйста, сгенерируй 2-3 дополнительных интересных аспекта или связанных активностей, которые могут быть интересны участникам. Ответь на немецком языке и отформатируй ответ для удобного чтения.`;
-                
-                let chatHistory = [];
-                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                const payload = { contents: chatHistory };
-                const apiKey = ""; 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        const errorBody = await response.text();
-                        throw new Error(`API-Fehler: ${response.status} ${response.statusText} - ${errorBody}`);
-                    }
-
-                    const result = await response.json();
-                    
-                    if (result.candidates && result.candidates.length > 0 &&
-                        result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
-                        const text = result.candidates[0].content.parts[0].text;
-                        geminiModalContent.textContent = text;
-                    } else {
-                        console.error("Unerwartete API-Antwortstruktur:", result);
-                        geminiModalContent.textContent = "Не удалось сгенерировать детали. Пожалуйста, попробуйте позже.";
-                    }
-                } catch (error) {
-                    console.error("Fehler bei der Gemini API-Anfrage:", error);
-                    geminiModalContent.textContent = `Ошибка запроса к ИИ. Пожалуйста, попробуйте позже. (${error.message})`;
-                }
-            };
-            
-            const attachActionListeners = () => {
-                if (!workshopsTabsContainer) return;
-                
+            const attachFavoriteButtonListeners = () => {
+                if (!workshopsTabsContainer) return; 
                 const favoriteButtons = workshopsTabsContainer.querySelectorAll('.favorite-btn');
                 favoriteButtons.forEach(button => {
                     const newButton = button.cloneNode(true); 
@@ -1837,25 +1719,7 @@
                         }
                     }
                 });
-
-                const geminiButtons = workshopsTabsContainer.querySelectorAll('.gemini-btn');
-                geminiButtons.forEach(button => {
-                    const newButton = button.cloneNode(true);
-                    button.parentNode.replaceChild(newButton, button);
-                    
-                    const card = newButton.closest('.event-card');
-                    if (card) {
-                        const eventId = card.dataset.eventId;
-                        if (eventId) {
-                            newButton.addEventListener('click', (e) => {
-                                e.stopPropagation();
-                                handleGeminiRequest(eventId);
-                            });
-                        }
-                    }
-                });
             };
-
 
             const getLocationNameById = (locationId) => {
                 if (!embeddedTimetableData.locations) return 'Место не указано';
@@ -1926,8 +1790,6 @@
                 }
 
                 const favButtonHTML = (event.eventType !== 'meal' && event.eventType !== 'registration' && event.eventType !== 'general_activity' && event.eventType !== 'ceremony') ? '<button class="favorite-btn" aria-label="Добавить в избранное">☆</button>' : '';
-                const geminiButtonHTML = (event.eventType !== 'meal' && event.eventType !== 'registration' && event.eventType !== 'general_activity' && event.eventType !== 'ceremony') ? '<button class="gemini-btn">Детали от ИИ</button>' : '';
-
 
                 return `
                     <div class="event-card" data-event-id="${event.eventId}">
@@ -1937,7 +1799,6 @@
                         ${descriptionHTML}
                         ${urlHTML}
                         ${event.locationId ? `<p class="event-location">Место: ${getLocationNameById(event.locationId)}</p>` : ''}
-                        ${geminiButtonHTML}
                     </div>
                 `;
             };
@@ -2036,7 +1897,7 @@
                 if (favoriteToggleLabel && favoriteToggleSwitch) {
                     favoriteToggleLabel.textContent = favoriteToggleSwitch.checked ? 'Только избранные' : 'Показать все';
                 }
-                attachActionListeners(); 
+                attachFavoriteButtonListeners(); 
                 hideLoading(); 
             };
             
