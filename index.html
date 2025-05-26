@@ -3,13 +3,2255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Расписание Мастер-классов</title>
+    <title>Гамельн</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1e3a8a">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+
+    <script>
+        // Eingebettete Workshop-Daten (vollständig)
+        const embeddedTimetableData = 
+       {
+  "eventInfo": {
+    "eventName": "Hameln",
+    "startDate": "2025-05-28",
+    "endDate": "2025-06-01",
+    "mainLanguage": "ru"
+  },
+  "locations": [
+    {
+      "locationId": "loc_1",
+      "name_ru": "Главная палатка (1)",
+      "name_de": "Hauptzelt (1)"
+    },
+    {
+      "locationId": "loc_1a",
+      "name_ru": "Павильон рядом с главной палаткой (1а)",
+      "name_de": "Pavillon neben dem Hauptzelt (1a)"
+    },
+    {
+      "locationId": "loc_2",
+      "name_ru": "Просветительская палатка (2)",
+      "name_de": "Informationszelt (2)"
+    },
+    {
+      "locationId": "loc_3",
+      "name_ru": "Палатка Рубикус (3)",
+      "name_de": "Rubikus Zelt (3)"
+    },
+    {
+      "locationId": "loc_4",
+      "name_ru": "Рукодельная палатка (4)",
+      "name_de": "Bastelzelt (4)"
+    },
+    {
+      "locationId": "loc_7",
+      "name_ru": "Центральная поляна (7)",
+      "name_de": "Zentrale Lichtung (7)"
+    },
+    {
+      "locationId": "loc_8",
+      "name_ru": "Зеленые скамейки (8)",
+      "name_de": "Grüne Bänke (8)"
+    },
+    {
+      "locationId": "loc_10",
+      "name_ru": "Дальняя поляна (10)",
+      "name_de": "Entfernte Lichtung (10)"
+    },
+    {
+      "locationId": "loc_11",
+      "name_ru": "Футбольное поле (11)",
+      "name_de": "Fußballfeld (11)"
+    },
+    {
+      "locationId": "loc_u_kostra",
+      "name_ru": "У костра",
+      "name_de": "Am Lagerfeuer"
+    },
+    {
+      "locationId": "loc_yurta5",
+      "name_ru": "Юрта(5)",
+      "name_de": "Jurte (5)"
+    },
+    {
+      "locationId": "loc_volleibolnaia_ploshchadka",
+      "name_ru": "Волейбольная площадка",
+      "name_de": "Volleyballplatz"
+    },
+    {
+      "locationId": "loc_tantsploshchadka_6",
+      "name_ru": "Танцплощадка (6)",
+      "name_de": "Tanzfläche (6)"
+    },
+    {
+      "locationId": "loc_goncharnyie_krugi23",
+      "name_ru": "Гончарные круги(23)",
+      "name_de": "Töpferscheiben (23)"
+    },
+    {
+      "locationId": "loc_okolo_piesochnitsy",
+      "name_ru": "Около песочницы",
+      "name_de": "Beim Sandkasten"
+    },
+    {
+      "locationId": "loc_ekskursiia_vstriecha_u_glavnoi_palatki",
+      "name_ru": "Экскурсия. Встреча у Главной палатки",
+      "name_de": "Exkursion. Treffpunkt am Hauptzelt"
+    },
+    {
+      "locationId": "loc_vstriecha_u_glavnoi_palatki",
+      "name_ru": "Встреча у Главной палатки",
+      "name_de": "Treffpunkt am Hauptzelt"
+    },
+    {
+      "locationId": "loc_stadion_vstriecha_u_glavnoi_palatki",
+      "name_ru": "Стадион. Встреча у главной палатки",
+      "name_de": "Stadion. Treffpunkt am Hauptzelt"
+    }
+  ],
+  "schedule": {
+    "2025-05-28": {
+      "dayLabel_de": "Mittwoch",
+      "dayLabel_ru": "среда",
+      "fullDayDescription_ru": "среда, 28.05.2025",
+      "events": [
+        {
+          "eventId": "W25005",
+          "title_ru": "Регистрация на поляне(W25005)",
+          "locationId": "loc_1a",
+          "eventType": "registration",
+          "startTime": "16:00",
+          "endTime": "18:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/426279.html"
+        },
+        {
+          "eventId": "W25124",
+          "title_ru": "Коллажи из бумаги (W25124)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25016",
+          "title_ru": "Гороховый конструктор (W25016)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/426765.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Ужин",
+          "locationId": null,
+          "eventType": "meal",
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25005",
+          "title_ru": "Регистрация на поляне(W25005)",
+          "locationId": "loc_1a",
+          "eventType": "registration",
+          "startTime": "19:00",
+          "endTime": "21:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/426279.html"
+        },
+        {
+          "eventId": "W25128",
+          "title_ru": "Физические опыты со звуком для детей 6-10 лет. (W25128)",
+          "locationId": "loc_2",
+          "eventType": "workshop",
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/455493.html"
+        },
+        {
+          "eventId": "W25109",
+          "title_ru": "Парфюмер (W25109)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/444788.html"
+        },
+        {
+          "eventId": "W25111",
+          "title_ru": "\"Махнёмся не глядя!\"(W25111)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/436655.html"
+        },
+        {
+          "eventId": "W25101",
+          "title_ru": "Древний Счёт (W25101)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/451707.html"
+        },
+        {
+          "eventId": "W25066",
+          "title_ru": "Чудеса из бумаги (W25066)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/452955.html"
+        },
+        {
+          "eventId": "W25056",
+          "title_ru": "Игры на знакомство (W25056)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/438066.html"
+        },
+        {
+          "eventId": "W25019",
+          "title_ru": "Песни у костра для взрослых и детей (W25019)",
+          "locationId": "loc_u_kostra",
+          "eventType": "activity",
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/442764.html"
+        }
+      ]
+    },
+    "2025-05-29": {
+      "dayLabel_de": "Donnerstag",
+      "dayLabel_ru": "четверг",
+      "fullDayDescription_ru": "четверг, 29.05.2025",
+      "events": [
+        {
+          "eventId": "W25027",
+          "title_ru": "Зарядка по утренней росе \"Киря и Гиря\" (W25027)",
+          "locationId": "loc_7",
+          "eventType": "sport",
+          "startTime": "07:30",
+          "endTime": "08:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/430114.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Завтрак",
+          "locationId": null,
+          "eventType": "meal",
+          "startTime": "08:00",
+          "endTime": "10:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25065",
+          "title_ru": "Утреннее пробуждение (W25065)",
+          "locationId": "loc_10",
+          "eventType": "activity",
+          "startTime": "08:00",
+          "endTime": "10:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/454280.html"
+        },
+        {
+          "eventId": "W25005",
+          "title_ru": "C 9:00 Регистрация на поляне(W25005)",
+          "locationId": "loc_1",
+          "eventType": "registration",
+          "startTime": "09:30",
+          "endTime": "10:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/426279.html"
+        },
+        {
+          "eventId": "W25111",
+          "title_ru": "\"Махнёмся не глядя!\"(W25111)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "09:30",
+          "endTime": "10:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/436655.html"
+        },
+        {
+          "eventId": "W25097",
+          "title_ru": "Паяльная мастерская (W25097)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/445117.html"
+        },
+        {
+          "eventId": "W25016",
+          "title_ru": "Гороховый конструктор (W25016)",
+          "locationId": "loc_1a",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/426765.html"
+        },
+        {
+          "eventId": "W25004",
+          "title_ru": "Сложно и понятно (W25004) Как придумать новое лекарство",
+          "locationId": "loc_2",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/458723.html"
+        },
+        {
+          "eventId": "W25011",
+          "title_ru": "Картины из пластилина на любой возраст (W25011)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/427964.html"
+        },
+        {
+          "eventId": "W25061",
+          "title_ru": "Украшение одежды вышивкой (W25061)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/436940.html"
+        },
+        {
+          "eventId": "W25056",
+          "title_ru": "Игры на знакомство (W25056)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/438066.html"
+        },
+        {
+          "eventId": "W25002",
+          "title_ru": "Театральная мастерская (W25002)",
+          "locationId": "loc_8",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/456958.html"
+        },
+        {
+          "eventId": "W25098",
+          "title_ru": "Охота за флагами (W25098)",
+          "locationId": "loc_10",
+          "eventType": "activity",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/447804.html"
+        },
+        {
+          "eventId": "W25032",
+          "title_ru": "Игры с парашютом для самых маленьких (W25032)",
+          "locationId": "loc_volleibolnaia_ploshchadka",
+          "eventType": "activity",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/431927.html"
+        },
+        {
+          "eventId": "W25023",
+          "title_ru": "Расшифровка генетического кода генетического кода (W25023)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/427395.html"
+        },
+        {
+          "eventId": "W25050",
+          "title_ru": "Раскраска лица, татуировка хной и бусины для глажки (W25050)",
+          "locationId": "loc_1a",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25004",
+          "title_ru": "Сложно и понятно (W25004) Что творится внутри у современной лампочки",
+          "locationId": "loc_2",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/458723.html"
+        },
+        {
+          "eventId": "W25122",
+          "title_ru": "Макаронное ожерелье (W25122)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/450036.html"
+        },
+         {
+          "eventId": "W25076",
+          "title_ru": "Как рождается книга - мастерская и история (W25076)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/432613.html"
+        },
+        {
+          "eventId": "W25018",
+          "title_ru": "Поделки(декор) из деревянных спилов (W25018)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/430907.html"
+        },
+        {
+          "eventId": "W25010",
+          "title_ru": "МнушИнки (W25010)",
+          "locationId": "loc_10",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/427230.html"
+        },
+        {
+          "eventId": "W25084",
+          "title_ru": "Неутомимая скакалка (W25084)",
+          "locationId": "loc_tantsploshchadka_6",
+          "eventType": "activity",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/438499.html"
+        },
+        {
+          "eventId": "W25069",
+          "title_ru": "Мастерская «Гипсовые руки» (W25069)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/446756.html"
+        },
+        {
+          "eventId": "W25101",
+          "title_ru": "Древний Счёт (W25101)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/451707.html"
+        },
+        {
+          "eventId": "W25109",
+          "title_ru": "Парфюмер (W25109)",
+          "locationId": "loc_1a",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/444788.html"
+        },
+        {
+          "eventId": "W25004",
+          "title_ru": "Сложно и понятно (W25004) Как болеет сердце или Пафофизиология кровеносной системы",
+          "locationId": "loc_2",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/458723.html"
+        },
+        {
+          "eventId": "W25095",
+          "title_ru": "ГрадоСтрой: Урбанистическая Сага (W25095)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/452067.html"
+        },
+        {
+          "eventId": "W25116",
+          "title_ru": "Разрисовываем камни (W25116)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25107",
+          "title_ru": "Дело в шляпе (W25107)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/442242.html"
+        },
+        {
+          "eventId": "W25104",
+          "title_ru": "Акройога (W25104)",
+          "locationId": "loc_7",
+          "eventType": "sport",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25094",
+          "title_ru": "Каталки - нажималки , топалки - хлопалки, гремелки - шумелки и т.д. (W25094)",
+          "locationId": "loc_11",
+          "eventType": "activity",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/448998.html"
+        },
+        {
+          "eventId": "W25057",
+          "title_ru": "Разведение костра без спичек (W25057)",
+          "locationId": "loc_u_kostra",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/430725.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Обед",
+          "locationId": null,
+          "eventType": "meal",
+          "startTime": "13:00",
+          "endTime": "15:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25055",
+          "title_ru": "Читаем, обсуждаем & мастерим. Книжный клуб. (W25055)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/433447.html"
+        },
+        {
+          "eventId": "W25046",
+          "title_ru": "Стойкий оловянный солдатик (W25046)",
+          "locationId": "loc_1a",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/432214.html"
+        },
+        {
+          "eventId": "W25004",
+          "title_ru": "Сложно и понятно (W25004) История Гамельна",
+          "locationId": "loc_2",
+          "eventType": "talk",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/458723.html"
+        },
+        {
+          "eventId": "W25075",
+          "title_ru": "Посиделки с двухголовым писателем Жвалевский-Пастернак (W25075)",
+          "locationId": "loc_3",
+          "eventType": "talk",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/431375.html"
+        },
+        {
+          "eventId": "W25073",
+          "title_ru": "Деревья из проволоки (с бисером) (W25073)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "15:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/443717.html"
+        },
+        {
+           "eventId": "W25015",
+           "title_ru": "The best of (W25015)",
+           "locationId": "loc_4",
+           "eventType": "workshop",
+           "startTime": "15:00",
+           "endTime": "16:00",
+           "description_ru": "",
+           "url": null
+        },
+        {
+          "eventId": "W25063",
+          "title_ru": "Мыльные пузыри (W25063)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/459424.html"
+        },
+         {
+          "eventId": "W25040",
+          "title_ru": "Хоровая (W25040)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/439578.html"
+        },
+        {
+          "eventId": "W25002",
+          "title_ru": "Театральная мастерская (W25002)",
+          "locationId": "loc_8",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/456958.html"
+        },
+        {
+          "eventId": "W25070",
+          "title_ru": "Релаксационные техники (W25070)",
+          "locationId": "loc_10",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/431725.html"
+        },
+        {
+          "eventId": "W25096",
+          "title_ru": "С мячом, за мячом, и от мяча (4 - 8 лет) (W25096)",
+          "locationId": "loc_11",
+          "eventType": "sport",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25117",
+          "title_ru": "\"Безумное чаепитие в майской юрте\" (W25117)",
+          "locationId": "loc_yurta5",
+          "eventType": "activity",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/441405.html"
+        },
+        {
+          "eventId": "W25068",
+          "title_ru": "День Африки (W25068)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/430390.html"
+        },
+        {
+          "eventId": "W25045",
+          "title_ru": "Веселые фонарики (W25045)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/455356.html"
+        },
+        {
+          "eventId": "W25062",
+          "title_ru": "Современная поэзия (W25062)",
+          "locationId": "loc_2",
+          "eventType": "talk",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/437137.html"
+        },
+        {
+          "eventId": "W25059",
+          "title_ru": "Шахматы (W25059)",
+          "locationId": "loc_3",
+          "eventType": "activity",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25103",
+          "title_ru": "Модные дизайнерские бусы (W25103)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/448164.html"
+        },
+        {
+          "eventId": "W25038",
+          "title_ru": "Айкидошки с Лёшкой (W25038)",
+          "locationId": "loc_7",
+          "eventType": "sport",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+           "eventId": "W25113",
+           "title_ru": "Игры с верёвочками \"Колыбель для кошки\" (W25113)",
+           "locationId": "loc_7",
+           "eventType": "activity",
+           "startTime": "16:00",
+           "endTime": "17:00",
+           "description_ru": "",
+           "url": null
+        },
+        {
+          "eventId": "W25010",
+          "title_ru": "МнушИнки (W25010)",
+          "locationId": "loc_10",
+          "eventType": "workshop",
+          "startTime": "16:00",
+          "endTime": "18:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/427230.html"
+        },
+        {
+          "eventId": "W25081",
+          "title_ru": "Восточные танцы для детей и взрослых (W25081)",
+          "locationId": "loc_11",
+          "eventType": "activity",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/434563.html"
+        },
+        {
+          "eventId": "W25091",
+          "title_ru": "Чтение пьес по ролям в юрте (W25091)",
+          "locationId": "loc_yurta5",
+          "eventType": "activity",
+          "startTime": "16:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/449377.html"
+        },
+        {
+            "eventId": "W25051",
+            "title_ru": "16:00-18:00 Гончарная (W25051)",
+            "locationId": "loc_goncharnyie_krugi23",
+            "eventType": "workshop",
+            "startTime": "16:00",
+            "endTime": "18:00",
+            "description_ru": "",
+            "url": "https://hamelnkinder.livejournal.com/451478.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Нет мастерских, потому что колотилки очень шумные. Будет не слышно друг друга",
+          "locationId": null,
+          "eventType": "info",
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25030",
+          "title_ru": "Juggling-Do — Жонглирование (W25030)",
+          "locationId": "loc_7",
+          "eventType": "workshop",
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/447008.html"
+        },
+        {
+          "eventId": "W25082",
+          "title_ru": "Учимся крутить пои (W25082)",
+          "locationId": "loc_8",
+          "eventType": "workshop",
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/456378.html"
+        },
+        {
+          "eventId": "W25003",
+          "title_ru": "Круговые танцы народов мира (W25003)",
+          "locationId": "loc_11",
+          "eventType": "activity",
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/447385.html"
+        },
+        {
+          "eventId": "W25025",
+          "title_ru": "Колотилки (W25025)",
+          "locationId": "loc_tantsploshchadka_6",
+          "eventType": "activity",
+          "startTime": "17:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+            "eventId": "W25031",
+            "title_ru": "Живые деревья (W25031)",
+            "locationId": "loc_ekskursiia_vstriecha_u_glavnoi_palatki",
+            "eventType": "tour",
+            "startTime": "17:00",
+            "endTime": "18:00",
+            "description_ru": "",
+            "url": "https://hamelnkinder.livejournal.com/446356.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Ужин",
+          "locationId": null,
+          "eventType": "meal",
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25033",
+          "title_ru": "Мини диско (W25033)",
+          "locationId": "loc_tantsploshchadka_6",
+          "eventType": "activity",
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/429467.html"
+        },
+        {
+          "eventId": "W25123",
+          "title_ru": "Интерактивный спектакль \"Фантеркок\" (W25123)",
+          "locationId": null,
+          "eventType": "performance",
+          "startTime": "19:00",
+          "endTime": "21:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/453712.html"
+        },
+        {
+          "eventId": "W25039",
+          "title_ru": "Мастерская теней \"Семейные легенды\" (W25039)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/436231.html"
+        },
+        {
+          "eventId": "W25126",
+          "title_ru": "Проект Рубикус helpUA (W25126)",
+          "locationId": "loc_2",
+          "eventType": "talk",
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/459857.html"
+        },
+        {
+          "eventId": "W25049",
+          "title_ru": "Радиолюбительская мастерская (W25049)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/429123.html"
+        },
+        {
+          "eventId": "W25019",
+          "title_ru": "Песни у костра для взрослых и детей (W25019)",
+          "locationId": "loc_u_kostra",
+          "eventType": "activity",
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/442764.html"
+        },
+        {
+          "eventId": "W25083",
+          "title_ru": "Feuershow (W25083)",
+          "locationId": "loc_8",
+          "eventType": "show",
+          "startTime": "22:00",
+          "endTime": "22:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/456601.html"
+        },
+        {
+          "eventId": "W25090",
+          "title_ru": "Чтение стихов в юрте (W25090)",
+          "locationId": "loc_yurta5",
+          "eventType": "activity",
+          "startTime": "22:00",
+          "endTime": "22:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/449137.html"
+        }
+      ]
+    },
+    "2025-05-30": {
+      "dayLabel_de": "Freitag",
+      "dayLabel_ru": "пятница",
+      "fullDayDescription_ru": "пятница, 30.05.2025",
+      "events": [
+        {
+          "eventId": "W25027",
+          "title_ru": "Зарядка по утренней росе \"Киря и Гиря\" (W25027)",
+          "locationId": "loc_7",
+          "eventType": "sport",
+          "startTime": "07:30",
+          "endTime": "08:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/430114.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Завтрак",
+          "locationId": null,
+          "eventType": "meal",
+          "startTime": "08:00",
+          "endTime": "10:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25065",
+          "title_ru": "Утреннее пробуждение (W25065)",
+          "locationId": "loc_10",
+          "eventType": "activity",
+          "startTime": "08:00",
+          "endTime": "10:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/454280.html"
+        },
+        {
+          "eventId": "W25079",
+          "title_ru": "Мультфильм в Stop Motion (W25079)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/433713.html"
+        },
+        {
+          "eventId": "W25050",
+          "title_ru": "Раскраска лица, татуировка хной и бусины для глажки (W25050)",
+          "locationId": "loc_1a",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25004",
+          "title_ru": "Сложно и понятно (W25004) «Хороший, плохой, злой»: гормон счастья — серотонин",
+          "locationId": "loc_2",
+          "eventType": "talk",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/458723.html"
+        },
+        {
+          "eventId": "W25071",
+          "title_ru": "Лепим электросхемы на бумаге (W25071)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25088",
+          "title_ru": "Цветы из пушистой проволоки (W25088)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/450338.html"
+        },
+        {
+          "eventId": "W25032",
+          "title_ru": "Игры с парашютом для самых маленьких (W25032)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/431927.html"
+        },
+        {
+          "eventId": "W25002",
+          "title_ru": "Театральная мастерская (W25002)",
+          "locationId": "loc_8",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/456958.html"
+        },
+        {
+          "eventId": "W25028",
+          "title_ru": "Утренняя экскурсия по гнездам птиц (W25028)",
+          "locationId": "loc_vstriecha_u_glavnoi_palatki",
+          "eventType": "tour",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/437434.html"
+        },
+        {
+          "eventId": "W25023",
+          "title_ru": "Расшифровка генетического кода генетического кода (W25023)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/427395.html"
+        },
+        {
+          "eventId": "W25036",
+          "title_ru": "Своя игра (W25036)",
+          "locationId": "loc_1a",
+          "eventType": "activity",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/443906.html"
+        },
+        {
+          "eventId": "W25004",
+          "title_ru": "Сложно и понятно (W25004) Путь к разумным машинам: от юмора до цепочек рассуждений",
+          "locationId": "loc_2",
+          "eventType": "talk",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/458723.html"
+        },
+        {
+          "eventId": "W25017",
+          "title_ru": "Украшения из проволоки (Wire Wrap) (W25017)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/450724.html"
+        },
+        {
+          "eventId": "W25094",
+          "title_ru": "Каталки - нажималки , топалки - хлопалки, гремелки - шумелки и т.д. (W25094)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "11:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/448998.html"
+        },
+        {
+          "eventId": "W25061",
+          "title_ru": "Украшение одежды вышивкой (W25061)",
+          "locationId": "loc_7",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/436940.html"
+        },
+        {
+          "eventId": "W25020",
+          "title_ru": "Парные фольклорные танцы (W25020)",
+          "locationId": "loc_11",
+          "eventType": "activity",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/434266.html"
+        },
+        {
+          "eventId": "W25012",
+          "title_ru": "Неньютоновская жидкость (W25012)",
+          "locationId": "loc_okolo_piesochnitsy",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/457375.html"
+        },
+        {
+          "eventId": "W25120",
+          "title_ru": "Неспешные разговоры про потери и горевание (W25120)",
+          "locationId": "loc_yurta5",
+          "eventType": "talk",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25074",
+          "title_ru": "Мастерская по придумыванию сюжета (W25074)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/431353.html"
+        },
+        {
+          "eventId": "W25069",
+          "title_ru": "Мастерская «Гипсовые руки» (W25069)",
+          "locationId": "loc_1a",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/446756.html"
+        },
+        {
+            "eventId": "W25044",
+            "title_ru": "Книжки на память (W25044)",
+            "locationId": "loc_1a",
+            "eventType": "workshop",
+            "startTime": "12:00",
+            "endTime": "13:00",
+            "description_ru": "",
+            "url": "https://hamelnkinder.livejournal.com/440344.html"
+        },
+        {
+          "eventId": "W25004",
+          "title_ru": "Сложно и понятно (W25004) Как делаются карты для дорожной навигации",
+          "locationId": "loc_2",
+          "eventType": "talk",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/458723.html"
+        },
+        {
+          "eventId": "W25103",
+          "title_ru": "Модные дизайнерские бусы (W25103)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/448164.html"
+        },
+        {
+            "eventId": "W25035",
+            "title_ru": "Цианоти́пия (W25035)",
+            "locationId": "loc_3",
+            "eventType": "workshop",
+            "startTime": "12:00",
+            "endTime": "13:00",
+            "description_ru": "",
+            "url": "https://hamelnkinder.livejournal.com/441236.html"
+        },
+        {
+          "eventId": "W25030",
+          "title_ru": "Juggling-Do — Жонглирование (W25030)",
+          "locationId": "loc_7",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/447008.html"
+        },
+        {
+          "eventId": "W25040",
+          "title_ru": "Хоровая (W25040)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/439578.html"
+        },
+        {
+          "eventId": "W25113",
+          "title_ru": "Игры с верёвочками \"Колыбель для кошки\" (W25113)",
+          "locationId": "loc_8",
+          "eventType": "activity",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25084",
+          "title_ru": "Неутомимая скакалка (W25084)",
+          "locationId": "loc_tantsploshchadka_6",
+          "eventType": "activity",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/438499.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Обед",
+          "locationId": null,
+          "eventType": "meal",
+          "startTime": "13:00",
+          "endTime": "15:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25107",
+          "title_ru": "Дело в шляпе (W25107)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/442242.html"
+        },
+        {
+          "eventId": "W25045",
+          "title_ru": "Веселые фонарики (W25045)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/455356.html"
+        },
+        {
+          "eventId": "W25048",
+          "title_ru": "Фимо/Полимерная глина (W25048)",
+          "locationId": "loc_1a",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25004",
+          "title_ru": "Сложно и понятно (W25004) О болезнях культурных растений",
+          "locationId": "loc_2",
+          "eventType": "talk",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/458723.html"
+        },
+        {
+          "eventId": "W25115",
+          "title_ru": "Математическая игротека. Головоломки и конструкторы (W25115)",
+          "locationId": "loc_3",
+          "eventType": "activity",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/439156.html"
+        },
+        {
+          "eventId": "W25102",
+          "title_ru": "Каллиграфия - Иероглифы кистью и не только (W25102)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/445434.html"
+        },
+        {
+          "eventId": "W25081",
+          "title_ru": "Восточные танцы для детей и взрослых (W25081)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/434563.html"
+        },
+        {
+          "eventId": "W25002",
+          "title_ru": "Театральная мастерская (W25002)",
+          "locationId": "loc_8",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/456958.html"
+        },
+        {
+          "eventId": "W25070",
+          "title_ru": "Релаксационные техники (W25070)",
+          "locationId": "loc_10",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/431725.html"
+        },
+        {
+          "eventId": "W25082",
+          "title_ru": "Учимся крутить пои (W25082)",
+          "locationId": "loc_11",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/456378.html"
+        },
+        {
+          "eventId": "W25051",
+          "title_ru": "15:00-17:00 Гончарная (W25051)",
+          "locationId": "loc_goncharnyie_krugi23",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/451478.html"
+        },
+        {
+          "eventId": "W25097",
+          "title_ru": "Паяльная мастерская (W25097)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/445117.html"
+        },
+        {
+          "eventId": "W25055",
+          "title_ru": "Читаем, обсуждаем & мастерим. Книжный клуб. (W25055)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/433447.html"
+        },
+        {
+          "eventId": "W25059",
+          "title_ru": "Шахматы (W25059)",
+          "locationId": "loc_1a",
+          "eventType": "activity",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25110",
+          "title_ru": "Стихи и разговоры (W25110)",
+          "locationId": "loc_2",
+          "eventType": "talk",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/445970.html"
+        },
+        {
+          "eventId": "W25112",
+          "title_ru": "Уникальная сумка (W25112)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "16:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/442979.html"
+        },
+        {
+            "eventId": "W25046",
+            "title_ru": "Стойкий оловянный солдатик (W25046)",
+            "locationId": "loc_3",
+            "eventType": "workshop",
+            "startTime": "16:00",
+            "endTime": "17:00",
+            "description_ru": "",
+            "url": "https://hamelnkinder.livejournal.com/432214.html"
+        },
+        {
+          "eventId": "W25073",
+          "title_ru": "Деревья из проволоки (с бисером) (W25073)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "16:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/443717.html"
+        },
+        {
+            "eventId": "W25015",
+            "title_ru": "The best of (W25015)",
+            "locationId": "loc_4",
+            "eventType": "workshop",
+            "startTime": "16:00",
+            "endTime": "17:00",
+            "description_ru": "",
+            "url": null
+        },
+        {
+          "eventId": "W25038",
+          "title_ru": "Айкидошки с Лёшкой (W25038)",
+          "locationId": "loc_7",
+          "eventType": "sport",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25007",
+          "title_ru": "Гага-хулиганство (W25007)",
+          "locationId": "loc_10",
+          "eventType": "activity",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/428923.html"
+        },
+        {
+          "eventId": "W25096",
+          "title_ru": "С мячом, за мячом, и от мяча (4 - 8 лет) (W25096)",
+          "locationId": "loc_11",
+          "eventType": "sport",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25077",
+          "title_ru": "Домино экспресс (W25077)",
+          "locationId": "loc_tantsploshchadka_6",
+          "eventType": "activity",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/444165.html"
+        },
+        {
+            "eventId": "W25117",
+            "title_ru": "\"Безумное чаепитие в майской юрте\" (W25117)",
+            "locationId": "loc_yurta5",
+            "eventType": "activity",
+            "startTime": "16:00",
+            "endTime": "17:00",
+            "description_ru": "",
+            "url": "https://hamelnkinder.livejournal.com/441405.html"
+        },
+        {
+          "eventId": "W25042",
+          "title_ru": "Концерт «Наши таланты» (W25042)",
+          "locationId": null,
+          "eventType": "concert",
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/439920.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Ужин",
+          "locationId": null,
+          "eventType": "meal",
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25033",
+          "title_ru": "Мини диско (W25033)",
+          "locationId": "loc_tantsploshchadka_6",
+          "eventType": "activity",
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/429467.html"
+        },
+        {
+          "eventId": "W25125",
+          "title_ru": "Дебаты 12+ (W25125)",
+          "locationId": "loc_1",
+          "eventType": "talk",
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/445705.html"
+        },
+        {
+          "eventId": "W25047",
+          "title_ru": "Паб-Квиз (W25047)",
+          "locationId": "loc_3",
+          "eventType": "activity",
+          "startTime": "19:00",
+          "endTime": "22:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25093",
+          "title_ru": "Вечерняя сказка для самых маленьких (W25093)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25039",
+          "title_ru": "Мастерская теней \"Семейные легенды\" (W25039)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/436231.html"
+        },
+        {
+          "eventId": "W25090",
+          "title_ru": "Чтение стихов в юрте (W25090)",
+          "locationId": "loc_yurta5",
+          "eventType": "activity",
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/449137.html"
+        },
+        {
+          "eventId": "W25083",
+          "title_ru": "Feuershow (W25083)",
+          "locationId": "loc_10",
+          "eventType": "show",
+          "startTime": "22:00",
+          "endTime": "22:30",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/456601.html"
+        },
+        {
+          "eventId": "W25019",
+          "title_ru": "Песни у костра для взрослых и детей (W25019)",
+          "locationId": "loc_u_kostra",
+          "eventType": "activity",
+          "startTime": "22:00",
+          "endTime": "22:30",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/442764.html"
+        },
+        {
+          "eventId": "W25029",
+          "title_ru": "Ночная экскурсия без фонариков: \"\"Медведица и соловей\" (W25029)",
+          "locationId": "loc_stadion_vstriecha_u_glavnoi_palatki",
+          "eventType": "tour",
+          "startTime": "22:30",
+          "endTime": "23:30",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/437724.html"
+        }
+      ]
+    },
+    "2025-05-31": {
+      "dayLabel_de": "Samstag",
+      "dayLabel_ru": "суббота",
+      "fullDayDescription_ru": "суббота, 31.05.2025",
+      "events": [
+        {
+          "eventId": "W25027",
+          "title_ru": "Зарядка по утренней росе \"Киря и Гиря\" (W25027)",
+          "locationId": "loc_7",
+          "eventType": "sport",
+          "startTime": "07:30",
+          "endTime": "08:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/430114.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Завтрак",
+          "locationId": null,
+          "eventType": "meal",
+          "startTime": "08:00",
+          "endTime": "10:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25065",
+          "title_ru": "Утреннее пробуждение (W25065)",
+          "locationId": "loc_10",
+          "eventType": "activity",
+          "startTime": "08:00",
+          "endTime": "10:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/454280.html"
+        },
+        {
+          "eventId": "W25097",
+          "title_ru": "Паяльная мастерская (W25097)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "10:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/445117.html"
+        },
+        {
+            "eventId": "W25088",
+            "title_ru": "Цветы из пушистой проволоки (W25088)",
+            "locationId": "loc_1",
+            "eventType": "workshop",
+            "startTime": "10:00",
+            "endTime": "11:00",
+            "description_ru": "",
+            "url": "https://hamelnkinder.livejournal.com/450338.html"
+        },
+        {
+          "eventId": "W25021",
+          "title_ru": "Клады (W25021)",
+          "locationId": "loc_1a",
+          "eventType": "activity",
+          "startTime": "10:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/438612.html"
+        },
+        {
+          "eventId": "W25004",
+          "title_ru": "Сложно и понятно (W25004) Украинский язык для чайников",
+          "locationId": "loc_2",
+          "eventType": "talk",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/458723.html"
+        },
+        {
+          "eventId": "W25058",
+          "title_ru": "Краеведческая мастерская про Гамельн (W25058)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "10:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+            "eventId": "W25034",
+            "title_ru": "Мягкие карабины (W25034)",
+            "locationId": "loc_3",
+            "eventType": "workshop",
+            "startTime": "10:00",
+            "endTime": "11:00",
+            "description_ru": "",
+            "url": "https://hamelnkinder.livejournal.com/428251.html"
+        },
+        {
+          "eventId": "W25106",
+          "title_ru": "Браслеты из паракорда (W25106)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "10:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/460654.html"
+        },
+        {
+            "eventId": "W25035",
+            "title_ru": "Цианоти́пия (W25035)",
+            "locationId": "loc_4",
+            "eventType": "workshop",
+            "startTime": "10:00",
+            "endTime": "11:00",
+            "description_ru": "",
+            "url": "https://hamelnkinder.livejournal.com/441236.html"
+        },
+        {
+          "eventId": "W25032",
+          "title_ru": "Игры с парашютом для самых маленьких (W25032)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/431927.html"
+        },
+        {
+          "eventId": "W25052",
+          "title_ru": "Волшебные флейты на поляне (W25052)",
+          "locationId": "loc_8",
+          "eventType": "activity",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/446521.html"
+        },
+        {
+          "eventId": "W25007",
+          "title_ru": "Гага-хулиганство (W25007)",
+          "locationId": "loc_10",
+          "eventType": "activity",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/428923.html"
+        },
+        {
+          "eventId": "W25051",
+          "title_ru": "10:00-12:00 Гончарная (W25051)",
+          "locationId": "loc_goncharnyie_krugi23",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/451478.html"
+        },
+        {
+          "eventId": "W25048",
+          "title_ru": "Фимо/Полимерная глина (W25048)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": null
+        },
+         {
+          "eventId": "W25071",
+          "title_ru": "Лепим электросхемы на бумаге (W25071)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25004",
+          "title_ru": "Сложно и понятно (W25004) Музыка с белками",
+          "locationId": "loc_2",
+          "eventType": "talk",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/458723.html"
+        },
+        {
+          "eventId": "W25050",
+          "title_ru": "Раскраска лица, татуировка хной и бусины для глажки (W25050)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+            "eventId": "W25118",
+            "title_ru": "\"Волшебный спичечный коробок\" (W25118)",
+            "locationId": "loc_3",
+            "eventType": "workshop",
+            "startTime": "11:00",
+            "endTime": "12:00",
+            "description_ru": "",
+            "url": "https://hamelnkinder.livejournal.com/447567.html"
+        },
+        {
+          "eventId": "W25017",
+          "title_ru": "Украшения из проволоки (Wire Wrap) (W25017)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/450724.html"
+        },
+        {
+          "eventId": "W25002",
+          "title_ru": "Театральная мастерская (W25002)",
+          "locationId": "loc_7",
+          "eventType": "workshop",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/456958.html"
+        },
+        {
+          "eventId": "W25040",
+          "title_ru": "Хоровая (W25040)",
+          "locationId": "loc_8",
+          "eventType": "activity",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/439578.html"
+        },
+        {
+          "eventId": "W25038",
+          "title_ru": "Айкидошки с Лёшкой (W25038)",
+          "locationId": "loc_10",
+          "eventType": "sport",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25081",
+          "title_ru": "Восточные танцы для детей и взрослых (W25081)",
+          "locationId": "loc_11",
+          "eventType": "activity",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/434563.html"
+        },
+        {
+          "eventId": "W25084",
+          "title_ru": "Неутомимая скакалка (W25084)",
+          "locationId": "loc_tantsploshchadka_6",
+          "eventType": "activity",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/438499.html"
+        },
+        {
+          "eventId": "W25044",
+          "title_ru": "Книжки на память (W25044)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/440344.html"
+        },
+        {
+          "eventId": "W25092",
+          "title_ru": "Эхо (W25092)",
+          "locationId": "loc_2",
+          "eventType": "activity",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/441662.html"
+        },
+        {
+          "eventId": "W25095",
+          "title_ru": "ГрадоСтрой: Урбанистическая Сага (W25095)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/452067.html"
+        },
+        {
+          "eventId": "W25094",
+          "title_ru": "Каталки - нажималки , топалки - хлопалки, гремелки - шумелки и т.д. (W25094)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/448998.html"
+        },
+        {
+          "eventId": "W25003",
+          "title_ru": "Круговые танцы народов мира (W25003)",
+          "locationId": "loc_10",
+          "eventType": "activity",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/447385.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Обед",
+          "locationId": null,
+          "eventType": "meal",
+          "startTime": "13:00",
+          "endTime": "15:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": null,
+          "title_ru": "Подготовка к сладкой мастерской",
+          "locationId": "loc_1",
+          "eventType": "preparation",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25092",
+          "title_ru": "Эхо (W25092)",
+          "locationId": "loc_2",
+          "eventType": "activity",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/441662.html"
+        },
+        {
+          "eventId": "W25114",
+          "title_ru": "Игры с буквами и словами для начинающих читателей (W25114)",
+          "locationId": "loc_3",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/438840.html"
+        },
+        {
+          "eventId": "W25112",
+          "title_ru": "Уникальная сумка (W25112)",
+          "locationId": "loc_4",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/442979.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Подготовка к спектаклю",
+          "locationId": "loc_7",
+          "eventType": "preparation",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25082",
+          "title_ru": "Учимся крутить пои (W25082)",
+          "locationId": "loc_8",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/456378.html"
+        },
+        {
+          "eventId": "W25070",
+          "title_ru": "Релаксационные техники (W25070)",
+          "locationId": "loc_10",
+          "eventType": "workshop",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/431725.html"
+        },
+        {
+          "eventId": "W25020",
+          "title_ru": "Парные фольклорные танцы (W25020)",
+          "locationId": "loc_11",
+          "eventType": "activity",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/434266.html"
+        },
+        {
+          "eventId": "W25077",
+          "title_ru": "Домино экспресс (W25077)",
+          "locationId": "loc_tantsploshchadka_6",
+          "eventType": "activity",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/444165.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Спектакль",
+          "locationId": null,
+          "eventType": "performance",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25099",
+          "title_ru": "По окончании спектакля Сладкая мастерская для всех детей (W25099)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/443264.html"
+        },
+        {
+          "eventId": "W25004",
+          "title_ru": "Сложно и понятно (W25004) Поведенческая терапия (Applied Behavior Analysis, ABA)",
+          "locationId": "loc_2",
+          "eventType": "talk",
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/458723.html"
+        },
+        {
+          "eventId": "W25127",
+          "title_ru": "Покраска хлоркой (W25127)",
+          "locationId": "loc_8",
+          "eventType": "workshop",
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": null,
+          "title_ru": "Ужин",
+          "locationId": null,
+          "eventType": "meal",
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25033",
+          "title_ru": "Мини диско (W25033)",
+          "locationId": "loc_tantsploshchadka_6",
+          "eventType": "activity",
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/429467.html"
+        },
+        {
+          "eventId": "W25041",
+          "title_ru": "Концерт мастерских (W25041)",
+          "locationId": null,
+          "eventType": "concert",
+          "startTime": "19:30",
+          "endTime": "21:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/440135.html"
+        },
+        {
+          "eventId": "W25100",
+          "title_ru": "Физматбеседы (W25100)",
+          "locationId": "loc_2",
+          "eventType": "talk",
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/461510.html"
+        },
+        {
+          "eventId": "W25019",
+          "title_ru": "Песни у костра для взрослых и детей (W25019)",
+          "locationId": "loc_u_kostra",
+          "eventType": "activity",
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/442764.html"
+        }
+      ]
+    },
+    "2025-06-01": {
+      "dayLabel_de": "Sonntag",
+      "dayLabel_ru": "воскресенье",
+      "fullDayDescription_ru": "воскресенье, 01.06.2025",
+      "events": [
+        {
+          "eventId": "W25027",
+          "title_ru": "Зарядка по утренней росе \"Киря и Гиря\" (W25027)",
+          "locationId": "loc_7",
+          "eventType": "sport",
+          "startTime": "07:30",
+          "endTime": "08:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/430114.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Завтрак",
+          "locationId": null,
+          "eventType": "meal",
+          "startTime": "08:00",
+          "endTime": "10:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": "W25034",
+          "title_ru": "Мягкие карабины (W25034)",
+          "locationId": "loc_1a",
+          "eventType": "workshop",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/428251.html"
+        },
+        {
+          "eventId": "W25094",
+          "title_ru": "Каталки - нажималки , топалки - хлопалки, гремелки - шумелки и т.д. (W25094)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/448998.html"
+        },
+        {
+          "eventId": "W25098",
+          "title_ru": "Охота за флагами (W25098)",
+          "locationId": "loc_11",
+          "eventType": "activity",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/447804.html"
+        },
+        {
+          "eventId": "W25006",
+          "title_ru": "Хороводы для взрослых (W25006)",
+          "locationId": "loc_7",
+          "eventType": "activity",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/428630.html"
+        },
+        {
+          "eventId": "W25063",
+          "title_ru": "Мыльные пузыри (W25063)",
+          "locationId": "loc_8",
+          "eventType": "activity",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/459424.html"
+        },
+        {
+          "eventId": "W25055",
+          "title_ru": "Читаем, обсуждаем & мастерим. Книжный клуб. (W25055)",
+          "locationId": "loc_1",
+          "eventType": "workshop",
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "description_ru": "",
+          "url": "https://hamelnkinder.livejournal.com/433447.html"
+        },
+        {
+          "eventId": null,
+          "title_ru": "Обед",
+          "locationId": null,
+          "eventType": "meal",
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": null,
+          "title_ru": "Экологический квест по уборке поляны (по традиции, активные участники получают мороженое)",
+          "locationId": null,
+          "eventType": "quest",
+          "startTime": "14:00",
+          "endTime": "16:00",
+          "description_ru": "",
+          "url": null
+        },
+        {
+          "eventId": null,
+          "title_ru": "Отъезд последних участников",
+          "locationId": null,
+          "eventType": "other",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "description_ru": "",
+          "url": null
+        }
+      ]
+    }
+  }
+};
+    </script>
 
     <style>
         body {
@@ -313,7 +2555,7 @@
 
     <div class="container mx-auto max-w-4xl">
         <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-blue-700">Расписание Мастер-классов</h1>
+            <h1 class="text-4xl font-bold text-blue-700">Гамельн</h1>
             <p class="text-xl text-gray-600">Май/Июнь 2025</p>
         </header>
 
@@ -334,7 +2576,7 @@
         </div>
         
         <div id="noFavoritesMessage">
-            Избранных мастер-классов нет. Отметьте мастер-классы звездочкой ☆, чтобы они отображались здесь.
+            Избранных мастерских нет. Отметьте мастер-классы звездочкой ☆, чтобы они отображались здесь.
         </div>
 
         <nav class="tab-nav" aria-label="Навигация по дням" id="tabNavContainer">
@@ -359,7 +2601,6 @@
                 return;
             }
 
-            let fullData = {}; // Wird mit den Daten aus timetable.json gefüllt
             let favorites = JSON.parse(localStorage.getItem('workshopFavorites')) || [];
             let currentView = localStorage.getItem('workshopPlanView') || 'all';
             if (favoriteToggleSwitch) { 
@@ -419,7 +2660,7 @@
                     toggle.parentNode.replaceChild(newToggle, toggle);
 
                     const contentId = newToggle.getAttribute('aria-controls');
-                    const contentElement = document.getElementById(contentId); 
+                    const contentElement = document.getElementById(contentId); // ID ist global
                     const chevron = newToggle.querySelector('.chevron');
 
                     if (contentElement) {
@@ -440,8 +2681,8 @@
 
 
             const getLocationNameById = (locationId) => {
-                if (!fullData.locations) return 'Место не указано';
-                const locationObj = fullData.locations.find(loc => loc.locationId === locationId);
+                if (!embeddedTimetableData.locations) return 'Место не указано';
+                const locationObj = embeddedTimetableData.locations.find(loc => loc.locationId === locationId);
                 return locationObj ? locationObj.name_ru : 'Место не указано'; 
             };
 
@@ -480,7 +2721,12 @@
                 }
 
                 let titleHTML = event.title_ru;
-                // Duration badge removed
+                // Duration badge removed from here
+                // const durationBadgeText = getDurationBadge(event.startTime, event.endTime);
+                // if (durationBadgeText) {
+                //     titleHTML += ` <span class="duration-badge">${durationBadgeText}</span>`;
+                // }
+
 
                 let detailsHTML = '';
                 if (event.details_ru) {
@@ -489,6 +2735,7 @@
                 if (event.targetAudience_ru) {
                     detailsHTML += `<p class="event-details">Целевая аудитория: ${event.targetAudience_ru}</p>`;
                 }
+                // Show full time if not a short event (or if duration badge was removed)
                 if (event.startTime && event.endTime) { 
                     detailsHTML += `<p class="event-details">Время: ${event.startTime} - ${event.endTime}</p>`;
                 }
@@ -534,14 +2781,14 @@
                     return;
                 }
                 const activePanel = workshopsTabsContainer.querySelector('.tab-panel.active');
-                if (!activePanel || !fullData.schedule) {
+                if (!activePanel || !embeddedTimetableData.schedule) {
                     hideLoading(); 
                     return;
                 }
 
                 let hasVisibleContentInActivePanel = false;
                 const activeDateKey = activePanel.id.replace('tab-', '');
-                const daySchedule = fullData.schedule[activeDateKey];
+                const daySchedule = embeddedTimetableData.schedule[activeDateKey];
 
                 if (!daySchedule || !daySchedule.events) {
                     activePanel.innerHTML = `<h2 class="day-header">${activePanel.dataset.dayDe}</h2><p class="text-center text-gray-500 mt-4">Мероприятий на этот день не запланировано.</p>`;
@@ -674,10 +2921,8 @@
             };
             
             showLoading();
-            // Daten direkt verwenden
             if (embeddedTimetableData && embeddedTimetableData.schedule) {
-                fullData = embeddedTimetableData; // Zuweisen der eingebetteten Daten
-                setupTabs(fullData.schedule); 
+                setupTabs(embeddedTimetableData.schedule); 
                 
                 const initiallyActiveTab = tabNavContainer ? tabNavContainer.querySelector('.tab-button.active') : null;
                 if (initiallyActiveTab) {
@@ -835,7 +3080,7 @@
     ```javascript
     // sw.js - Service Worker
 
-    const CACHE_NAME = 'veranstaltungsplan-cache-v1.17'; // Cache-Version erhöht
+    const CACHE_NAME = 'veranstaltungsplan-cache-v1.20'; // Cache-Version erhöht
     const urlsToCache = [
       './', 
       'index.html', // Wird nun mit eingebetteten Daten gecacht
