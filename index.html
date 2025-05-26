@@ -16,6 +16,33 @@
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6; 
         }
+        #loadingIndicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(243, 244, 246, 0.9); /* Light gray with opacity */
+            z-index: 9999;
+            text-align: center;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #1e3a8a; /* Indigo */
+            animation: spin 1s ease infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         .event-card {
             background-color: white;
             border-radius: 0.5rem;
@@ -30,9 +57,41 @@
         }
         .event-title {
             font-weight: 700;
-            font-size: 1.125rem;
-            color: #111827;
+            font-size: 1.125rem; 
+            color: #111827; 
+            margin-bottom: 0.25rem; 
+            display: flex; 
+            align-items: center; 
+            flex-wrap: wrap; 
+        }
+        .duration-badge {
+            font-size: 0.75rem; 
+            color: #4b5563; 
+            background-color: #e5e7eb; 
+            padding: 0.125rem 0.375rem; 
+            border-radius: 0.25rem; 
+            margin-left: 0.5rem; 
+            font-weight: 500; 
+            white-space: nowrap; 
+        }
+        .event-description { 
+            font-size: 0.875rem;
+            color: #374151; 
+            margin-top: 0.5rem;
             margin-bottom: 0.25rem;
+            padding-left: 0.5rem;
+            border-left: 2px solid #d1d5db;
+        }
+        .event-url { 
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        .event-url a {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+        .event-url a:hover {
+            color: #1e3a8a;
         }
         .event-details {
             font-size: 0.875rem;
@@ -99,6 +158,7 @@
             align-items: center;
             justify-content: center;
             transition: background-color 0.3s, color 0.3s;
+            z-index: 10; 
         }
         .favorite-btn.favorited {
             background-color: #fde047;
@@ -121,7 +181,7 @@
         #installPwaButton:hover {
             background-color: #1d4ed8;
         }
-        .hidden-by-filter, .tab-panel:not(.active) {
+        .hidden-by-filter, .tab-panel:not(.active), #loadingIndicator.hidden { 
             display: none !important;
         }
         #noFavoritesMessage {
@@ -158,18 +218,16 @@
             color: #1e40af;
             border-bottom-color: #1e40af;
         }
-
-        /* Toggle Switch Styling */
         .toggle-switch-label {
-            font-size: 0.875rem; /* 14px */
-            color: #374151; /* Dark gray text */
+            font-size: 0.875rem; 
+            color: #374151; 
             margin-right: 0.5rem;
         }
         .toggle-switch {
             position: relative;
             display: inline-block;
-            width: 44px; /* Breite des Schalters */
-            height: 24px; /* Höhe des Schalters */
+            width: 44px; 
+            height: 24px; 
         }
         .toggle-switch input {
             opacity: 0;
@@ -185,35 +243,40 @@
             bottom: 0;
             background-color: #ccc;
             transition: .4s;
-            border-radius: 24px; /* Höhe des Schalters */
+            border-radius: 24px; 
         }
         .slider:before {
             position: absolute;
             content: "";
-            height: 18px; /* Größe des Knubbels */
-            width: 18px;  /* Größe des Knubbels */
-            left: 3px;   /* Position des Knubbels */
-            bottom: 3px; /* Position des Knubbels */
+            height: 18px; 
+            width: 18px;  
+            left: 3px;   
+            bottom: 3px; 
             background-color: white;
             transition: .4s;
             border-radius: 50%;
         }
         input:checked + .slider {
-            background-color: #10b981; /* Grüne Farbe für aktiv */
+            background-color: #10b981; 
         }
         input:checked + .slider:before {
-            transform: translateX(20px); /* Bewegung des Knubbels */
+            transform: translateX(20px); 
         }
-        .controls-container { /* Flex-Container für Buttons/Toggle */
+        .controls-container { 
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-wrap: wrap; /* Umbruch bei Bedarf */
+            flex-wrap: wrap; 
             margin-bottom: 1rem;
         }
     </style>
 </head>
 <body class="p-4 md:p-8">
+    <div id="loadingIndicator">
+        <div class="spinner"></div>
+        <p class="text-lg font-semibold text-gray-700">Lade Veranstaltungsplan...</p>
+    </div>
+
     <div class="container mx-auto max-w-4xl">
         <header class="text-center mb-8">
             <h1 class="text-4xl font-bold text-blue-700">Veranstaltungsplan Workshops</h1>
@@ -222,7 +285,8 @@
 
         <div id="controlsContainer" class="controls-container mb-4">
              <button id="installPwaButton">App installieren</button>
-             <div class="flex items-center ml-4"> <span class="toggle-switch-label" id="favoriteToggleLabel">Alle anzeigen</span>
+             <div class="flex items-center ml-4"> 
+                <span class="toggle-switch-label" id="favoriteToggleLabel">Alle anzeigen</span>
                 <label class="toggle-switch">
                     <input type="checkbox" id="favoriteToggleSwitch">
                     <span class="slider"></span>
@@ -238,1108 +302,1812 @@
             Keine Favoriten ausgewählt. Markieren Sie Workshops mit ☆, um sie hier anzuzeigen.
         </div>
 
-        <nav class="tab-nav" aria-label="Tagesnavigation">
-            <button class="tab-button active" data-tab-target="tab-mittwoch">Среда</button>
-            <button class="tab-button" data-tab-target="tab-donnerstag">Четверг</button>
-            <button class="tab-button" data-tab-target="tab-freitag">Пятница</button>
-            <button class="tab-button" data-tab-target="tab-samstag">Суббота</button>
-            <button class="tab-button" data-tab-target="tab-sonntag">Воскресенье</button>
-        </nav>
+        <nav class="tab-nav" aria-label="Tagesnavigation" id="tabNavContainer">
+            </nav>
 
         <div id="workshopsTabsContainer">
-            <div id="tab-mittwoch" class="tab-panel active day-section">
-                <h2 class="day-header">Среда 28.05.2025, день заезда</h2>
-                
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">17:00</h3>
-                    <div class="event-card" data-event-id="W25124">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Коллажи из бумаги (W25124)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25005_Mi17">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Регистрация на поляне (W25005)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25016">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Гороховый конструктор (W25016)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                </div>
-
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">18:00 - 19:00</h3>
-                    <div class="meal-item">
-                        <p>Ужин - Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">19:00 - 20:00</h3>
-                    <div class="event-card" data-event-id="W25101_Mi19">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Древний Счёт (W25101)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25005_Mi19">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Регистрация на поляне (W25005)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25128">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Физические опыты со звуком для детей 6-10 лет. (W25128)</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25109_Mi19">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Парфюмер (W25109)</p>
-                        <p class="event-details">Parallel: Чудеса из бумаги (W25066)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25111_Mi19">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">"Махнёмся не глядя!" (W25111)</p>
-                        <p class="event-details">Parallel: Игры на знакомство (W25056)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">21:00</h3>
-                    <div class="event-card" data-event-id="W25019_Mi21">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Песни у костра для взрослых и детей (W25019)</p>
-                        <p class="event-location">Ort: У костра</p>
-                    </div>
-                </div>
             </div>
-
-            <div id="tab-donnerstag" class="tab-panel day-section">
-                <h2 class="day-header">Четверг 29.05.2025</h2>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">07:30</h3>
-                    <div class="event-card" data-event-id="W25027_Do0730">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Зарядка по утренней росе "Киря и Гиря" (W25027)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                     <h3 class="timeslot-time-header">08:00 - 10:00</h3>
-                    <div class="meal-item">
-                        <p>Завтрак</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25005_Do09"> <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Регистрация на поляне (W25005)</p>
-                        <p class="event-details">(ab 09:00)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                     <div class="event-card" data-event-id="W25065_Do08">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Утреннее пробуждение (W25065)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">09:30</h3>
-                    <div class="event-card" data-event-id="W25111_Do0930">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">"Махнёмся не глядя!" (W25111)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">10:00</h3>
-                    <div class="event-card" data-event-id="W25016_Do10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Гороховый конструктор (W25016)</p>
-                        <p class="event-details">Parallel: Раскраска лица, татуировка хной и бусины для глажки (W25050)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25097_Do10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Паяльная мастерская (W25097)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25004_Do10_Lampe">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Сложно и понятно (W25004): Что творится внутри у современной лампочки</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25011_Do10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Картины из пластилина на любой возраст (W25011)</p>
-                        <p class="event-details">Parallel: Макаронное ожерелье (W25122)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                     <div class="event-card" data-event-id="W25061_Do10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Украшение одежды вышивкой (W25061)</p>
-                        <p class="event-details">Parallel: Поделки (декор) из деревянных спилов (W25018)</p>
-                        <p class="event-location">Ort: Рукодельная палатка (4)</p>
-                    </div>
-                     <div class="event-card" data-event-id="W25056_Do10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Игры на знакомство (W25056)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25002_Do10_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Театральная мастерская (W25002)</p>
-                        <p class="event-details">Parallel: Мнушинки (W25010)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25032_Do10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Игры с парашютом для самых маленьких (W25032)</p>
-                        <p class="event-details">Parallel: Охота за флагами (W25098) <br> Parallel: С мячом, за мячом, и от мяча (4-8 лет) (W25096)</p>
-                        <p class="event-location">Ort: Футбольное поле (11)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">11:00</h3>
-                    <div class="event-card" data-event-id="W25023_Do11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Расшифровка генетического кода (W25023)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25004_Do11_Med">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Сложно и понятно (W25004): Как придумать новое лекарство</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25076_Do11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Как рождается книга мастерская и история (W25076)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25094_Do11_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Каталки нажималки топалки хлопалки, гремелки шумелки и т.д. (W25094)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25084_Do11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Неутомимая скакалка (W25084)</p>
-                        <p class="event-location">Ort: Футбольное поле (11)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">12:00</h3>
-                    <div class="event-card" data-event-id="W25069_Do12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Гипсовые руки (W25069)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25109_Do12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Парфюмер (W25109)</p>
-                        <p class="event-details">Parallel: Древний Счёт (W25101)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25004_Do12_Herz">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Сложно и понятно (W25004): Исследование жесткости сердечной мышцы</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25095_Do12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">ГрадоСтрой: Урбанистическая Сага (W25095)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25116_Do12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Разрисовываем камни (W25116)</p>
-                        <p class="event-details">Parallel: Дело в шляпе (W25107)</p>
-                        <p class="event-location">Ort: Рукодельная палатка (4)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25104_Do12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Акройога (W25104)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25057_Do12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Разведение костра без спичек (W25057)</p>
-                        <p class="event-location">Ort: Другое место: У костра</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">13:00 - 15:00</h3>
-                    <div class="meal-item">
-                        <p>Обед</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">15:00</h3>
-                     <div class="event-card" data-event-id="W25055_Do15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Читаем, обсуждаем & мастерим. Книжный клуб. (W25055)</p>
-                        <p class="event-details">Parallel: Стойкий оловянный солдатик (W25046)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25004_Do15_Hameln">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Сложно и понятно (W25004): История Гамельна</p>
-                        <p class="event-details">Parallel: Современная поэзия (W25062)</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25075_Do15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Посиделки с двухголовым писателем Жвалевский-Пастернак (W25075)</p>
-                        <p class="event-details">Parallel: Шахматы (W25059)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25073_Do15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Деревья из проволоки (с бисером) (W25073)</p>
-                        <p class="event-details">Parallel: The best of (W25015) <br> Parallel: Модные дизайнерские бусы (W25103)</p>
-                        <p class="event-location">Ort: Рукодельная палатка (4)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25063_Do15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Мыльные пузыри (W25063)</p>
-                        <p class="event-details">Parallel: Хоровая (W25040)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25070_Do15_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Релаксационные техники (W25070)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25117_Do15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">"Безумное чаепитие в майской юрте" (W25117)</p>
-                        <p class="event-location">Ort: Другое место: Юрта (5)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">16:00</h3>
-                    <div class="event-card" data-event-id="W25068_Do16">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">День Африки (W25068)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25045_Do16">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Веселые фонарики (W25045)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25038_Do16_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Айкидошки с Лёшкой (W25038)</p>
-                        <p class="event-details">Parallel: Игры с верёвочками "Колыбель для кошки" (W25113)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25002_Do16_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Театральная мастерская (W25002)</p>
-                        <p class="event-details">Parallel: МнушИнки (W25010)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25051_Do16">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Гончарная (W25051) (16:00-18:00)</p>
-                        <p class="event-location">Ort: Другое место: Гончарные круги (23)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25081_Do16_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Восточные танцы для детей и взрослых (W25081)</p>
-                        <p class="event-location">Ort: Другое место: Юрта (5)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25025_Do16">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Колотилки (W25025)</p>
-                        <p class="event-location">Ort: Другое место: Танцплощадка (6)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">17:00</h3>
-                     <div class="event-card bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" data-event-id="NoWorkshop_Do17">
-                        <p class="event-details">В палатках нет мастерских, потому что колотилки очень шумные. Будет не слышно друг друга.</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25030_Do17_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Juggling-Do- Жонглирование (W25030)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25082_Do17_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Учимся крутить пои (W25082)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25091_Do17">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Чтение пьес по ролям в юрте (W25091)</p>
-                        <p class="event-location">Ort: Другое место: Юрта (5)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25003_Do17_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Круговые танцы народов мира (W25003)</p>
-                        <p class="event-location">Ort: Другое место: Танцплощадка (6)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25031_Do17">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Живые деревья (W25031)</p>
-                        <p class="event-location">Ort: Другое место: Экскурсия. Встреча у Главной палатки</p>
-                    </div>
-                </div>
-                 <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">18:00 - 19:00</h3>
-                    <div class="meal-item">
-                        <p>Ужин</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25033_Do18_Frei"> <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Мини диско (W25033)</p>
-                        <p class="event-location">Ort: Другое место: Танцплощадка (6)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">19:00</h3>
-                    <div class="event-card" data-event-id="W25123_Do19_Zelt">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Интерактивный спектакль "Фантеркок" (W25123)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a) UND Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25123_Do19_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Интерактивный спектакль "Фантеркок" (W25123)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">21:00</h3>
-                     <div class="event-card" data-event-id="W25039_Do21">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Мастерская теней "Семейные легенды" (W25039)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25126_Do21">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Проект Рубикус helpUA (W25126)</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25049_Do21">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Радиолюбительская мастерская (W25049)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25019_Do21_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Песни у костра для взрослых и детей (W25019)</p>
-                        <p class="event-location">Ort: Другое место: У костра</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">22:00</h3>
-                    <div class="event-card" data-event-id="W25083_Do22_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Feuershow (W25083)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                     <div class="event-card" data-event-id="W25090_Do22_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Чтение стихов в юрте (W25090)</p>
-                        <p class="event-location">Ort: Другое место: Юрта (5)</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="tab-freitag" class="tab-panel day-section">
-                <h2 class="day-header">Пятница 30.05.2025</h2>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">07:30</h3>
-                    <div class="event-card" data-event-id="W25027_Fr0730">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Зарядка по утренней росе "Киря и Гиря" (W25027)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">08:00 - 10:00</h3>
-                    <div class="meal-item">
-                        <p>Завтрак</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25065_Fr08">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Утреннее пробуждение (W25065)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">10:00</h3>
-                    <div class="event-card" data-event-id="W25079_Fr10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Мультфильм в Stop Motion (W25079)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25050_Fr10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Раскраска лица, татуировка хной и бусины для глажки (W25050)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25004_Fr10_Serotonin">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Сложно и понятно (W25004): «Хороший, плохой, злой»: гормон счастья серотонин</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25071_Fr10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Лепим электросхемы на бумаге (W25071)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25088_Fr10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Цветы из пушистой проволоки (W25088)</p>
-                        <p class="event-location">Ort: Рукодельная палатка (4)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25032_Fr10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Игры с парашютом для самых маленьких (W25032)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25028_Fr10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Утренняя экскурсия по гнездам птиц (W25028)</p>
-                        <p class="event-location">Ort: Другое место: Встреча у Главной палатки</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">11:00</h3>
-                    <div class="event-card" data-event-id="W25023_Fr11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Расшифровка генетического кода (W25023)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25036_Fr11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Своя игра (W25036)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25004_Fr11_Maschinen">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Сложно и понятно (W25004): Путь к разумным машинам: от юмора до цепочек рассуждений</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25061_Fr11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Украшение одежды вышивкой (W25061)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25017_Fr11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Украшения из проволоки (Wire Wrap) (W25017)</p>
-                        <p class="event-location">Ort: Рукодельная палатка (4)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25002_Fr11_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Театральная мастерская (W25002)</p>
-                        <p class="event-details">Parallel: Каталки нажималки, топалки хлопалки, гремелки шумелки и т.д. (W25094)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25052_Fr11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Волшебные флейты на поляне (W25052)</p>
-                        <p class="event-details">Parallel: Juggling-Do- Жонглирование (W25030)</p>
-                        <p class="event-location">Ort: Дальняя поляна (10)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25020_Fr11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Парные фольклорные танцы (W25020)</p>
-                        <p class="event-location">Ort: Другое место: Танцплощадка (6)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">12:00</h3>
-                    <div class="event-card" data-event-id="W25074_Fr12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Мастерская по придумыванию сюжета (W25074)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25069_Fr12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Гипсовые руки (W25069)</p>
-                        <p class="event-details">Parallel: Книжки на память (W25044)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25004_Fr12_Karten">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Сложно и понятно (W25004): Как делаются карты для дорожной навигации</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25103_Fr12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Модные дизайнерские бусы (W25103)</p>
-                        <p class="event-details">Parallel: Цианотипия (W25035)</p>
-                        <p class="event-location">Ort: Рукодельная палатка (4)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25113_Fr12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Игры с верёвочками "Колыбель для кошки" (W25113)</p>
-                        <p class="event-details">Parallel: Хоровая (W25040)</p>
-                        <p class="event-location">Ort: Дальняя поляна (10)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25012_Fr12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Неньютоновская жидкость (W25012)</p>
-                        <p class="event-location">Ort: Другое место: Около песочницы</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25120_Fr12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Неспешные разговоры про потери и горевание (W25120)</p>
-                        <p class="event-location">Ort: Другое место: Юрта (5)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25084_Fr12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Неутомимая скакалка (W25084)</p>
-                        <p class="event-location">Ort: Футбольное поле (11)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">13:00 - 15:00</h3>
-                    <div class="meal-item">
-                        <p>Обед</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">15:00</h3>
-                    <div class="event-card" data-event-id="W25107_Fr15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Дело в шляпе (W25107)</p>
-                        <p class="event-details">Parallel: Веселые фонарики (W25045)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25048_Fr15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Фимо/Полимерная глина (W25048)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25004_Fr15_HerzPatho">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Сложно и понятно (W25004): Как болеет сердце? Патофизиология системы кровообращения</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25115_Fr15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Математическая игротека. Головоломки и конструкторы (W25115)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25102_Fr15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Каллиграфия Иероглифы кистью и не только (W25102)</p>
-                        <p class="event-location">Ort: Рукодельная палатка (4)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25070_Fr15_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Релаксационные техники (W25070)</p>
-                        <p class="event-details">Parallel: Восточные танцы для детей и взрослых (W25081)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25082_Fr15_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Учимся крутить пои (W25082)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25051_Fr15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Гончарная (W25051) (15:00-17:00)</p>
-                        <p class="event-location">Ort: Другое место: Гончарные круги (23)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">16:00</h3>
-                    <div class="event-card" data-event-id="W25097_Fr16">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Паяльная мастерская (W25097)</p>
-                        <p class="event-details">Parallel: Читаем, обсуждаем & мастерим. Книжный клуб. (W25055)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25059_Fr16">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Шахматы (W25059)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25110_Fr16">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Стихи и разговоры (W25110)</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25112_Fr16">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Уникальная сумка (W25112)</p>
-                        <p class="event-details">Parallel: Стойкий оловянный солдатик (W25046)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25073_Fr16">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Деревья из проволоки (с бисером) (W25073)</p>
-                        <p class="event-details">Parallel: The best of (W25015)</p>
-                        <p class="event-location">Ort: Рукодельная палатка (4)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25002_Fr16_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Театральная мастерская (W25002)</p>
-                        <p class="event-details">Parallel: Гага-хулиганство (W25007)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25096_Fr16_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">С мячом, за мячом, и от мяча (4-8 лет) (W25096)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25077_Fr16_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Домино экспресс (W25077)</p>
-                        <p class="event-location">Ort: Дальняя поляна (10)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25117_Fr16_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">"Безумное чаепитие в майской юрте" (W25117)</p>
-                        <p class="event-location">Ort: Другое место: Юрта (5)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">17:00</h3>
-                    <div class="event-card" data-event-id="W25042_Fr17_Zelt">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Концерт «Наши таланты» (W25042)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                     <div class="event-card" data-event-id="W25038_Fr17_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Айкидошки с Лёшкой (W25038)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25042_Fr17_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Концерт «Наши таланты» (W25042)</p>
-                        <p class="event-location">Ort: Другое место: Танцплощадка (6)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">18:00 - 19:00</h3>
-                    <div class="meal-item">
-                        <p>Ужин</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25033_Fr18_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Мини диско (W25033)</p>
-                        <p class="event-location">Ort: Другое место: Танцплощадка (6)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">19:00</h3>
-                    <div class="event-card" data-event-id="W25125_Fr19">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Дебаты 12+ (W25125)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">20:00</h3>
-                    <div class="event-card" data-event-id="W25047_Fr20">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Паб-Квиз (W25047)</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25093_Fr20_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Вечерняя сказка для самых маленьких (W25093)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">21:00</h3>
-                    <div class="event-card" data-event-id="W25039_Fr21">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Мастерская теней "Семейные легенды" (W25039)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25090_Fr21_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Чтение стихов в юрте (W25090)</p>
-                        <p class="event-location">Ort: Другое место: Юрта (5)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">22:00</h3>
-                    <div class="event-card" data-event-id="W25083_Fr22_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Feuershow (W25083)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25019_Fr22_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Песни у костра для взрослых и детей (W25019)</p>
-                        <p class="event-location">Ort: Другое место: У костра</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">22:30</h3>
-                     <div class="event-card" data-event-id="W25029_Fr2230">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Ночная экскурсия без фонариков: "Медведица и соловей" (W25029)</p>
-                        <p class="event-location">Ort: Другое место: Стадион. Встреча у главной палатки</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="tab-samstag" class="tab-panel day-section">
-                <h2 class="day-header">Суббота 31.05.2025</h2>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">07:30</h3>
-                    <div class="event-card" data-event-id="W25027_Sa0730">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Зарядка по утренней росе "Киря и Гиря" (W25027)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">08:00 - 10:00</h3>
-                    <div class="meal-item">
-                        <p>Завтрак</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25065_Sa08">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Утреннее пробуждение (W25065)</p>
-                        <p class="event-location">Ort: Дальняя поляна (10)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">10:00</h3>
-                    <div class="event-card" data-event-id="W25097_Sa10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Паяльная мастерская (W25097)</p>
-                        <p class="event-details">Parallel: Цветы из пушистой проволоки (W25088)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25004_Sa10_Ukrainisch">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Сложно и понятно (W25004): Украинский язык для чайников</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25058_Sa10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Краеведческая мастерская про Гамельн (W25058)</p>
-                        <p class="event-details">Parallel: Мягкие карабины (W25034)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25106_Sa10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Браслеты из паракорда (W25106)</p>
-                        <p class="event-details">Parallel: Цианотипия (W25035)</p>
-                        <p class="event-location">Ort: Рукодельная палатка (4)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25032_Sa10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Игры с парашютом для самых маленьких (W25032)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25052_Sa10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Волшебные флейты на поляне (W25052)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25007_Sa10_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Гага-хулиганство (W25007)</p>
-                        <p class="event-location">Ort: Дальняя поляна (10)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25051_Sa10"> <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Гончарная (W25051) (10:00-12:00)</p>
-                        <p class="event-location">Ort: Другое место: Гончарные круги (23)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">11:00</h3>
-                    <div class="event-card" data-event-id="W25048_Sa11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Фимо/Полимерная глина (W25048)</p>
-                        <p class="event-details">Parallel: Лепим электросхемы на бумаге (W25071)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25021_Sa11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Клады (W25021)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25004_Sa11_Musik">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Сложно и понятно (W25004): Музыка с белками</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25050_Sa11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Раскраска лица, татуировка хной и бусины для глажки (W25050)</p>
-                        <p class="event-details">Parallel: "Волшебный спичечный коробок" (W25118)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25017_Sa11">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Украшения из проволоки (Wire Wrap) (W25017)</p>
-                        <p class="event-location">Ort: Рукодельная палатка (4)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25002_Sa11_Frei"> <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Театральная мастерская (W25002) (11:00-12:00)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25040_Sa11_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Хоровая (W25040)</p>
-                        <p class="event-details">Parallel: Каталки нажималки, топалки - хлопалки, гремелки шумелки и т.д. (W25094)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25038_Sa11_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Айкидошки с Лешкой (W25038)</p>
-                        <p class="event-location">Ort: Дальняя поляна (10)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25081_Sa11_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Восточные танцы для детей и взрослых (W25081)</p>
-                        <p class="event-details">Parallel: Круговые танцы народов мира (W25003)</p>
-                        <p class="event-location">Ort: Другое место: Танцплощадка (6)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">12:00</h3>
-                     <div class="event-card" data-event-id="W25044_Sa12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Книжки на память (W25044)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25092_Sa12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Эхо (W25092)</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25095_Sa12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">ГрадоСтрой: Урбанистическая Сага (W25095)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25084_Sa12_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Неутомимая скакалка (W25084)</p>
-                        <p class="event-location">Ort: Футбольное поле (11)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">13:00 - 15:00</h3>
-                    <div class="meal-item">
-                        <p>Обед</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">15:00</h3>
-                    <div class="event-card" data-event-id="PrepSweets_Sa15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Подготовка к сладкой мастерской</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25092_Sa15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Эхо (W25092)</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25114_Sa15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Игры с буквами и словами для начинающих читателей (W25114)</p>
-                        <p class="event-location">Ort: Палатка Рубикус (3)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25112_Sa15">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Уникальная сумка (W25112)</p>
-                        <p class="event-location">Ort: Рукодельная палатка (4)</p>
-                    </div>
-                    <div class="event-card" data-event-id="PrepSpectacle_Sa15_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Подготовка к спектаклю</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25082_Sa15_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Учимся крутить пои (W25082)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25070_Sa15_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Релаксационные техники (W25070)</p>
-                        <p class="event-location">Ort: Дальняя поляна (10)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25020_Sa15_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Парные фольклорные танцы (W25020)</p>
-                        <p class="event-location">Ort: Другое место: Танцплощадка (6)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25077_Sa15_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Домино экспресс (W25077)</p>
-                        <p class="event-location">Ort: Футбольное поле (11)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">16:00</h3>
-                    <div class="event-card" data-event-id="Spectacle_Sa16">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Спектакль</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="Spectacle_Sa16_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Спектакль</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">17:00</h3>
-                    <div class="event-card" data-event-id="W25099_Sa17">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">По окончании спектакля Сладкая мастерская для всех детей (W25099)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25004_Sa17_ABA">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Сложно и понятно (W25004): Поведенческая терапия (Applied Behavior Analysis, ABA)</p>
-                        <p class="event-location">Ort: Просветительская палатка (2)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25127_Sa17_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Покраска хлоркой (W25127)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">18:00 - 19:00</h3>
-                    <div class="meal-item">
-                        <p>Ужин</p>
-                    </div>
-                     <div class="event-card" data-event-id="W25033_Sa18_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Мини диско (W25033)</p>
-                        <p class="event-location">Ort: Другое место: Танцплощадка (6)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">19:30</h3>
-                    <div class="event-card" data-event-id="W25041_Sa1930_Zelt">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Концерт мастерских (W25041)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25041_Sa1930_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Концерт мастерских (W25041)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">21:00</h3>
-                    <div class="event-card" data-event-id="W25100_Sa21">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Физматбеседы (W25100)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25019_Sa21_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Песни у костра для взрослых и детей (W25019)</p>
-                        <p class="event-location">Ort: Другое место: У костра</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="tab-sonntag" class="tab-panel day-section">
-                <h2 class="day-header">Воскресенье 01.06.2025, день отъезда</h2>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">07:30</h3>
-                    <div class="event-card" data-event-id="W25027_So0730">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Зарядка по утренней росе "Киря и Гиря" (W25027)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">08:00 - 10:00</h3>
-                    <div class="meal-item">
-                        <p>Завтрак</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">10:00</h3>
-                    <div class="event-card" data-event-id="W25034_So10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Мягкие карабины (W25034)</p>
-                        <p class="event-location">Ort: Павильон рядом с главной палаткой (1a)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25094_So10_Frei">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Каталки нажималки, топалки - хлопалки, гремелки шумелки и т.д. (W25094)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25006_So10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Хороводы для взрослых (W25006)</p>
-                        <p class="event-details">Parallel: Мыльные пузыри (W25063) (impliziert 11:00)</p>
-                        <p class="event-location">Ort: Зеленые скамейки (8)</p>
-                    </div>
-                    <div class="event-card" data-event-id="W25098_So10">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Охота за флагами (W25098)</p>
-                        <p class="event-location">Ort: Футбольное поле (11)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                     <h3 class="timeslot-time-header">12:00</h3>
-                    <div class="event-card" data-event-id="W25055_So12">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Читаем, обсуждаем & мастерим. Книжный клуб. (W25055)</p>
-                        <p class="event-location">Ort: Главная палатка (1)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">13:00 - 14:00</h3>
-                    <div class="meal-item">
-                        <p>Обед</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">14:00 - 16:00</h3>
-                    <div class="event-card" data-event-id="EcoQuest_So14">
-                        <button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>
-                        <p class="event-title">Экологический квест по уборке поляны (по традиции, активные участники получают мороженое)</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-                <div class="timeslot-group">
-                    <h3 class="timeslot-time-header">16:00</h3>
-                    <div class="event-card" data-event-id="Departure_So16">
-                         <p class="event-title">Отъезд последних участников</p>
-                        <p class="event-location">Ort: Центральная поляна (7)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
+        // Eingebettete Workshop-Daten (vollständig)
+        const embeddedWorkshopsData = [
+
+  {
+    "id": "W25124",
+    "day": "Mittwoch",
+    "day_de": "Среда 28.05.2025, день заезда",
+    "tabTarget": "tab-mittwoch",
+    "timeSlot": "17:00",
+    "originalTitle": "Коллажи из бумаги (W25124)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25005",
+    "day": "Mittwoch",
+    "day_de": "Среда 28.05.2025, день заезда",
+    "tabTarget": "tab-mittwoch",
+    "timeSlot": "17:00",
+    "originalTitle": "Регистрация на поляне (W25005)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25016",
+    "day": "Mittwoch",
+    "day_de": "Среда 28.05.2025, день заезда",
+    "tabTarget": "tab-mittwoch",
+    "timeSlot": "17:00",
+    "originalTitle": "Гороховый конструктор (W25016)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Mittwoch",
+    "day_de": "Среда 28.05.2025, день заезда",
+    "tabTarget": "tab-mittwoch",
+    "timeSlot": "18:00-19:00",
+    "originalTitle": "Ужин",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": true,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25101",
+    "day": "Mittwoch",
+    "day_de": "Среда 28.05.2025, день заезда",
+    "tabTarget": "tab-mittwoch",
+    "timeSlot": "19:00",
+    "originalTitle": "Древний Счёт (W25101)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25005",
+    "day": "Mittwoch",
+    "day_de": "Среда 28.05.2025, день заезда",
+    "tabTarget": "tab-mittwoch",
+    "timeSlot": "19:00",
+    "originalTitle": "Регистрация на поляне (W25005)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25128",
+    "day": "Mittwoch",
+    "day_de": "Среда 28.05.2025, день заезда",
+    "tabTarget": "tab-mittwoch",
+    "timeSlot": "19:00",
+    "originalTitle": "Физические опыты со звуком для детей 6-10 лет. (W25128)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25109",
+    "day": "Mittwoch",
+    "day_de": "Среда 28.05.2025, день заезда",
+    "tabTarget": "tab-mittwoch",
+    "timeSlot": "19:00",
+    "originalTitle": "Парфюмер (W25109)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25111",
+    "day": "Mittwoch",
+    "day_de": "Среда 28.05.2025, день заезда",
+    "tabTarget": "tab-mittwoch",
+    "timeSlot": "19:00",
+    "originalTitle": "\"Махнёмся не глядя!\" (W25111)",
+    "durationBadge": null,
+    "location": "Центральная поляна (7)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25066",
+    "day": "Mittwoch",
+    "day_de": "Среда 28.05.2025, день заезда",
+    "tabTarget": "tab-mittwoch",
+    "timeSlot": "20:00",
+    "originalTitle": "Чудеса из бумаги (W25066)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25056",
+    "day": "Mittwoch",
+    "day_de": "Среда 28.05.2025, день заезда",
+    "tabTarget": "tab-mittwoch",
+    "timeSlot": "20:00",
+    "originalTitle": "Игры на знакомство (W25056)",
+    "durationBadge": null,
+    "location": "Центральная поляна (7)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25019",
+    "day": "Mittwoch",
+    "day_de": "Среда 28.05.2025, день заезда",
+    "tabTarget": "tab-mittwoch",
+    "timeSlot": "21:00",
+    "originalTitle": "Песни у костра для взрослых и детей (W25019)",
+    "durationBadge": null,
+    "location": "У костра",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "09:00-10:00",
+    "originalTitle": "Завтрак",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": true,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25057",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "10:00",
+    "originalTitle": "Волшебные цветы из шёлка (W25057)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25025",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "10:00",
+    "originalTitle": "Типографика (W25025)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25009",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "10:00",
+    "originalTitle": "Наблюдение за Солнцем (W25009)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25110",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "10:00",
+    "originalTitle": "Музыкальные нейросети (W25110)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25097",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "10:00",
+    "originalTitle": "Подвижные игры для детей 3-5 лет (W25097)",
+    "durationBadge": null,
+    "location": "Детская площадка (4)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25104",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "10:00",
+    "originalTitle": "Настольные игры (W25104)",
+    "durationBadge": null,
+    "location": "Игровая палатка (5)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25018",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "11:00",
+    "originalTitle": "Лоскутные сумки (W25018)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25064",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "11:00",
+    "originalTitle": "Тайны нашего тела (W25064)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25106",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "11:00",
+    "originalTitle": "Пластилинография (W25106)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25113",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "11:00",
+    "originalTitle": "Книжная лавка (W25113)",
+    "durationBadge": null,
+    "location": "Центральная поляна (7)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25068",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "12:00",
+    "originalTitle": "Интуитивное рисование (W25068)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25098",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "12:00",
+    "originalTitle": "Верёвочный курс (W25098)",
+    "durationBadge": null,
+    "location": "Детская площадка (4)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25113",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "12:00",
+    "originalTitle": "Книжная лавка (W25113)",
+    "durationBadge": null,
+    "location": "Центральная поляна (7)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "13:00-15:00",
+    "originalTitle": "Обед",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": true,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25023",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "13:00-15:00",
+    "originalTitle": "Ярмарка (W25023)",
+    "durationBadge": null,
+    "location": "Центральная поляна (7)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25108",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "15:00",
+    "originalTitle": "Нейрографика (W25108)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25027",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "15:00",
+    "originalTitle": "Мастерская голоса (W25027)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25017",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "15:00",
+    "originalTitle": "Программирование роботов (W25017)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25015",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "15:00",
+    "originalTitle": "Бумажная архитектура (W25015)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25046",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "15:00",
+    "originalTitle": "Рисование для детей 3-5 лет (W25046)",
+    "durationBadge": null,
+    "location": "Детская площадка (4)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25037",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "15:00",
+    "originalTitle": "Взрослые настольные игры (W25037)",
+    "durationBadge": null,
+    "location": "Игровая палатка (5)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25023",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "15:00",
+    "originalTitle": "Ярмарка (W25023)",
+    "durationBadge": null,
+    "location": "Центральная поляна (7)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25073",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "16:00",
+    "originalTitle": "Психологическая игра \"Денежный поток\" (W25073)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25099",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "16:00",
+    "originalTitle": "Эксперименты с растениями (W25099)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25062",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "16:00",
+    "originalTitle": "Лепка из полимерной глины (W25062)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25096",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "16:00",
+    "originalTitle": "Лепка для детей 3-5 лет (W25096)",
+    "durationBadge": null,
+    "location": "Детская площадка (4)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25023",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "16:00",
+    "originalTitle": "Ярмарка (W25023)",
+    "durationBadge": null,
+    "location": "Центральная поляна (7)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25107",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "17:00",
+    "originalTitle": "Кофейная гуща (W25107)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25059",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "17:00",
+    "originalTitle": "Керамика (W25059)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25047",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "17:00",
+    "originalTitle": "Кукольный театр (W25047)",
+    "durationBadge": null,
+    "location": "Детская площадка (4)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25034",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "17:00",
+    "originalTitle": "Спортивные игры (W25034)",
+    "durationBadge": null,
+    "location": "Танцплощадка (6)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "18:00-19:00",
+    "originalTitle": "Ужин",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": true,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25033",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "18:00-19:00",
+    "originalTitle": "Мини диско (W25033)",
+    "durationBadge": null,
+    "location": "Танцплощадка (6)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25001",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "19:30",
+    "originalTitle": "Официальное открытие слёта (W25001)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25019",
+    "day": "Donnerstag",
+    "day_de": "Четверг 29.05.2025, официальное открытие",
+    "tabTarget": "tab-donnerstag",
+    "timeSlot": "21:00",
+    "originalTitle": "Песни у костра для взрослых и детей (W25019)",
+    "durationBadge": null,
+    "location": "У костра",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "09:00-10:00",
+    "originalTitle": "Завтрак",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": true,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25058",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "10:00",
+    "originalTitle": "Роспись футболок (W25058)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25065",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "10:00",
+    "originalTitle": "Квест по химии (W25065)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25105",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "10:00",
+    "originalTitle": "Игры с воздушными шарами (W25105)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25097",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "10:00",
+    "originalTitle": "Подвижные игры для детей 3-5 лет (W25097)",
+    "durationBadge": null,
+    "location": "Детская площадка (4)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25104",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "10:00",
+    "originalTitle": "Настольные игры (W25104)",
+    "durationBadge": null,
+    "location": "Игровая палатка (5)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25081",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "10:00",
+    "originalTitle": "Ювелирная мастерская (W25081)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25067",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "11:00",
+    "originalTitle": "Макраме (W25067)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25129",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "11:00",
+    "originalTitle": "Программирование на Scratch (W25129)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25063",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "11:00",
+    "originalTitle": "Рисование акварелью (W25063)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25113",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "11:00",
+    "originalTitle": "Книжная лавка (W25113)",
+    "durationBadge": null,
+    "location": "Центральная поляна (7)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25079",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "11:00",
+    "originalTitle": "Историческое фехтование (W25079)",
+    "durationBadge": null,
+    "location": "Танцплощадка (6)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25081",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "11:00",
+    "originalTitle": "Ювелирная мастерская (W25081)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25112",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "12:00",
+    "originalTitle": "Игры нашего двора (W25112)",
+    "durationBadge": null,
+    "location": "Детская площадка (4)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25113",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "12:00",
+    "originalTitle": "Книжная лавка (W25113)",
+    "durationBadge": null,
+    "location": "Центральная поляна (7)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25079",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "12:00",
+    "originalTitle": "Историческое фехтование (W25079)",
+    "durationBadge": null,
+    "location": "Танцплощадка (6)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25081",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "12:00",
+    "originalTitle": "Ювелирная мастерская (W25081)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "13:00-15:00",
+    "originalTitle": "Обед",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": true,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25023",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "13:00-15:00",
+    "originalTitle": "Ярмарка (W25023)",
+    "durationBadge": null,
+    "location": "Центральная поляна (7)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25072",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "15:00",
+    "originalTitle": "Психологическая игра \"Остров мечты\" (W25072)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25071",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "15:00",
+    "originalTitle": "Посиделки с гитарой (W25071)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25010",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "15:00",
+    "originalTitle": "Квест по астрономии (W25010)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25061",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "15:00",
+    "originalTitle": "Декупаж (W25061)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25046",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "15:00",
+    "originalTitle": "Рисование для детей 3-5 лет (W25046)",
+    "durationBadge": null,
+    "location": "Детская площадка (4)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25037",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "15:00",
+    "originalTitle": "Взрослые настольные игры (W25037)",
+    "durationBadge": null,
+    "location": "Игровая палатка (5)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25023",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "15:00",
+    "originalTitle": "Ярмарка (W25023)",
+    "durationBadge": null,
+    "location": "Центральная поляна (7)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25072",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "16:00",
+    "originalTitle": "Психологическая игра \"Остров мечты\" (W25072)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25071",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "16:00",
+    "originalTitle": "Посиделки с гитарой (W25071)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25076",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "16:00",
+    "originalTitle": "Игры для всей семьи (W25076)",
+    "durationBadge": null,
+    "location": "Танцплощадка (6)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25023",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "16:00",
+    "originalTitle": "Ярмарка (W25023)",
+    "durationBadge": null,
+    "location": "Центральная поляна (7)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25096",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "16:00",
+    "originalTitle": "Лепка для детей 3-5 лет (W25096)",
+    "durationBadge": null,
+    "location": "Детская площадка (4)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25072",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "17:00",
+    "originalTitle": "Психологическая игра \"Остров мечты\" (W25072)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25071",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "17:00",
+    "originalTitle": "Посиделки с гитарой (W25071)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25047",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "17:00",
+    "originalTitle": "Кукольный театр (W25047)",
+    "durationBadge": null,
+    "location": "Детская площадка (4)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "18:00-19:00",
+    "originalTitle": "Ужин",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": true,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25033",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "18:00-19:00",
+    "originalTitle": "Мини диско (W25033)",
+    "durationBadge": null,
+    "location": "Танцплощадка (6)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25040",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "19:30",
+    "originalTitle": "Акустический концерт (W25040)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25019",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "21:00",
+    "originalTitle": "Песни у костра для взрослых и детей (W25019)",
+    "durationBadge": null,
+    "location": "У костра",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25021",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "22:00",
+    "originalTitle": "Ночная игротека (W25021)",
+    "durationBadge": null,
+    "location": "Игровая палатка (5)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25012",
+    "day": "Freitag",
+    "day_de": "Пятница 30.05.2025",
+    "tabTarget": "tab-freitag",
+    "timeSlot": "23:00",
+    "originalTitle": "Наблюдение за звёздами (W25012)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "09:00-10:00",
+    "originalTitle": "Завтрак",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": true,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25006",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "10:00",
+    "originalTitle": "Регистрация на поляне (W25006)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25022",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "10:00",
+    "originalTitle": "Финансовая игра \"Не в деньгах счастье\" (W25022)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25125",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "10:00",
+    "originalTitle": "Оригами (W25125)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25097",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "10:00",
+    "originalTitle": "Подвижные игры для детей 3-5 лет (W25097)",
+    "durationBadge": null,
+    "location": "Детская площадка (4)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25104",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "10:00",
+    "originalTitle": "Настольные игры (W25104)",
+    "durationBadge": null,
+    "location": "Игровая палатка (5)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25075",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "10:00",
+    "originalTitle": "Ирландские танцы (W25075)",
+    "durationBadge": null,
+    "location": "Танцплощадка (6)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25006",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "11:00",
+    "originalTitle": "Регистрация на поляне (W25006)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25022",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "11:00",
+    "originalTitle": "Финансовая игра \"Не в деньгах счастье\" (W25022)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25080",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "11:00",
+    "originalTitle": "Шляпная мастерская (W25080)",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25075",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "11:00",
+    "originalTitle": "Ирландские танцы (W25075)",
+    "durationBadge": null,
+    "location": "Танцплощадка (6)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25006",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "12:00",
+    "originalTitle": "Регистрация на поляне (W25006)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25022",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "12:00",
+    "originalTitle": "Финансовая игра \"Не в деньгах счастье\" (W25022)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25112",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "12:00",
+    "originalTitle": "Игры нашего двора (W25112)",
+    "durationBadge": null,
+    "location": "Детская площадка (4)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25075",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "12:00",
+    "originalTitle": "Ирландские танцы (W25075)",
+    "durationBadge": null,
+    "location": "Танцплощадка (6)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "13:00-15:00",
+    "originalTitle": "Обед",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": true,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25082",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "15:00",
+    "originalTitle": "Учимся крутить пои (W25082)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25070",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "15:00",
+    "originalTitle": "Релаксационные техники (W25070)",
+    "durationBadge": null,
+    "location": "Просветительская палатка (2)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25020",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "15:00",
+    "originalTitle": "Парные фольклорные танцы (W25020)",
+    "durationBadge": null,
+    "location": "Танцплощадка (6)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25077",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "15:00",
+    "originalTitle": "Домино экспресс (W25077)",
+    "durationBadge": null,
+    "location": "Игровая палатка (5)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "16:00",
+    "originalTitle": "Спектакль",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25127",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "17:00",
+    "originalTitle": "Покраска хлоркой (W25127)",
+    "durationBadge": null,
+    "location": "Павильон рядом с главной палаткой (1a)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "18:00-19:00",
+    "originalTitle": "Ужин",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": true,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25033",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "18:00-19:00",
+    "originalTitle": "Мини диско (W25033)",
+    "durationBadge": null,
+    "location": "Танцплощадка (6)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25041",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "19:30",
+    "originalTitle": "Концерт мастерских (W25041)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25019",
+    "day": "Samstag",
+    "day_de": "Суббота 31.05.2025, родительский день",
+    "tabTarget": "tab-samstag",
+    "timeSlot": "21:00",
+    "originalTitle": "Песни у костра для взрослых и детей (W25019)",
+    "durationBadge": null,
+    "location": "У костра",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Sonntag",
+    "day_de": "Воскресенье 01.06.2025, день отъезда",
+    "tabTarget": "tab-sonntag",
+    "timeSlot": "09:00-10:00",
+    "originalTitle": "Завтрак",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": true,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": "W25007",
+    "day": "Sonntag",
+    "day_de": "Воскресенье 01.06.2025, день отъезда",
+    "tabTarget": "tab-sonntag",
+    "timeSlot": "10:00",
+    "originalTitle": "Закрытие слёта (W25007)",
+    "durationBadge": null,
+    "location": "Главная палатка (1)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Sonntag",
+    "day_de": "Воскресенье 01.06.2025, день отъезда",
+    "tabTarget": "tab-sonntag",
+    "timeSlot": "11:00",
+    "originalTitle": "Общая уборка территории",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  },
+  {
+    "id": null,
+    "day": "Sonntag",
+    "day_de": "Воскресенье 01.06.2025, день отъезда",
+    "tabTarget": "tab-sonntag",
+    "timeSlot": "12:00",
+    "originalTitle": "Отъезд",
+    "durationBadge": null,
+    "location": "Палатка Рубикус (3)",
+    "parallelWith": [],
+    "isMeal": false,
+    "details": null,
+    "url": "",
+    "description": ""
+  }
+
+        ]; 
+
         document.addEventListener('DOMContentLoaded', () => {
-            const favoriteButtons = document.querySelectorAll('.favorite-btn');
+            const loadingIndicator = document.getElementById('loadingIndicator');
             const favoriteToggleSwitch = document.getElementById('favoriteToggleSwitch');
             const favoriteToggleLabel = document.getElementById('favoriteToggleLabel');
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const tabPanels = document.querySelectorAll('.tab-panel');
+            const tabNavContainer = document.getElementById('tabNavContainer');
+            const workshopsTabsContainer = document.getElementById('workshopsTabsContainer');
             const noFavoritesMessage = document.getElementById('noFavoritesMessage');
 
             let favorites = JSON.parse(localStorage.getItem('workshopFavorites')) || [];
-            // Initial state of the toggle based on a saved preference or default to 'all'
             let currentView = localStorage.getItem('workshopPlanView') || 'all';
-            favoriteToggleSwitch.checked = (currentView === 'favorites');
+            if (favoriteToggleSwitch) { 
+                favoriteToggleSwitch.checked = (currentView === 'favorites');
+            }
 
+            const showLoading = () => {
+                if (loadingIndicator) loadingIndicator.classList.remove('hidden');
+            }
+            const hideLoading = () => {
+                 if (loadingIndicator) loadingIndicator.classList.add('hidden');
+            }
 
-            const updateButtonAppearance = (button, eventId) => {
+            const updateFavoriteButtonAppearance = (button, eventId) => {
                 if (favorites.includes(eventId)) {
                     button.classList.add('favorited');
                     button.textContent = '★';
@@ -1350,130 +2118,240 @@
                     button.setAttribute('aria-label', 'Als Favorit markieren');
                 }
             };
+            
+            const attachFavoriteButtonListeners = () => {
+                const favoriteButtons = workshopsTabsContainer.querySelectorAll('.favorite-btn');
+                favoriteButtons.forEach(button => {
+                    const newButton = button.cloneNode(true); 
+                    button.parentNode.replaceChild(newButton, button);
 
-            const renderWorkshops = () => {
-                const activePanel = document.querySelector('.tab-panel.active');
-                if (!activePanel) return; // Nichts tun, wenn kein Tab aktiv ist
-
-                let hasVisibleContentInActivePanel = false;
-
-                const allTimeslotGroupsInActivePanel = Array.from(activePanel.querySelectorAll('.timeslot-group'));
-                const dayHeaderInActivePanel = activePanel.querySelector('.day-header');
-
-                allTimeslotGroupsInActivePanel.forEach(group => {
-                    const timeHeader = group.querySelector('.timeslot-time-header');
-                    const eventCardsInGroup = Array.from(group.querySelectorAll('.event-card'));
-                    const mealItemInGroup = group.querySelector('.meal-item');
-                    let hasVisibleFavoriteInGroup = false;
-                    let groupHasAnyVisibleCard = false;
-
-                    eventCardsInGroup.forEach(card => {
+                    const card = newButton.closest('.event-card, .meal-item'); 
+                    if (card) {
                         const eventId = card.dataset.eventId;
-                        if (currentView === 'all' || (eventId && favorites.includes(eventId))) {
-                            card.classList.remove('hidden-by-filter');
-                            groupHasAnyVisibleCard = true;
-                            if (currentView === 'favorites' && eventId && favorites.includes(eventId)) {
-                                hasVisibleFavoriteInGroup = true;
-                            }
-                        } else {
-                            card.classList.add('hidden-by-filter');
-                        }
-                    });
-                    
-                    if (mealItemInGroup) {
-                        if (currentView === 'all' || hasVisibleFavoriteInGroup) { // Zeige Mahlzeit, wenn Ansicht "alle" oder Favoriten im Slot
-                            mealItemInGroup.classList.remove('hidden-by-filter');
-                            groupHasAnyVisibleCard = true; // Mahlzeit zählt als sichtbarer Inhalt für den Slot
-                        } else {
-                            mealItemInGroup.classList.add('hidden-by-filter');
+                        if (eventId && !card.classList.contains('meal-item')) { 
+                            updateFavoriteButtonAppearance(newButton, eventId);
+                            newButton.addEventListener('click', () => {
+                                if (favorites.includes(eventId)) {
+                                    favorites = favorites.filter(id => id !== eventId);
+                                } else {
+                                    favorites.push(eventId);
+                                }
+                                localStorage.setItem('workshopFavorites', JSON.stringify(favorites));
+                                updateFavoriteButtonAppearance(newButton, eventId);
+                                renderWorkshops(); 
+                            });
                         }
                     }
+                });
+            };
 
-                    if (groupHasAnyVisibleCard) {
-                        group.classList.remove('hidden-by-filter');
-                        if (timeHeader) timeHeader.classList.remove('hidden-by-filter');
+            const buildWorkshopHTML = (workshop) => {
+                if (workshop.isMeal) {
+                    return `
+                        <div class="meal-item" data-event-id="${workshop.id}">
+                            <p>${workshop.originalTitle} ${workshop.location ? `- Ort: ${workshop.location}` : ''}</p>
+                        </div>
+                    `;
+                }
+
+                let titleHTML = workshop.originalTitle;
+                if (workshop.durationBadge) {
+                    titleHTML += ` <span class="duration-badge">${workshop.durationBadge}</span>`;
+                }
+
+                let detailsHTML = '';
+                if (workshop.details) {
+                    detailsHTML += `<p class="event-details">${workshop.details}</p>`;
+                }
+                if (workshop.parallelWith) {
+                    detailsHTML += `<p class="event-details">Parallel: ${workshop.parallelWith}</p>`;
+                }
+
+                let descriptionHTML = '';
+                if (workshop.description && workshop.description.trim() !== "") {
+                    descriptionHTML = `<p class="event-description">${workshop.description}</p>`;
+                }
+                
+                let urlHTML = '';
+                if (workshop.url && workshop.url.trim() !== "") {
+                    urlHTML = `<p class="event-url"><a href="${workshop.url}" target="_blank" rel="noopener noreferrer">Weitere Infos</a></p>`;
+                }
+
+                const favButtonHTML = workshop.isMeal ? '' : '<button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>';
+
+                return `
+                    <div class="event-card" data-event-id="${workshop.id}">
+                        ${favButtonHTML}
+                        <p class="event-title">${titleHTML}</p>
+                        ${detailsHTML}
+                        ${descriptionHTML}
+                        ${urlHTML}
+                        ${workshop.location ? `<p class="event-location">Ort: ${workshop.location}</p>` : ''}
+                    </div>
+                `;
+            };
+
+            const renderWorkshops = () => {
+                const activePanel = workshopsTabsContainer.querySelector('.tab-panel.active');
+                if (!activePanel) {
+                    hideLoading(); 
+                    return;
+                }
+
+                let hasVisibleContentInActivePanel = false;
+                const dayData = embeddedWorkshopsData.filter(ws => ws.tabTarget === activePanel.id); // Use embedded data
+                
+                const timeSlots = {};
+                dayData.forEach(ws => {
+                    if (!timeSlots[ws.timeSlot]) {
+                        timeSlots[ws.timeSlot] = [];
+                    }
+                    timeSlots[ws.timeSlot].push(ws);
+                });
+
+                activePanel.innerHTML = `<h2 class="day-header">${activePanel.dataset.dayDe}</h2>`; 
+
+                Object.keys(timeSlots).sort().forEach(timeSlot => { 
+                    const workshopsInSlot = timeSlots[timeSlot];
+                    const timeslotGroup = document.createElement('div');
+                    timeslotGroup.className = 'timeslot-group';
+                    timeslotGroup.innerHTML = `<h3 class="timeslot-time-header">${timeSlot}</h3>`;
+                    
+                    let groupHasAnyVisibleElement = false;
+
+                    workshopsInSlot.forEach(workshop => {
+                        const workshopHTML = buildWorkshopHTML(workshop);
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = workshopHTML.trim();
+                        const workshopElement = tempDiv.firstChild;
+
+                        if (currentView === 'all' || (workshop.id && favorites.includes(workshop.id)) || workshop.isMeal) {
+                            if (workshopElement) workshopElement.classList.remove('hidden-by-filter');
+                            groupHasAnyVisibleElement = true;
+                        } else {
+                            if (workshopElement) workshopElement.classList.add('hidden-by-filter');
+                        }
+                        if (workshopElement) timeslotGroup.appendChild(workshopElement);
+                    });
+                    
+                    if (groupHasAnyVisibleElement) {
+                        activePanel.appendChild(timeslotGroup);
                         hasVisibleContentInActivePanel = true;
-                    } else {
-                        group.classList.add('hidden-by-filter');
-                        if (timeHeader) timeHeader.classList.add('hidden-by-filter');
                     }
                 });
                 
+                const dayHeaderInActivePanel = activePanel.querySelector('.day-header');
                 if (dayHeaderInActivePanel) {
                      dayHeaderInActivePanel.style.display = hasVisibleContentInActivePanel ? '' : 'none';
                 }
+                
+                const visibleTimeSlotGroups = activePanel.querySelectorAll('.timeslot-group:not(.hidden-by-filter)');
+                 if (visibleTimeSlotGroups.length === 0 && dayHeaderInActivePanel && activePanel.children.length <=1 ) { 
+                     activePanel.style.display = 'none'; 
+                } else {
+                    activePanel.style.display = '';
+                }
+
 
                 if (noFavoritesMessage) {
-                    noFavoritesMessage.style.display = (currentView === 'favorites' && !hasVisibleContentInActivePanel) ? 'block' : 'none';
+                    const activeTabHasContent = activePanel.querySelectorAll('.timeslot-group:not(.hidden-by-filter) .event-card:not(.hidden-by-filter), .timeslot-group:not(.hidden-by-filter) .meal-item:not(.hidden-by-filter)').length > 0;
+                    noFavoritesMessage.style.display = (currentView === 'favorites' && !activeTabHasContent) ? 'block' : 'none';
                 }
-                if (favoriteToggleLabel) {
+
+                if (favoriteToggleLabel && favoriteToggleSwitch) {
                     favoriteToggleLabel.textContent = favoriteToggleSwitch.checked ? 'Nur Favoriten' : 'Alle anzeigen';
                 }
+                attachFavoriteButtonListeners(); 
+                hideLoading(); 
             };
             
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    const targetPanelId = button.dataset.tabTarget;
-                    tabPanels.forEach(panel => {
-                        panel.classList.toggle('active', panel.id === targetPanelId);
-                    });
-                    renderWorkshops(); 
-                });
-            });
+            const setupTabs = (data) => {
+                const uniqueDays = [];
+                const dayOrder = ["Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]; 
 
-            favoriteButtons.forEach(button => {
-                const card = button.closest('.event-card');
-                if (card) {
-                    const eventId = card.dataset.eventId;
-                    if (eventId) {
-                        updateButtonAppearance(button, eventId);
-                        button.addEventListener('click', () => {
-                            if (favorites.includes(eventId)) {
-                                favorites = favorites.filter(id => id !== eventId);
-                            } else {
-                                favorites.push(eventId);
-                            }
-                            localStorage.setItem('workshopFavorites', JSON.stringify(favorites));
-                            updateButtonAppearance(button, eventId);
-                            renderWorkshops(); 
-                        });
+                data.forEach(ws => {
+                    if (!uniqueDays.find(d => d.tabTarget === ws.tabTarget)) {
+                        uniqueDays.push({ day_de: ws.day_de, tabTarget: ws.tabTarget, dayOriginal: ws.day, originalDayName: ws.day });
                     }
+                });
+
+                uniqueDays.sort((a, b) => {
+                    return dayOrder.indexOf(a.originalDayName) - dayOrder.indexOf(b.originalDayName);
+                });
+                
+                if (tabNavContainer) tabNavContainer.innerHTML = ''; 
+                if (workshopsTabsContainer) workshopsTabsContainer.innerHTML = ''; 
+
+                uniqueDays.forEach((day, index) => {
+                    const tabButton = document.createElement('button');
+                    tabButton.className = 'tab-button';
+                    tabButton.textContent = day.dayOriginal; 
+                    tabButton.dataset.tabTarget = day.tabTarget;
+
+                    const tabPanel = document.createElement('div');
+                    tabPanel.id = day.tabTarget;
+                    tabPanel.className = 'tab-panel day-section';
+                    tabPanel.dataset.dayDe = day.day_de; 
+
+                    if (index === 0) {
+                        tabButton.classList.add('active');
+                        tabPanel.classList.add('active');
+                    }
+                    
+                    if (tabNavContainer) tabNavContainer.appendChild(tabButton);
+                    if (workshopsTabsContainer) workshopsTabsContainer.appendChild(tabPanel);
+                });
+
+                const newTabButtons = tabNavContainer ? tabNavContainer.querySelectorAll('.tab-button') : [];
+                newTabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        showLoading();
+                        newTabButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        const targetPanelId = button.dataset.tabTarget;
+                        if (workshopsTabsContainer) {
+                            workshopsTabsContainer.querySelectorAll('.tab-panel').forEach(panel => {
+                                panel.classList.toggle('active', panel.id === targetPanelId);
+                            });
+                        }
+                        setTimeout(renderWorkshops, 0); 
+                    });
+                });
+            };
+            
+            // Initialize with embedded data
+            showLoading();
+            setupTabs(embeddedWorkshopsData); // Use embedded data directly
+            
+            const initiallyActiveTab = tabNavContainer ? tabNavContainer.querySelector('.tab-button.active') : null;
+            if (initiallyActiveTab) {
+                const targetPanelId = initiallyActiveTab.dataset.tabTarget;
+                const targetPanel = document.getElementById(targetPanelId);
+                if (targetPanel) {
+                     if(workshopsTabsContainer) workshopsTabsContainer.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active')); 
+                    targetPanel.classList.add('active');
                 }
-            });
+            } else if (tabNavContainer && tabNavContainer.firstChild) { 
+                tabNavContainer.firstChild.classList.add('active');
+                const firstPanelId = tabNavContainer.firstChild.dataset.tabTarget;
+                const firstPanel = document.getElementById(firstPanelId);
+                if (firstPanel) firstPanel.classList.add('active');
+            }
+            renderWorkshops(); // Render immediately with embedded data
+            hideLoading(); // Hide loading after initial render with embedded data
+
 
             if (favoriteToggleSwitch) {
                 favoriteToggleSwitch.addEventListener('change', () => {
+                    showLoading();
                     currentView = favoriteToggleSwitch.checked ? 'favorites' : 'all';
-                    localStorage.setItem('workshopPlanView', currentView); // Speichere die Ansichtswahl
-                    renderWorkshops();
+                    localStorage.setItem('workshopPlanView', currentView); 
+                    setTimeout(renderWorkshops, 0);
                 });
             }
-            
-            const initiallyActiveTab = document.querySelector('.tab-button.active');
-            if (initiallyActiveTab) {
-                 const targetPanelId = initiallyActiveTab.dataset.tabTarget;
-                 const targetPanel = document.getElementById(targetPanelId);
-                 if (targetPanel) {
-                     targetPanel.classList.add('active');
-                 } else {
-                     // Fallback, falls kein Tab als aktiv markiert ist oder das Ziel nicht existiert
-                     const firstTabPanel = document.querySelector('.tab-panel');
-                     if (firstTabPanel) firstTabPanel.classList.add('active');
-                     const firstTabButton = document.querySelector('.tab-button');
-                     if (firstTabButton) firstTabButton.classList.add('active');
-                 }
-            } else {
-                 // Fallback, falls kein Tab als aktiv markiert ist
-                const firstTabPanel = document.querySelector('.tab-panel');
-                if (firstTabPanel) firstTabPanel.classList.add('active');
-                const firstTabButton = document.querySelector('.tab-button');
-                if (firstTabButton) firstTabButton.classList.add('active');
-            }
-            renderWorkshops();
         });
 
+        // Service Worker Registrierung und PWA Installations-Prompt
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
@@ -1531,7 +2409,7 @@
       "name": "Veranstaltungsplan Workshops",
       "short_name": "Workshop Plan",
       "description": "Ein übersichtlicher Plan für Workshops der Veranstaltung Mai/Juni 2025.",
-      "start_url": "index.html",
+      "start_url": "index.html", 
       "display": "standalone",
       "background_color": "#f3f4f6",
       "theme_color": "#1e3a8a",
@@ -1595,11 +2473,12 @@
     ```javascript
     // sw.js - Service Worker
 
-    const CACHE_NAME = 'veranstaltungsplan-cache-v1.6'; // Cache-Version erhöht
+    const CACHE_NAME = 'veranstaltungsplan-cache-v1.15'; // Cache-Version erhöht
     const urlsToCache = [
       './', 
       'index.html',
       'manifest.json',
+      // 'workshop.json', // Nicht mehr direkt cachen, da eingebettet
       '[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)',
       '[https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap)',
       'icons/icon-192x192.png',
@@ -1641,6 +2520,11 @@
     });
 
     self.addEventListener('fetch', event => {
+      // Die spezielle Fetch-Strategie für workshop.json ist nicht mehr nötig,
+      // da die Daten jetzt in der index.html eingebettet sind.
+      // Der Service Worker wird die index.html (mit den eingebetteten Daten)
+      // gemäß der allgemeinen Strategie für Navigationsanfragen behandeln.
+      
       if (event.request.method !== 'GET') {
         return;
       }
@@ -1675,20 +2559,16 @@
               networkResponse => {
                 if (networkResponse && networkResponse.status === 200) {
                   const urlString = event.request.url;
-                  // Nur URLs cachen, die explizit in urlsToCache sind
                   const isCachable = urlsToCache.some(cacheUrl => {
-                      if (cacheUrl.startsWith('http')) { // Exakter Vergleich für externe URLs
+                      if (cacheUrl.startsWith('http')) { 
                           return urlString === cacheUrl;
                       }
-                      // Für lokale Pfade (beginnend mit './' oder direkt Dateiname)
-                      const requestPath = new URL(urlString).pathname; // z.B. /veranstaltungsplan/index.html
+                      const requestPath = new URL(urlString).pathname; 
                       let localCachePath = cacheUrl;
-                      if (localCachePath === './') localCachePath = 'index.html';
-                      // Erstelle einen vollständigen Pfad für den Vergleich, falls der Service Worker im Root liegt
-                      // Dies muss ggf. angepasst werden, wenn die PWA in einem Unterverzeichnis auf dem Server liegt.
-                      // Für GitHub Pages: /projektname/index.html vs. index.html
-                      // Wir nehmen an, dass sw.js im selben Verzeichnis wie index.html liegt.
-                      return requestPath.endsWith(localCachePath);
+                      if (localCachePath === './') localCachePath = 'index.html'; 
+                      const normalizedRequestPath = requestPath.startsWith('/') ? requestPath : '/' + requestPath;
+                      const normalizedCachePath = localCachePath.startsWith('/') ? localCachePath : '/' + localCachePath;
+                      return normalizedRequestPath.endsWith(normalizedCachePath) || normalizedRequestPath === normalizedCachePath;
                   });
 
                   if (isCachable) {
