@@ -11,6 +11,1350 @@
     <meta name="theme-color" content="#1e3a8a">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
 
+    <script>
+        // Eingebettete Workshop-Daten (vollständig)
+        const embeddedTimetableData = {
+          "eventInfo": {
+            "eventName": "Фестиваль W",
+            "startDate": "2025-05-28",
+            "endDate": "2025-06-01",
+            "mainLanguage": "ru"
+          },
+          "locations": [
+            {
+              "locationId": "loc1",
+              "name_ru": "Главная палатка (1)",
+              "name_de": "Hauptzelt (1)"
+            },
+            {
+              "locationId": "loc2",
+              "name_ru": "Павильон рядом с главной палаткой (1a)",
+              "name_de": "Pavillon neben Hauptzelt (1a)"
+            },
+            {
+              "locationId": "loc3",
+              "name_ru": "Палатка Рубикус (3)",
+              "name_de": "Rubicus Zelt (3)"
+            },
+            {
+              "locationId": "loc4",
+              "name_ru": "Просветительская палатка (2)",
+              "name_de": "Bildungszelt (2)"
+            },
+            {
+              "locationId": "loc5",
+              "name_ru": "Центральная поляна (7)",
+              "name_de": "Zentrale Lichtung (7)"
+            },
+            {
+              "locationId": "loc6",
+              "name_ru": "У костра",
+              "name_de": "Am Lagerfeuer"
+            },
+            {
+              "locationId": "loc7",
+              "name_ru": "Детская площадка (4)",
+              "name_de": "Kinderspielplatz (4)"
+            },
+            {
+              "locationId": "loc8",
+              "name_ru": "Игровая палатка (5)",
+              "name_de": "Spielezelt (5)"
+            },
+            {
+              "locationId": "loc9",
+              "name_ru": "Танцплощадка (6)",
+              "name_de": "Tanzfläche (6)"
+            }
+          ],
+          "schedule": {
+            "2025-05-28": {
+              "dayLabel_de": "Mittwoch",
+              "dayLabel_ru": "Среда",
+              "fullDayDescription_ru": "Среда 28.05.2025, день заезда",
+              "events": [
+                {
+                  "eventId": "W25124",
+                  "title_ru": "Коллажи из бумаги (W25124)",
+                  "locationId": "loc1",
+                  "eventType": "workshop",
+                  "startTime": "17:00",
+                  "endTime": "18:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25005_Mi17",
+                  "title_ru": "Регистрация на поляне (W25005)",
+                  "locationId": "loc2",
+                  "eventType": "registration",
+                  "startTime": "17:00",
+                  "endTime": "18:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25016",
+                  "title_ru": "Гороховый конструктор (W25016)",
+                  "locationId": "loc3",
+                  "eventType": "workshop",
+                  "startTime": "17:00",
+                  "endTime": "18:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "Meal_Mi1800",
+                  "title_ru": "Ужин",
+                  "locationId": "loc5", 
+                  "eventType": "meal",
+                  "startTime": "18:00",
+                  "endTime": "19:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25101_Mi19",
+                  "title_ru": "Древний Счёт (W25101)",
+                  "locationId": "loc1",
+                  "eventType": "workshop",
+                  "startTime": "19:00",
+                  "endTime": "20:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25005_Mi19",
+                  "title_ru": "Регистрация на поляне (W25005)",
+                  "locationId": "loc2",
+                  "eventType": "registration",
+                  "startTime": "19:00",
+                  "endTime": "20:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25128",
+                  "title_ru": "Физические опыты со звуком для детей 6-10 лет. (W25128)",
+                  "locationId": "loc4",
+                  "eventType": "science_activity",
+                  "startTime": "19:00",
+                  "endTime": "20:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": "6-10 лет"
+                },
+                {
+                  "eventId": "W25109_Mi19",
+                  "title_ru": "Парфюмер (W25109)",
+                  "locationId": "loc3",
+                  "eventType": "workshop",
+                  "startTime": "19:00",
+                  "endTime": "20:00",
+                  "description_ru": "",
+                  "details_ru": "Parallel: Чудеса из бумаги (W25066)", 
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                 {
+                  "eventId": "W25066_Mi19", 
+                  "title_ru": "Чудеса из бумаги (W25066)",
+                  "locationId": "loc3",
+                  "eventType": "workshop",
+                  "startTime": "19:00", 
+                  "endTime": "20:00",
+                  "description_ru": "",
+                  "details_ru": "Parallel: Парфюмер (W25109)",
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25111_Mi19",
+                  "title_ru": "\"Махнёмся не глядя!\" (W25111)",
+                  "locationId": "loc5",
+                  "eventType": "workshop",
+                  "startTime": "19:00",
+                  "endTime": "20:00",
+                  "description_ru": "",
+                  "details_ru": "Parallel: Игры на знакомство (W25056)", 
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25056_Mi19", 
+                  "title_ru": "Игры на знакомство (W25056)",
+                  "locationId": "loc5",
+                  "eventType": "game",
+                  "startTime": "19:00", 
+                  "endTime": "20:00",
+                  "description_ru": "",
+                  "details_ru": "Parallel: \"Махнёмся не глядя!\" (W25111)",
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25019_Mi21",
+                  "title_ru": "Песни у костра для взрослых и детей (W25019)",
+                  "locationId": "loc6",
+                  "eventType": "activity",
+                  "startTime": "21:00",
+                  "endTime": "22:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                }
+              ]
+            },
+            "2025-05-29": {
+              "dayLabel_de": "Donnerstag",
+              "dayLabel_ru": "Четверг",
+              "fullDayDescription_ru": "Четверг 29.05.2025, официальное открытие",
+              "events": [
+                {
+                  "eventId": "W25027_Do0730",
+                  "title_ru": "Зарядка по утренней росе \"Киря и Гиря\" (W25027)",
+                  "locationId": "loc5", 
+                  "eventType": "activity",
+                  "startTime": "07:30",
+                  "endTime": "08:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "Meal_Do0800",
+                  "title_ru": "Завтрак",
+                  "locationId": "loc3", 
+                  "eventType": "meal",
+                  "startTime": "08:00",
+                  "endTime": "10:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25005_Do09",
+                  "title_ru": "Регистрация на поляне (W25005)",
+                  "locationId": "loc2",
+                  "eventType": "registration",
+                  "startTime": "09:00", 
+                  "endTime": "10:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25065_Do08",
+                  "title_ru": "Утреннее пробуждение (W25065)",
+                  "locationId": "loc_gruene_baenke", 
+                  "eventType": "activity",
+                  "startTime": "08:00", 
+                  "endTime": "10:00", 
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                 {
+                  "eventId": "W25111_Do0930",
+                  "title_ru": "\"Махнёмся не глядя!\" (W25111)",
+                  "locationId": "loc5",
+                  "eventType": "workshop",
+                  "startTime": "09:30",
+                  "endTime": "10:00", 
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25057",
+                  "title_ru": "Волшебные цветы из шёлка (W25057)",
+                  "locationId": "loc1",
+                  "eventType": "workshop",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25025",
+                  "title_ru": "Типографика (W25025)",
+                  "locationId": "loc2",
+                  "eventType": "workshop",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25009",
+                  "title_ru": "Наблюдение за Солнцем (W25009)",
+                  "locationId": "loc4",
+                  "eventType": "observation_activity",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25110_Do10", 
+                  "title_ru": "Музыкальные нейросети (W25110)",
+                  "locationId": "loc3",
+                  "eventType": "workshop",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25097_Do10",
+                  "title_ru": "Подвижные игры для детей 3-5 лет (W25097)",
+                  "locationId": "loc7",
+                  "eventType": "game",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": "3-5 лет"
+                },
+                {
+                  "eventId": "W25104_Do10",
+                  "title_ru": "Настольные игры (W25104)",
+                  "locationId": "loc8",
+                  "eventType": "game",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25018_Do11",
+                  "title_ru": "Лоскутные сумки (W25018)",
+                  "locationId": "loc1",
+                  "eventType": "workshop",
+                  "startTime": "11:00",
+                  "endTime": "12:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25064_Do11",
+                  "title_ru": "Тайны нашего тела (W25064)",
+                  "locationId": "loc4",
+                  "eventType": "workshop",
+                  "startTime": "11:00",
+                  "endTime": "12:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25106_Do11",
+                  "title_ru": "Пластилинография (W25106)",
+                  "locationId": "loc3",
+                  "eventType": "workshop",
+                  "startTime": "11:00",
+                  "endTime": "12:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25113_Do11",
+                  "title_ru": "Книжная лавка (W25113)",
+                  "locationId": "loc5",
+                  "eventType": "shop",
+                  "startTime": "11:00",
+                  "endTime": "13:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25068_Do12",
+                  "title_ru": "Интуитивное рисование (W25068)",
+                  "locationId": "loc1",
+                  "eventType": "workshop",
+                  "startTime": "12:00",
+                  "endTime": "13:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25098_Do12",
+                  "title_ru": "Верёвочный курс (W25098)",
+                  "locationId": "loc7",
+                  "eventType": "workshop",
+                  "startTime": "12:00",
+                  "endTime": "13:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "Meal_Do1300",
+                  "title_ru": "Обед",
+                  "locationId": "loc3",
+                  "eventType": "meal",
+                  "startTime": "13:00",
+                  "endTime": "15:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25023_Do13",
+                  "title_ru": "Ярмарка (W25023)",
+                  "locationId": "loc5",
+                  "eventType": "fair",
+                  "startTime": "13:00",
+                  "endTime": "17:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25108_Do15",
+                  "title_ru": "Нейрографика (W25108)",
+                  "locationId": "loc1",
+                  "eventType": "workshop",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25027_Do15",
+                  "title_ru": "Мастерская голоса (W25027)",
+                  "locationId": "loc2",
+                  "eventType": "workshop",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25017_Do15",
+                  "title_ru": "Программирование роботов (W25017)",
+                  "locationId": "loc4",
+                  "eventType": "workshop",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25015_Do15",
+                  "title_ru": "Бумажная архитектура (W25015)",
+                  "locationId": "loc3",
+                  "eventType": "workshop",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25046_Do15",
+                  "title_ru": "Рисование для детей 3-5 лет (W25046)",
+                  "locationId": "loc7",
+                  "eventType": "workshop",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": "3-5 лет"
+                },
+                {
+                  "eventId": "W25037_Do15",
+                  "title_ru": "Взрослые настольные игры (W25037)",
+                  "locationId": "loc8",
+                  "eventType": "game",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25073_Do16",
+                  "title_ru": "Психологическая игра \"Денежный поток\" (W25073)",
+                  "locationId": "loc2",
+                  "eventType": "game",
+                  "startTime": "16:00",
+                  "endTime": "17:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25099_Do16",
+                  "title_ru": "Эксперименты с растениями (W25099)",
+                  "locationId": "loc4",
+                  "eventType": "science_activity",
+                  "startTime": "16:00",
+                  "endTime": "17:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25062_Do16",
+                  "title_ru": "Лепка из полимерной глины (W25062)",
+                  "locationId": "loc3",
+                  "eventType": "workshop",
+                  "startTime": "16:00",
+                  "endTime": "17:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25096_Do16",
+                  "title_ru": "Лепка для детей 3-5 лет (W25096)",
+                  "locationId": "loc7",
+                  "eventType": "workshop",
+                  "startTime": "16:00",
+                  "endTime": "17:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": "3-5 лет"
+                },
+                {
+                  "eventId": "W25107_Do17",
+                  "title_ru": "Кофейная гуща (W25107)",
+                  "locationId": "loc1",
+                  "eventType": "activity",
+                  "startTime": "17:00",
+                  "endTime": "18:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25059_Do17",
+                  "title_ru": "Керамика (W25059)",
+                  "locationId": "loc3",
+                  "eventType": "workshop",
+                  "startTime": "17:00",
+                  "endTime": "18:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25047_Do17",
+                  "title_ru": "Кукольный театр (W25047)",
+                  "locationId": "loc7",
+                  "eventType": "performance",
+                  "startTime": "17:00",
+                  "endTime": "18:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25034_Do17",
+                  "title_ru": "Спортивные игры (W25034)",
+                  "locationId": "loc9",
+                  "eventType": "game",
+                  "startTime": "17:00",
+                  "endTime": "18:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "Meal_Do1800",
+                  "title_ru": "Ужин",
+                  "locationId": "loc3",
+                  "eventType": "meal",
+                  "startTime": "18:00",
+                  "endTime": "19:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25033_Do18",
+                  "title_ru": "Мини диско (W25033)",
+                  "locationId": "loc9",
+                  "eventType": "dance",
+                  "startTime": "18:00",
+                  "endTime": "19:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25001_Do1930",
+                  "title_ru": "Официальное открытие слёта (W25001)",
+                  "locationId": "loc1",
+                  "eventType": "ceremony",
+                  "startTime": "19:30",
+                  "endTime": "20:30",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25019_Do2100",
+                  "title_ru": "Песни у костра для взрослых и детей (W25019)",
+                  "locationId": "loc6",
+                  "eventType": "activity",
+                  "startTime": "21:00",
+                  "endTime": "22:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                }
+              ]
+            },
+            "2025-05-30": {
+              "dayLabel_de": "Freitag",
+              "dayLabel_ru": "Пятница",
+              "fullDayDescription_ru": "Пятница 30.05.2025",
+              "events": [
+                {
+                  "eventId": "Meal_Fr0900",
+                  "title_ru": "Завтрак",
+                  "locationId": "loc3",
+                  "eventType": "meal",
+                  "startTime": "09:00",
+                  "endTime": "10:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25058_Fr10",
+                  "title_ru": "Роспись футболок (W25058)",
+                  "locationId": "loc1",
+                  "eventType": "workshop",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25065_Fr10",
+                  "title_ru": "Квест по химии (W25065)",
+                  "locationId": "loc4",
+                  "eventType": "quest",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25105_Fr10",
+                  "title_ru": "Игры с воздушными шарами (W25105)",
+                  "locationId": "loc3",
+                  "eventType": "game",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25097_Fr1000",
+                  "title_ru": "Подвижные игры для детей 3-5 лет (W25097)",
+                  "locationId": "loc7",
+                  "eventType": "game",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": "3-5 лет"
+                },
+                {
+                  "eventId": "W25104_Fr1000",
+                  "title_ru": "Настольные игры (W25104)",
+                  "locationId": "loc8",
+                  "eventType": "game",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25081_Fr10",
+                  "title_ru": "Ювелирная мастерская (W25081)",
+                  "locationId": "loc2",
+                  "eventType": "workshop",
+                  "startTime": "10:00",
+                  "endTime": "13:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25067_Fr11",
+                  "title_ru": "Макраме (W25067)",
+                  "locationId": "loc1",
+                  "eventType": "workshop",
+                  "startTime": "11:00",
+                  "endTime": "12:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25129_Fr11",
+                  "title_ru": "Программирование на Scratch (W25129)",
+                  "locationId": "loc4",
+                  "eventType": "workshop",
+                  "startTime": "11:00",
+                  "endTime": "12:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25063_Fr11",
+                  "title_ru": "Рисование акварелью (W25063)",
+                  "locationId": "loc3",
+                  "eventType": "workshop",
+                  "startTime": "11:00",
+                  "endTime": "12:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25113_Fr1100",
+                  "title_ru": "Книжная лавка (W25113)",
+                  "locationId": "loc5",
+                  "eventType": "shop",
+                  "startTime": "11:00",
+                  "endTime": "13:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25079_Fr11",
+                  "title_ru": "Историческое фехтование (W25079)",
+                  "locationId": "loc9",
+                  "eventType": "workshop",
+                  "startTime": "11:00",
+                  "endTime": "13:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25112_Fr12",
+                  "title_ru": "Игры нашего двора (W25112)",
+                  "locationId": "loc7",
+                  "eventType": "game",
+                  "startTime": "12:00",
+                  "endTime": "13:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "Meal_Fr1300",
+                  "title_ru": "Обед",
+                  "locationId": "loc3",
+                  "eventType": "meal",
+                  "startTime": "13:00",
+                  "endTime": "15:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25023_Fr",
+                  "title_ru": "Ярмарка (W25023)",
+                  "locationId": "loc5",
+                  "eventType": "fair",
+                  "startTime": "13:00",
+                  "endTime": "17:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25072_Fr15",
+                  "title_ru": "Психологическая игра \"Остров мечты\" (W25072)",
+                  "locationId": "loc1",
+                  "eventType": "game",
+                  "startTime": "15:00",
+                  "endTime": "18:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25071_Fr15",
+                  "title_ru": "Посиделки с гитарой (W25071)",
+                  "locationId": "loc2",
+                  "eventType": "activity",
+                  "startTime": "15:00",
+                  "endTime": "18:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25010_Fr15",
+                  "title_ru": "Квест по астрономии (W25010)",
+                  "locationId": "loc4",
+                  "eventType": "quest",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25061_Fr15",
+                  "title_ru": "Декупаж (W25061)",
+                  "locationId": "loc3",
+                  "eventType": "workshop",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25046_Fr1500",
+                  "title_ru": "Рисование для детей 3-5 лет (W25046)",
+                  "locationId": "loc7",
+                  "eventType": "workshop",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": "3-5 лет"
+                },
+                {
+                  "eventId": "W25037_Fr1500",
+                  "title_ru": "Взрослые настольные игры (W25037)",
+                  "locationId": "loc8",
+                  "eventType": "game",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25076_Fr16",
+                  "title_ru": "Игры для всей семьи (W25076)",
+                  "locationId": "loc9",
+                  "eventType": "game",
+                  "startTime": "16:00",
+                  "endTime": "17:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25096_Fr1600",
+                  "title_ru": "Лепка для детей 3-5 лет (W25096)",
+                  "locationId": "loc7",
+                  "eventType": "workshop",
+                  "startTime": "16:00",
+                  "endTime": "17:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": "3-5 лет"
+                },
+                {
+                  "eventId": "W25047_Fr1700",
+                  "title_ru": "Кукольный театр (W25047)",
+                  "locationId": "loc7",
+                  "eventType": "performance",
+                  "startTime": "17:00",
+                  "endTime": "18:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "Meal_Fr1800",
+                  "title_ru": "Ужин",
+                  "locationId": "loc3",
+                  "eventType": "meal",
+                  "startTime": "18:00",
+                  "endTime": "19:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25033_Fr1800",
+                  "title_ru": "Мини диско (W25033)",
+                  "locationId": "loc9",
+                  "eventType": "dance",
+                  "startTime": "18:00",
+                  "endTime": "19:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25040_Fr1930",
+                  "title_ru": "Акустический концерт (W25040)",
+                  "locationId": "loc1",
+                  "eventType": "performance",
+                  "startTime": "19:30",
+                  "endTime": "20:30",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                 {
+                  "eventId": "W25047_Fr19", 
+                  "title_ru": "Паб-Квиз (W25047)",
+                  "locationId": "loc4", 
+                  "eventType": "quiz",
+                  "startTime": "19:00", 
+                  "endTime": "22:30", 
+                  "description_ru": "Ein unterhaltsames Quiz für Teams.",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25019_Fr2100",
+                  "title_ru": "Песни у костра для взрослых и детей (W25019)",
+                  "locationId": "loc6",
+                  "eventType": "activity",
+                  "startTime": "21:00",
+                  "endTime": "22:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25021_Fr22",
+                  "title_ru": "Ночная игротека (W25021)",
+                  "locationId": "loc8",
+                  "eventType": "game",
+                  "startTime": "22:00",
+                  "endTime": "23:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25012_Fr23",
+                  "title_ru": "Наблюдение за звёздами (W25012)",
+                  "locationId": "loc4",
+                  "eventType": "observation_activity",
+                  "startTime": "23:00",
+                  "endTime": "00:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                }
+              ]
+            },
+            "2025-05-31": {
+              "dayLabel_de": "Samstag",
+              "dayLabel_ru": "Суббота",
+              "fullDayDescription_ru": "Суббота 31.05.2025, родительский день",
+              "events": [
+                {
+                  "eventId": "Meal_Sa0900",
+                  "title_ru": "Завтрак",
+                  "locationId": "loc3",
+                  "eventType": "meal",
+                  "startTime": "09:00",
+                  "endTime": "10:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25006_Sa10",
+                  "title_ru": "Регистрация на поляне (W25006)",
+                  "locationId": "loc2",
+                  "eventType": "registration",
+                  "startTime": "10:00",
+                  "endTime": "13:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25022_Sa10",
+                  "title_ru": "Финансовая игра \"Не в деньгах счастье\" (W25022)",
+                  "locationId": "loc4",
+                  "eventType": "game",
+                  "startTime": "10:00",
+                  "endTime": "13:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25125_Sa10",
+                  "title_ru": "Оригами (W25125)",
+                  "locationId": "loc3",
+                  "eventType": "workshop",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25097_Sa1000",
+                  "title_ru": "Подвижные игры для детей 3-5 лет (W25097)",
+                  "locationId": "loc7",
+                  "eventType": "game",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": "3-5 лет"
+                },
+                {
+                  "eventId": "W25104_Sa1000",
+                  "title_ru": "Настольные игры (W25104)",
+                  "locationId": "loc8",
+                  "eventType": "game",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25075_Sa10",
+                  "title_ru": "Ирландские танцы (W25075)",
+                  "locationId": "loc9",
+                  "eventType": "dance",
+                  "startTime": "10:00",
+                  "endTime": "13:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25080_Sa11",
+                  "title_ru": "Шляпная мастерская (W25080)",
+                  "locationId": "loc3",
+                  "eventType": "workshop",
+                  "startTime": "11:00",
+                  "endTime": "12:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25112_Sa1200",
+                  "title_ru": "Игры нашего двора (W25112)",
+                  "locationId": "loc7",
+                  "eventType": "game",
+                  "startTime": "12:00",
+                  "endTime": "13:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "Meal_Sa1300",
+                  "title_ru": "Обед",
+                  "locationId": "loc3",
+                  "eventType": "meal",
+                  "startTime": "13:00",
+                  "endTime": "15:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25082_Sa15",
+                  "title_ru": "Учимся крутить пои (W25082)",
+                  "locationId": "loc2",
+                  "eventType": "workshop",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25070_Sa15",
+                  "title_ru": "Релаксационные техники (W25070)",
+                  "locationId": "loc4",
+                  "eventType": "workshop",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25020_Sa15",
+                  "title_ru": "Парные фольклорные танцы (W25020)",
+                  "locationId": "loc9",
+                  "eventType": "dance",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25077_Sa15",
+                  "title_ru": "Домино экспресс (W25077)",
+                  "locationId": "loc8",
+                  "eventType": "game",
+                  "startTime": "15:00",
+                  "endTime": "16:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "Spectacle_Sa1600",
+                  "title_ru": "Спектакль",
+                  "locationId": "loc1",
+                  "eventType": "performance",
+                  "startTime": "16:00",
+                  "endTime": "17:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25127_Sa17",
+                  "title_ru": "Покраска хлоркой (W25127)",
+                  "locationId": "loc2",
+                  "eventType": "workshop",
+                  "startTime": "17:00",
+                  "endTime": "18:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "Meal_Sa1800",
+                  "title_ru": "Ужин",
+                  "locationId": "loc3",
+                  "eventType": "meal",
+                  "startTime": "18:00",
+                  "endTime": "19:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25033_Sa1800",
+                  "title_ru": "Мини диско (W25033)",
+                  "locationId": "loc9",
+                  "eventType": "dance",
+                  "startTime": "18:00",
+                  "endTime": "19:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25041_Sa1930",
+                  "title_ru": "Концерт мастерских (W25041)",
+                  "locationId": "loc1",
+                  "eventType": "performance",
+                  "startTime": "19:30",
+                  "endTime": "20:30",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25019_Sa2100",
+                  "title_ru": "Песни у костра для взрослых и детей (W25019)",
+                  "locationId": "loc6",
+                  "eventType": "activity",
+                  "startTime": "21:00",
+                  "endTime": "22:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                }
+              ]
+            },
+            "2025-06-01": {
+              "dayLabel_de": "Sonntag",
+              "dayLabel_ru": "Воскресенье",
+              "fullDayDescription_ru": "Воскресенье 01.06.2025, день отъезда",
+              "events": [
+                {
+                  "eventId": "Meal_So0900",
+                  "title_ru": "Завтрак",
+                  "locationId": "loc3",
+                  "eventType": "meal",
+                  "startTime": "09:00",
+                  "endTime": "10:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "W25007_So10",
+                  "title_ru": "Закрытие слёта (W25007)",
+                  "locationId": "loc1",
+                  "eventType": "ceremony",
+                  "startTime": "10:00",
+                  "endTime": "11:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "GeneralActivity_So1100",
+                  "title_ru": "Общая уборка территории",
+                  "locationId": "loc3", 
+                  "eventType": "general_activity",
+                  "startTime": "11:00",
+                  "endTime": "12:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                },
+                {
+                  "eventId": "GeneralActivity_So1200",
+                  "title_ru": "Отъезд",
+                  "locationId": "loc3", 
+                  "eventType": "general_activity",
+                  "startTime": "12:00",
+                  "endTime": "13:00",
+                  "description_ru": "",
+                  "details_ru": null,
+                  "url": "",
+                  "targetAudience_ru": null
+                }
+              ]
+            }
+          }
+        };
+    </script>
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -310,1782 +1654,6 @@
     </div>
 
     <script>
-        // Eingebettete Workshop-Daten (vollständig)
-        const embeddedWorkshopsData = [
-
-  {
-    "id": "W25124",
-    "day": "Mittwoch",
-    "day_de": "Среда 28.05.2025, день заезда",
-    "tabTarget": "tab-mittwoch",
-    "timeSlot": "17:00",
-    "originalTitle": "Коллажи из бумаги (W25124)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25005",
-    "day": "Mittwoch",
-    "day_de": "Среда 28.05.2025, день заезда",
-    "tabTarget": "tab-mittwoch",
-    "timeSlot": "17:00",
-    "originalTitle": "Регистрация на поляне (W25005)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25016",
-    "day": "Mittwoch",
-    "day_de": "Среда 28.05.2025, день заезда",
-    "tabTarget": "tab-mittwoch",
-    "timeSlot": "17:00",
-    "originalTitle": "Гороховый конструктор (W25016)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Mittwoch",
-    "day_de": "Среда 28.05.2025, день заезда",
-    "tabTarget": "tab-mittwoch",
-    "timeSlot": "18:00-19:00",
-    "originalTitle": "Ужин",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": true,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25101",
-    "day": "Mittwoch",
-    "day_de": "Среда 28.05.2025, день заезда",
-    "tabTarget": "tab-mittwoch",
-    "timeSlot": "19:00",
-    "originalTitle": "Древний Счёт (W25101)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25005",
-    "day": "Mittwoch",
-    "day_de": "Среда 28.05.2025, день заезда",
-    "tabTarget": "tab-mittwoch",
-    "timeSlot": "19:00",
-    "originalTitle": "Регистрация на поляне (W25005)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25128",
-    "day": "Mittwoch",
-    "day_de": "Среда 28.05.2025, день заезда",
-    "tabTarget": "tab-mittwoch",
-    "timeSlot": "19:00",
-    "originalTitle": "Физические опыты со звуком для детей 6-10 лет. (W25128)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25109",
-    "day": "Mittwoch",
-    "day_de": "Среда 28.05.2025, день заезда",
-    "tabTarget": "tab-mittwoch",
-    "timeSlot": "19:00",
-    "originalTitle": "Парфюмер (W25109)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25111",
-    "day": "Mittwoch",
-    "day_de": "Среда 28.05.2025, день заезда",
-    "tabTarget": "tab-mittwoch",
-    "timeSlot": "19:00",
-    "originalTitle": "\"Махнёмся не глядя!\" (W25111)",
-    "durationBadge": null,
-    "location": "Центральная поляна (7)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25066",
-    "day": "Mittwoch",
-    "day_de": "Среда 28.05.2025, день заезда",
-    "tabTarget": "tab-mittwoch",
-    "timeSlot": "20:00",
-    "originalTitle": "Чудеса из бумаги (W25066)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25056",
-    "day": "Mittwoch",
-    "day_de": "Среда 28.05.2025, день заезда",
-    "tabTarget": "tab-mittwoch",
-    "timeSlot": "20:00",
-    "originalTitle": "Игры на знакомство (W25056)",
-    "durationBadge": null,
-    "location": "Центральная поляна (7)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25019",
-    "day": "Mittwoch",
-    "day_de": "Среда 28.05.2025, день заезда",
-    "tabTarget": "tab-mittwoch",
-    "timeSlot": "21:00",
-    "originalTitle": "Песни у костра для взрослых и детей (W25019)",
-    "durationBadge": null,
-    "location": "У костра",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "09:00-10:00",
-    "originalTitle": "Завтрак",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": true,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25057",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "10:00",
-    "originalTitle": "Волшебные цветы из шёлка (W25057)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25025",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "10:00",
-    "originalTitle": "Типографика (W25025)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25009",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "10:00",
-    "originalTitle": "Наблюдение за Солнцем (W25009)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25110",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "10:00",
-    "originalTitle": "Музыкальные нейросети (W25110)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25097",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "10:00",
-    "originalTitle": "Подвижные игры для детей 3-5 лет (W25097)",
-    "durationBadge": null,
-    "location": "Детская площадка (4)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25104",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "10:00",
-    "originalTitle": "Настольные игры (W25104)",
-    "durationBadge": null,
-    "location": "Игровая палатка (5)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25018",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "11:00",
-    "originalTitle": "Лоскутные сумки (W25018)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25064",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "11:00",
-    "originalTitle": "Тайны нашего тела (W25064)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25106",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "11:00",
-    "originalTitle": "Пластилинография (W25106)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25113",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "11:00",
-    "originalTitle": "Книжная лавка (W25113)",
-    "durationBadge": null,
-    "location": "Центральная поляна (7)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25068",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "12:00",
-    "originalTitle": "Интуитивное рисование (W25068)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25098",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "12:00",
-    "originalTitle": "Верёвочный курс (W25098)",
-    "durationBadge": null,
-    "location": "Детская площадка (4)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25113",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "12:00",
-    "originalTitle": "Книжная лавка (W25113)",
-    "durationBadge": null,
-    "location": "Центральная поляна (7)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "13:00-15:00",
-    "originalTitle": "Обед",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": true,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25023",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "13:00-15:00",
-    "originalTitle": "Ярмарка (W25023)",
-    "durationBadge": null,
-    "location": "Центральная поляна (7)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25108",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "15:00",
-    "originalTitle": "Нейрографика (W25108)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25027",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "15:00",
-    "originalTitle": "Мастерская голоса (W25027)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25017",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "15:00",
-    "originalTitle": "Программирование роботов (W25017)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25015",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "15:00",
-    "originalTitle": "Бумажная архитектура (W25015)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25046",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "15:00",
-    "originalTitle": "Рисование для детей 3-5 лет (W25046)",
-    "durationBadge": null,
-    "location": "Детская площадка (4)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25037",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "15:00",
-    "originalTitle": "Взрослые настольные игры (W25037)",
-    "durationBadge": null,
-    "location": "Игровая палатка (5)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25023",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "15:00",
-    "originalTitle": "Ярмарка (W25023)",
-    "durationBadge": null,
-    "location": "Центральная поляна (7)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25073",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "16:00",
-    "originalTitle": "Психологическая игра \"Денежный поток\" (W25073)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25099",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "16:00",
-    "originalTitle": "Эксперименты с растениями (W25099)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25062",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "16:00",
-    "originalTitle": "Лепка из полимерной глины (W25062)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25096",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "16:00",
-    "originalTitle": "Лепка для детей 3-5 лет (W25096)",
-    "durationBadge": null,
-    "location": "Детская площадка (4)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25023",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "16:00",
-    "originalTitle": "Ярмарка (W25023)",
-    "durationBadge": null,
-    "location": "Центральная поляна (7)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25107",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "17:00",
-    "originalTitle": "Кофейная гуща (W25107)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25059",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "17:00",
-    "originalTitle": "Керамика (W25059)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25047",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "17:00",
-    "originalTitle": "Кукольный театр (W25047)",
-    "durationBadge": null,
-    "location": "Детская площадка (4)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25034",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "17:00",
-    "originalTitle": "Спортивные игры (W25034)",
-    "durationBadge": null,
-    "location": "Танцплощадка (6)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "18:00-19:00",
-    "originalTitle": "Ужин",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": true,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25033",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "18:00-19:00",
-    "originalTitle": "Мини диско (W25033)",
-    "durationBadge": null,
-    "location": "Танцплощадка (6)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25001",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "19:30",
-    "originalTitle": "Официальное открытие слёта (W25001)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25019",
-    "day": "Donnerstag",
-    "day_de": "Четверг 29.05.2025, официальное открытие",
-    "tabTarget": "tab-donnerstag",
-    "timeSlot": "21:00",
-    "originalTitle": "Песни у костра для взрослых и детей (W25019)",
-    "durationBadge": null,
-    "location": "У костра",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "09:00-10:00",
-    "originalTitle": "Завтрак",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": true,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25058",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "10:00",
-    "originalTitle": "Роспись футболок (W25058)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25065",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "10:00",
-    "originalTitle": "Квест по химии (W25065)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25105",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "10:00",
-    "originalTitle": "Игры с воздушными шарами (W25105)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25097",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "10:00",
-    "originalTitle": "Подвижные игры для детей 3-5 лет (W25097)",
-    "durationBadge": null,
-    "location": "Детская площадка (4)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25104",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "10:00",
-    "originalTitle": "Настольные игры (W25104)",
-    "durationBadge": null,
-    "location": "Игровая палатка (5)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25081",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "10:00",
-    "originalTitle": "Ювелирная мастерская (W25081)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25067",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "11:00",
-    "originalTitle": "Макраме (W25067)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25129",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "11:00",
-    "originalTitle": "Программирование на Scratch (W25129)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25063",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "11:00",
-    "originalTitle": "Рисование акварелью (W25063)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25113",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "11:00",
-    "originalTitle": "Книжная лавка (W25113)",
-    "durationBadge": null,
-    "location": "Центральная поляна (7)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25079",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "11:00",
-    "originalTitle": "Историческое фехтование (W25079)",
-    "durationBadge": null,
-    "location": "Танцплощадка (6)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25081",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "11:00",
-    "originalTitle": "Ювелирная мастерская (W25081)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25112",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "12:00",
-    "originalTitle": "Игры нашего двора (W25112)",
-    "durationBadge": null,
-    "location": "Детская площадка (4)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25113",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "12:00",
-    "originalTitle": "Книжная лавка (W25113)",
-    "durationBadge": null,
-    "location": "Центральная поляна (7)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25079",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "12:00",
-    "originalTitle": "Историческое фехтование (W25079)",
-    "durationBadge": null,
-    "location": "Танцплощадка (6)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25081",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "12:00",
-    "originalTitle": "Ювелирная мастерская (W25081)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "13:00-15:00",
-    "originalTitle": "Обед",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": true,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25023",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "13:00-15:00",
-    "originalTitle": "Ярмарка (W25023)",
-    "durationBadge": null,
-    "location": "Центральная поляна (7)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25072",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "15:00",
-    "originalTitle": "Психологическая игра \"Остров мечты\" (W25072)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25071",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "15:00",
-    "originalTitle": "Посиделки с гитарой (W25071)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25010",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "15:00",
-    "originalTitle": "Квест по астрономии (W25010)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25061",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "15:00",
-    "originalTitle": "Декупаж (W25061)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25046",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "15:00",
-    "originalTitle": "Рисование для детей 3-5 лет (W25046)",
-    "durationBadge": null,
-    "location": "Детская площадка (4)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25037",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "15:00",
-    "originalTitle": "Взрослые настольные игры (W25037)",
-    "durationBadge": null,
-    "location": "Игровая палатка (5)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25023",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "15:00",
-    "originalTitle": "Ярмарка (W25023)",
-    "durationBadge": null,
-    "location": "Центральная поляна (7)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25072",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "16:00",
-    "originalTitle": "Психологическая игра \"Остров мечты\" (W25072)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25071",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "16:00",
-    "originalTitle": "Посиделки с гитарой (W25071)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25076",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "16:00",
-    "originalTitle": "Игры для всей семьи (W25076)",
-    "durationBadge": null,
-    "location": "Танцплощадка (6)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25023",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "16:00",
-    "originalTitle": "Ярмарка (W25023)",
-    "durationBadge": null,
-    "location": "Центральная поляна (7)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25096",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "16:00",
-    "originalTitle": "Лепка для детей 3-5 лет (W25096)",
-    "durationBadge": null,
-    "location": "Детская площадка (4)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25072",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "17:00",
-    "originalTitle": "Психологическая игра \"Остров мечты\" (W25072)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25071",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "17:00",
-    "originalTitle": "Посиделки с гитарой (W25071)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25047",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "17:00",
-    "originalTitle": "Кукольный театр (W25047)",
-    "durationBadge": null,
-    "location": "Детская площадка (4)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "18:00-19:00",
-    "originalTitle": "Ужин",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": true,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25033",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "18:00-19:00",
-    "originalTitle": "Мини диско (W25033)",
-    "durationBadge": null,
-    "location": "Танцплощадка (6)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25040",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "19:30",
-    "originalTitle": "Акустический концерт (W25040)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25019",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "21:00",
-    "originalTitle": "Песни у костра для взрослых и детей (W25019)",
-    "durationBadge": null,
-    "location": "У костра",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25021",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "22:00",
-    "originalTitle": "Ночная игротека (W25021)",
-    "durationBadge": null,
-    "location": "Игровая палатка (5)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25012",
-    "day": "Freitag",
-    "day_de": "Пятница 30.05.2025",
-    "tabTarget": "tab-freitag",
-    "timeSlot": "23:00",
-    "originalTitle": "Наблюдение за звёздами (W25012)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "09:00-10:00",
-    "originalTitle": "Завтрак",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": true,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25006",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "10:00",
-    "originalTitle": "Регистрация на поляне (W25006)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25022",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "10:00",
-    "originalTitle": "Финансовая игра \"Не в деньгах счастье\" (W25022)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25125",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "10:00",
-    "originalTitle": "Оригами (W25125)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25097",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "10:00",
-    "originalTitle": "Подвижные игры для детей 3-5 лет (W25097)",
-    "durationBadge": null,
-    "location": "Детская площадка (4)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25104",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "10:00",
-    "originalTitle": "Настольные игры (W25104)",
-    "durationBadge": null,
-    "location": "Игровая палатка (5)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25075",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "10:00",
-    "originalTitle": "Ирландские танцы (W25075)",
-    "durationBadge": null,
-    "location": "Танцплощадка (6)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25006",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "11:00",
-    "originalTitle": "Регистрация на поляне (W25006)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25022",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "11:00",
-    "originalTitle": "Финансовая игра \"Не в деньгах счастье\" (W25022)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25080",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "11:00",
-    "originalTitle": "Шляпная мастерская (W25080)",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25075",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "11:00",
-    "originalTitle": "Ирландские танцы (W25075)",
-    "durationBadge": null,
-    "location": "Танцплощадка (6)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25006",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "12:00",
-    "originalTitle": "Регистрация на поляне (W25006)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25022",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "12:00",
-    "originalTitle": "Финансовая игра \"Не в деньгах счастье\" (W25022)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25112",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "12:00",
-    "originalTitle": "Игры нашего двора (W25112)",
-    "durationBadge": null,
-    "location": "Детская площадка (4)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25075",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "12:00",
-    "originalTitle": "Ирландские танцы (W25075)",
-    "durationBadge": null,
-    "location": "Танцплощадка (6)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "13:00-15:00",
-    "originalTitle": "Обед",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": true,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25082",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "15:00",
-    "originalTitle": "Учимся крутить пои (W25082)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25070",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "15:00",
-    "originalTitle": "Релаксационные техники (W25070)",
-    "durationBadge": null,
-    "location": "Просветительская палатка (2)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25020",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "15:00",
-    "originalTitle": "Парные фольклорные танцы (W25020)",
-    "durationBadge": null,
-    "location": "Танцплощадка (6)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25077",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "15:00",
-    "originalTitle": "Домино экспресс (W25077)",
-    "durationBadge": null,
-    "location": "Игровая палатка (5)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "16:00",
-    "originalTitle": "Спектакль",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25127",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "17:00",
-    "originalTitle": "Покраска хлоркой (W25127)",
-    "durationBadge": null,
-    "location": "Павильон рядом с главной палаткой (1a)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "18:00-19:00",
-    "originalTitle": "Ужин",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": true,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25033",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "18:00-19:00",
-    "originalTitle": "Мини диско (W25033)",
-    "durationBadge": null,
-    "location": "Танцплощадка (6)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25041",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "19:30",
-    "originalTitle": "Концерт мастерских (W25041)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25019",
-    "day": "Samstag",
-    "day_de": "Суббота 31.05.2025, родительский день",
-    "tabTarget": "tab-samstag",
-    "timeSlot": "21:00",
-    "originalTitle": "Песни у костра для взрослых и детей (W25019)",
-    "durationBadge": null,
-    "location": "У костра",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Sonntag",
-    "day_de": "Воскресенье 01.06.2025, день отъезда",
-    "tabTarget": "tab-sonntag",
-    "timeSlot": "09:00-10:00",
-    "originalTitle": "Завтрак",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": true,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": "W25007",
-    "day": "Sonntag",
-    "day_de": "Воскресенье 01.06.2025, день отъезда",
-    "tabTarget": "tab-sonntag",
-    "timeSlot": "10:00",
-    "originalTitle": "Закрытие слёта (W25007)",
-    "durationBadge": null,
-    "location": "Главная палатка (1)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Sonntag",
-    "day_de": "Воскресенье 01.06.2025, день отъезда",
-    "tabTarget": "tab-sonntag",
-    "timeSlot": "11:00",
-    "originalTitle": "Общая уборка территории",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  },
-  {
-    "id": null,
-    "day": "Sonntag",
-    "day_de": "Воскресенье 01.06.2025, день отъезда",
-    "tabTarget": "tab-sonntag",
-    "timeSlot": "12:00",
-    "originalTitle": "Отъезд",
-    "durationBadge": null,
-    "location": "Палатка Рубикус (3)",
-    "parallelWith": [],
-    "isMeal": false,
-    "details": null,
-    "url": "",
-    "description": ""
-  }
-
-        ]; 
-
         document.addEventListener('DOMContentLoaded', () => {
             const loadingIndicator = document.getElementById('loadingIndicator');
             const favoriteToggleSwitch = document.getElementById('favoriteToggleSwitch');
@@ -2093,6 +1661,13 @@
             const tabNavContainer = document.getElementById('tabNavContainer');
             const workshopsTabsContainer = document.getElementById('workshopsTabsContainer');
             const noFavoritesMessage = document.getElementById('noFavoritesMessage');
+
+            // Kritische DOM-Elemente prüfen
+            if (!tabNavContainer || !workshopsTabsContainer) {
+                console.error("CRITICAL: Tab- oder Workshop-Container nicht im DOM gefunden. Initialisierung abgebrochen.");
+                if (loadingIndicator) loadingIndicator.classList.add('hidden');
+                return;
+            }
 
             let favorites = JSON.parse(localStorage.getItem('workshopFavorites')) || [];
             let currentView = localStorage.getItem('workshopPlanView') || 'all';
@@ -2120,15 +1695,16 @@
             };
             
             const attachFavoriteButtonListeners = () => {
+                if (!workshopsTabsContainer) return; 
                 const favoriteButtons = workshopsTabsContainer.querySelectorAll('.favorite-btn');
                 favoriteButtons.forEach(button => {
                     const newButton = button.cloneNode(true); 
                     button.parentNode.replaceChild(newButton, button);
 
-                    const card = newButton.closest('.event-card, .meal-item'); 
+                    const card = newButton.closest('.event-card'); 
                     if (card) {
                         const eventId = card.dataset.eventId;
-                        if (eventId && !card.classList.contains('meal-item')) { 
+                        if (eventId) { 
                             updateFavoriteButtonAppearance(newButton, eventId);
                             newButton.addEventListener('click', () => {
                                 if (favorites.includes(eventId)) {
@@ -2145,93 +1721,154 @@
                 });
             };
 
-            const buildWorkshopHTML = (workshop) => {
-                if (workshop.isMeal) {
+            const getLocationNameById = (locationId) => {
+                if (!embeddedTimetableData.locations) return 'Unbekannter Ort';
+                const locationObj = embeddedTimetableData.locations.find(loc => loc.locationId === locationId);
+                return locationObj ? locationObj.name_ru : 'Unbekannter Ort'; 
+            };
+
+            const parseTime = (timeStr) => { 
+                if (!timeStr || !timeStr.includes(':')) return null;
+                const [hours, minutes] = timeStr.split(':').map(Number);
+                if (isNaN(hours) || isNaN(minutes)) return null;
+                return hours * 60 + minutes;
+            };
+
+            const getDurationBadge = (startTime, endTime) => {
+                const startMinutes = parseTime(startTime);
+                const endMinutes = parseTime(endTime);
+
+                if (startMinutes === null || endMinutes === null) return null;
+                
+                let duration = endMinutes - startMinutes;
+                if (duration < 0) { 
+                    duration += 24 * 60;
+                }
+
+                if (duration > 0 && duration <= 60) {
+                    return '(≤1h)';
+                }
+                return null;
+            };
+
+
+            const buildWorkshopHTML = (event) => {
+                if (event.eventType === 'meal') {
                     return `
-                        <div class="meal-item" data-event-id="${workshop.id}">
-                            <p>${workshop.originalTitle} ${workshop.location ? `- Ort: ${workshop.location}` : ''}</p>
+                        <div class="meal-item" data-event-id="${event.eventId}">
+                            <p>${event.title_ru} ${event.locationId ? `- Ort: ${getLocationNameById(event.locationId)}` : ''}</p>
                         </div>
                     `;
                 }
 
-                let titleHTML = workshop.originalTitle;
-                if (workshop.durationBadge) {
-                    titleHTML += ` <span class="duration-badge">${workshop.durationBadge}</span>`;
+                let titleHTML = event.title_ru;
+                const durationBadgeText = getDurationBadge(event.startTime, event.endTime);
+                if (durationBadgeText) {
+                    titleHTML += ` <span class="duration-badge">${durationBadgeText}</span>`;
                 }
 
                 let detailsHTML = '';
-                if (workshop.details) {
-                    detailsHTML += `<p class="event-details">${workshop.details}</p>`;
+                if (event.details_ru) {
+                    detailsHTML += `<p class="event-details">${event.details_ru}</p>`;
                 }
-                if (workshop.parallelWith) {
-                    detailsHTML += `<p class="event-details">Parallel: ${workshop.parallelWith}</p>`;
+                if (event.targetAudience_ru) {
+                    detailsHTML += `<p class="event-details">Zielgruppe: ${event.targetAudience_ru}</p>`;
+                }
+                 if (event.startTime && event.endTime && !durationBadgeText) { 
+                    detailsHTML += `<p class="event-details">Zeit: ${event.startTime} - ${event.endTime}</p>`;
                 }
 
+
                 let descriptionHTML = '';
-                if (workshop.description && workshop.description.trim() !== "") {
-                    descriptionHTML = `<p class="event-description">${workshop.description}</p>`;
+                if (event.description_ru && event.description_ru.trim() !== "") {
+                    descriptionHTML = `<p class="event-description">${event.description_ru}</p>`;
                 }
                 
                 let urlHTML = '';
-                if (workshop.url && workshop.url.trim() !== "") {
-                    urlHTML = `<p class="event-url"><a href="${workshop.url}" target="_blank" rel="noopener noreferrer">Weitere Infos</a></p>`;
+                if (event.url && event.url.trim() !== "") {
+                    urlHTML = `<p class="event-url"><a href="${event.url}" target="_blank" rel="noopener noreferrer">Weitere Infos</a></p>`;
                 }
 
-                const favButtonHTML = workshop.isMeal ? '' : '<button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>';
+                const favButtonHTML = (event.eventType !== 'meal' && event.eventType !== 'registration' && event.eventType !== 'general_activity' && event.eventType !== 'ceremony') ? '<button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>' : '';
+
 
                 return `
-                    <div class="event-card" data-event-id="${workshop.id}">
+                    <div class="event-card" data-event-id="${event.eventId}">
                         ${favButtonHTML}
                         <p class="event-title">${titleHTML}</p>
                         ${detailsHTML}
                         ${descriptionHTML}
                         ${urlHTML}
-                        ${workshop.location ? `<p class="event-location">Ort: ${workshop.location}</p>` : ''}
+                        ${event.locationId ? `<p class="event-location">Ort: ${getLocationNameById(event.locationId)}</p>` : ''}
                     </div>
                 `;
             };
 
             const renderWorkshops = () => {
+                if (!workshopsTabsContainer) { 
+                    console.error("renderWorkshops: workshopsTabsContainer ist nicht verfügbar.");
+                    hideLoading();
+                    return;
+                }
                 const activePanel = workshopsTabsContainer.querySelector('.tab-panel.active');
-                if (!activePanel) {
+                if (!activePanel || !embeddedTimetableData.schedule) {
                     hideLoading(); 
                     return;
                 }
 
                 let hasVisibleContentInActivePanel = false;
-                const dayData = embeddedWorkshopsData.filter(ws => ws.tabTarget === activePanel.id); // Use embedded data
+                const activeDateKey = activePanel.id.replace('tab-', '');
+                const daySchedule = embeddedTimetableData.schedule[activeDateKey];
+
+                if (!daySchedule || !daySchedule.events) {
+                    activePanel.innerHTML = `<h2 class="day-header">${activePanel.dataset.dayDe}</h2><p class="text-center text-gray-500 mt-4">Keine Veranstaltungen für diesen Tag geplant.</p>`;
+                    hideLoading();
+                    return;
+                }
                 
+                const dayEvents = daySchedule.events;
                 const timeSlots = {};
-                dayData.forEach(ws => {
-                    if (!timeSlots[ws.timeSlot]) {
-                        timeSlots[ws.timeSlot] = [];
+                dayEvents.forEach(event => {
+                    const slotKey = event.startTime; 
+                    if (!timeSlots[slotKey]) {
+                        timeSlots[slotKey] = [];
                     }
-                    timeSlots[ws.timeSlot].push(ws);
+                    timeSlots[slotKey].push(event);
                 });
 
                 activePanel.innerHTML = `<h2 class="day-header">${activePanel.dataset.dayDe}</h2>`; 
 
                 Object.keys(timeSlots).sort().forEach(timeSlot => { 
-                    const workshopsInSlot = timeSlots[timeSlot];
+                    const eventsInSlot = timeSlots[timeSlot];
                     const timeslotGroup = document.createElement('div');
                     timeslotGroup.className = 'timeslot-group';
-                    timeslotGroup.innerHTML = `<h3 class="timeslot-time-header">${timeSlot}</h3>`;
+                    
+                    let commonEndTime = eventsInSlot.length > 0 ? eventsInSlot[0].endTime : null;
+                    if (commonEndTime) {
+                        for (let i = 1; i < eventsInSlot.length; i++) {
+                            if (eventsInSlot[i].endTime !== commonEndTime) {
+                                commonEndTime = null; 
+                                break;
+                            }
+                        }
+                    }
+                    timeslotGroup.innerHTML = `<h3 class="timeslot-time-header">${timeSlot}${commonEndTime && commonEndTime !== timeSlot ? ' - ' + commonEndTime : ''}</h3>`;
                     
                     let groupHasAnyVisibleElement = false;
 
-                    workshopsInSlot.forEach(workshop => {
-                        const workshopHTML = buildWorkshopHTML(workshop);
+                    eventsInSlot.forEach(event => {
+                        const eventHTML = buildWorkshopHTML(event);
                         const tempDiv = document.createElement('div');
-                        tempDiv.innerHTML = workshopHTML.trim();
-                        const workshopElement = tempDiv.firstChild;
+                        tempDiv.innerHTML = eventHTML.trim();
+                        const eventElement = tempDiv.firstChild;
 
-                        if (currentView === 'all' || (workshop.id && favorites.includes(workshop.id)) || workshop.isMeal) {
-                            if (workshopElement) workshopElement.classList.remove('hidden-by-filter');
+                        if (currentView === 'all' || (event.eventId && favorites.includes(event.eventId)) || event.eventType === 'meal') {
+                            if (eventElement) eventElement.classList.remove('hidden-by-filter');
                             groupHasAnyVisibleElement = true;
                         } else {
-                            if (workshopElement) workshopElement.classList.add('hidden-by-filter');
+                            if (eventElement) eventElement.classList.add('hidden-by-filter');
                         }
-                        if (workshopElement) timeslotGroup.appendChild(workshopElement);
+                        if (eventElement) timeslotGroup.appendChild(eventElement);
                     });
                     
                     if (groupHasAnyVisibleElement) {
@@ -2265,44 +1902,38 @@
                 hideLoading(); 
             };
             
-            const setupTabs = (data) => {
-                const uniqueDays = [];
-                const dayOrder = ["Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]; 
-
-                data.forEach(ws => {
-                    if (!uniqueDays.find(d => d.tabTarget === ws.tabTarget)) {
-                        uniqueDays.push({ day_de: ws.day_de, tabTarget: ws.tabTarget, dayOriginal: ws.day, originalDayName: ws.day });
-                    }
-                });
-
-                uniqueDays.sort((a, b) => {
-                    return dayOrder.indexOf(a.originalDayName) - dayOrder.indexOf(b.originalDayName);
-                });
+            const setupTabs = (schedule) => {
+                if (!tabNavContainer || !workshopsTabsContainer) { 
+                    console.error("Tab-Container nicht im DOM gefunden für setupTabs.");
+                    return;
+                }
+                const dateKeys = Object.keys(schedule).sort(); 
                 
-                if (tabNavContainer) tabNavContainer.innerHTML = ''; 
-                if (workshopsTabsContainer) workshopsTabsContainer.innerHTML = ''; 
+                tabNavContainer.innerHTML = ''; 
+                workshopsTabsContainer.innerHTML = ''; 
 
-                uniqueDays.forEach((day, index) => {
+                dateKeys.forEach((dateKey, index) => {
+                    const dayInfo = schedule[dateKey];
                     const tabButton = document.createElement('button');
                     tabButton.className = 'tab-button';
-                    tabButton.textContent = day.dayOriginal; 
-                    tabButton.dataset.tabTarget = day.tabTarget;
+                    tabButton.textContent = dayInfo.dayLabel_ru; 
+                    tabButton.dataset.tabTarget = `tab-${dateKey}`;
 
                     const tabPanel = document.createElement('div');
-                    tabPanel.id = day.tabTarget;
+                    tabPanel.id = `tab-${dateKey}`;
                     tabPanel.className = 'tab-panel day-section';
-                    tabPanel.dataset.dayDe = day.day_de; 
+                    tabPanel.dataset.dayDe = dayInfo.fullDayDescription_ru; 
 
                     if (index === 0) {
                         tabButton.classList.add('active');
                         tabPanel.classList.add('active');
                     }
                     
-                    if (tabNavContainer) tabNavContainer.appendChild(tabButton);
-                    if (workshopsTabsContainer) workshopsTabsContainer.appendChild(tabPanel);
+                    tabNavContainer.appendChild(tabButton);
+                    workshopsTabsContainer.appendChild(tabPanel);
                 });
 
-                const newTabButtons = tabNavContainer ? tabNavContainer.querySelectorAll('.tab-button') : [];
+                const newTabButtons = tabNavContainer.querySelectorAll('.tab-button');
                 newTabButtons.forEach(button => {
                     button.addEventListener('click', () => {
                         showLoading();
@@ -2321,24 +1952,32 @@
             
             // Initialize with embedded data
             showLoading();
-            setupTabs(embeddedWorkshopsData); // Use embedded data directly
-            
-            const initiallyActiveTab = tabNavContainer ? tabNavContainer.querySelector('.tab-button.active') : null;
-            if (initiallyActiveTab) {
-                const targetPanelId = initiallyActiveTab.dataset.tabTarget;
-                const targetPanel = document.getElementById(targetPanelId);
-                if (targetPanel) {
-                     if(workshopsTabsContainer) workshopsTabsContainer.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active')); 
-                    targetPanel.classList.add('active');
+            if (embeddedTimetableData && embeddedTimetableData.schedule) {
+                setupTabs(embeddedTimetableData.schedule); 
+                
+                const initiallyActiveTab = tabNavContainer ? tabNavContainer.querySelector('.tab-button.active') : null;
+                if (initiallyActiveTab) {
+                    const targetPanelId = initiallyActiveTab.dataset.tabTarget;
+                    const targetPanel = document.getElementById(targetPanelId);
+                    if (targetPanel) {
+                         if(workshopsTabsContainer) workshopsTabsContainer.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active')); 
+                        targetPanel.classList.add('active');
+                    }
+                } else if (tabNavContainer && tabNavContainer.firstChild) { 
+                    tabNavContainer.firstChild.classList.add('active');
+                    const firstPanelId = tabNavContainer.firstChild.dataset.tabTarget;
+                    const firstPanel = document.getElementById(firstPanelId);
+                    if (firstPanel) firstPanel.classList.add('active');
                 }
-            } else if (tabNavContainer && tabNavContainer.firstChild) { 
-                tabNavContainer.firstChild.classList.add('active');
-                const firstPanelId = tabNavContainer.firstChild.dataset.tabTarget;
-                const firstPanel = document.getElementById(firstPanelId);
-                if (firstPanel) firstPanel.classList.add('active');
+                setTimeout(renderWorkshops, 0); // Defer initial render slightly
+            } else {
+                 console.error("Eingebettete Workshop-Daten (embeddedTimetableData.schedule) nicht gefunden oder fehlerhaft.");
+                 if (workshopsTabsContainer) { 
+                    workshopsTabsContainer.innerHTML = "<p class='text-red-500 text-center'>Fehler: Workshop-Daten konnten nicht initialisiert werden.</p>";
+                }
+                hideLoading();
             }
-            renderWorkshops(); // Render immediately with embedded data
-            hideLoading(); // Hide loading after initial render with embedded data
+            // hideLoading() is now called within renderWorkshops or the catch block for embedded data
 
 
             if (favoriteToggleSwitch) {
@@ -2473,12 +2112,12 @@
     ```javascript
     // sw.js - Service Worker
 
-    const CACHE_NAME = 'veranstaltungsplan-cache-v1.15'; // Cache-Version erhöht
+    const CACHE_NAME = 'veranstaltungsplan-cache-v1.18'; // Cache-Version erhöht
     const urlsToCache = [
       './', 
-      'index.html',
+      'index.html', // Wird nun mit eingebetteten Daten gecacht
       'manifest.json',
-      // 'workshop.json', // Nicht mehr direkt cachen, da eingebettet
+      // 'timetable.json', // Entfernt, da Daten eingebettet sind
       '[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)',
       '[https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap)',
       'icons/icon-192x192.png',
@@ -2520,10 +2159,7 @@
     });
 
     self.addEventListener('fetch', event => {
-      // Die spezielle Fetch-Strategie für workshop.json ist nicht mehr nötig,
-      // da die Daten jetzt in der index.html eingebettet sind.
-      // Der Service Worker wird die index.html (mit den eingebetteten Daten)
-      // gemäß der allgemeinen Strategie für Navigationsanfragen behandeln.
+      // Die spezielle Fetch-Strategie für timetable.json ist nicht mehr nötig.
       
       if (event.request.method !== 'GET') {
         return;
