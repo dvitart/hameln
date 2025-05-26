@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="de">
-<head>
+<html lang="ru"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veranstaltungsplan Workshops</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Расписание Мастер-классов</title> <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="manifest" href="manifest.json">
@@ -1613,24 +1611,53 @@
             flex-wrap: wrap; 
             margin-bottom: 1rem;
         }
+        .gemini-btn {
+            background-color: #6366f1; /* Indigo-500 */
+            color: white;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem; /* Smaller text */
+            border-radius: 0.375rem;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .gemini-btn:hover {
+            background-color: #4f46e5; /* Indigo-600 */
+        }
+        /* Modal Styling */
+        #geminiModal {
+            /* ... existing styles ... */
+        }
+        #geminiModalTitle {
+             /* ... existing styles ... */
+        }
+        #geminiModalContent {
+            max-height: 60vh; /* Limit height and make scrollable */
+            overflow-y: auto;
+            text-align: left; /* Align text to the left for readability */
+            white-space: pre-wrap; /* Preserve line breaks from API response */
+        }
+        #closeGeminiModal {
+             /* ... existing styles ... */
+        }
     </style>
 </head>
 <body class="p-4 md:p-8">
     <div id="loadingIndicator">
         <div class="spinner"></div>
-        <p class="text-lg font-semibold text-gray-700">Lade Veranstaltungsplan...</p>
+        <p class="text-lg font-semibold text-gray-700">Загрузка расписания...</p>
     </div>
 
     <div class="container mx-auto max-w-4xl">
         <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-blue-700">Veranstaltungsplan Workshops</h1>
-            <p class="text-xl text-gray-600">Mai/Juni 2025</p>
+            <h1 class="text-4xl font-bold text-blue-700">Расписание Мастер-классов</h1>
+            <p class="text-xl text-gray-600">Май/Июнь 2025</p>
         </header>
 
         <div id="controlsContainer" class="controls-container mb-4">
-             <button id="installPwaButton">App installieren</button>
+             <button id="installPwaButton">Установить приложение</button>
              <div class="flex items-center ml-4"> 
-                <span class="toggle-switch-label" id="favoriteToggleLabel">Alle anzeigen</span>
+                <span class="toggle-switch-label" id="favoriteToggleLabel">Показать все</span>
                 <label class="toggle-switch">
                     <input type="checkbox" id="favoriteToggleSwitch">
                     <span class="slider"></span>
@@ -1639,18 +1666,35 @@
         </div>
 
         <div class="note">
-            <p><strong>Wichtiger Hinweis:</strong> Wenn zwei Workshops in einer Zelle des Originaldokuments übereinander stehen, finden diese gleichzeitig statt. Klicken Sie auf das Sternchen (☆), um einen Workshop als Favorit zu speichern.</p>
+            <p><strong>Важное замечание:</strong> Если два мастер-класса указаны в одной ячейке друг под другом, они проходят одновременно. Нажмите на звездочку (☆), чтобы сохранить мастер-класс в избранное.</p>
         </div>
         
         <div id="noFavoritesMessage">
-            Keine Favoriten ausgewählt. Markieren Sie Workshops mit ☆, um sie hier anzuzeigen.
+            Избранных мастер-классов нет. Отметьте мастер-классы звездочкой ☆, чтобы они отображались здесь.
         </div>
 
-        <nav class="tab-nav" aria-label="Tagesnavigation" id="tabNavContainer">
+        <nav class="tab-nav" aria-label="Навигация по дням" id="tabNavContainer">
             </nav>
 
         <div id="workshopsTabsContainer">
             </div>
+        
+        <div id="geminiModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50">
+            <div class="relative mx-auto p-5 border w-11/12 md:w-1/2 shadow-lg rounded-md bg-white">
+                <div class="mt-3 text-center">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="geminiModalTitle">Детали от ИИ</h3>
+                    <div class="mt-2 px-7 py-3">
+                        <p class="text-sm text-gray-500" id="geminiModalContent">Загрузка деталей от ИИ...</p>
+                    </div>
+                    <div class="items-center px-4 py-3">
+                        <button id="closeGeminiModal" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                            Закрыть
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -1661,10 +1705,13 @@
             const tabNavContainer = document.getElementById('tabNavContainer');
             const workshopsTabsContainer = document.getElementById('workshopsTabsContainer');
             const noFavoritesMessage = document.getElementById('noFavoritesMessage');
+            const geminiModal = document.getElementById('geminiModal');
+            const geminiModalTitle = document.getElementById('geminiModalTitle');
+            const geminiModalContent = document.getElementById('geminiModalContent');
+            const closeGeminiModalButton = document.getElementById('closeGeminiModal');
 
-            // Kritische DOM-Elemente prüfen
-            if (!tabNavContainer || !workshopsTabsContainer) {
-                console.error("CRITICAL: Tab- oder Workshop-Container nicht im DOM gefunden. Initialisierung abgebrochen.");
+            if (!tabNavContainer || !workshopsTabsContainer || !geminiModal || !geminiModalTitle || !geminiModalContent || !closeGeminiModalButton) {
+                console.error("CRITICAL: Eines oder mehrere Haupt-UI-Elemente nicht im DOM gefunden. Initialisierung abgebrochen.");
                 if (loadingIndicator) loadingIndicator.classList.add('hidden');
                 return;
             }
@@ -1686,16 +1733,86 @@
                 if (favorites.includes(eventId)) {
                     button.classList.add('favorited');
                     button.textContent = '★';
-                    button.setAttribute('aria-label', 'Als Favorit entfernt');
+                    button.setAttribute('aria-label', 'Удалить из избранного');
                 } else {
                     button.classList.remove('favorited');
                     button.textContent = '☆';
-                    button.setAttribute('aria-label', 'Als Favorit markieren');
+                    button.setAttribute('aria-label', 'Добавить в избранное');
+                }
+            };
+
+            const openGeminiModal = (title) => {
+                geminiModalTitle.textContent = `Детали от ИИ для: ${title}`;
+                geminiModalContent.textContent = 'Загрузка деталей от ИИ...';
+                geminiModal.classList.remove('hidden');
+            };
+
+            const closeGeminiModal = () => {
+                geminiModal.classList.add('hidden');
+            };
+
+            if(closeGeminiModalButton) {
+                closeGeminiModalButton.addEventListener('click', closeGeminiModal);
+            }
+            
+            const handleGeminiRequest = async (eventId) => {
+                let eventData = null;
+                for (const dateKey in embeddedTimetableData.schedule) {
+                    const foundEvent = embeddedTimetableData.schedule[dateKey].events.find(e => e.eventId === eventId);
+                    if (foundEvent) {
+                        eventData = foundEvent;
+                        break;
+                    }
+                }
+
+                if (!eventData) {
+                    console.error("Event-Daten nicht gefunden für ID:", eventId);
+                    geminiModalContent.textContent = "Ошибка: Данные о мероприятии не найдены.";
+                    return;
+                }
+
+                openGeminiModal(eventData.title_ru);
+
+                const prompt = `Для мастер-класса с названием "${eventData.title_ru}" ${eventData.description_ru ? `и описанием "${eventData.description_ru}"` : ''}, пожалуйста, сгенерируй 2-3 дополнительных интересных аспекта или связанных активностей, которые могут быть интересны участникам. Ответь на немецком языке и отформатируй ответ для удобного чтения.`;
+                
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errorBody = await response.text();
+                        throw new Error(`API-Fehler: ${response.status} ${response.statusText} - ${errorBody}`);
+                    }
+
+                    const result = await response.json();
+                    
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        geminiModalContent.textContent = text;
+                    } else {
+                        console.error("Unerwartete API-Antwortstruktur:", result);
+                        geminiModalContent.textContent = "Не удалось сгенерировать детали. Пожалуйста, попробуйте позже.";
+                    }
+                } catch (error) {
+                    console.error("Fehler bei der Gemini API-Anfrage:", error);
+                    geminiModalContent.textContent = `Ошибка запроса к ИИ. Пожалуйста, попробуйте позже. (${error.message})`;
                 }
             };
             
-            const attachFavoriteButtonListeners = () => {
-                if (!workshopsTabsContainer) return; 
+            const attachActionListeners = () => {
+                if (!workshopsTabsContainer) return;
+                
                 const favoriteButtons = workshopsTabsContainer.querySelectorAll('.favorite-btn');
                 favoriteButtons.forEach(button => {
                     const newButton = button.cloneNode(true); 
@@ -1706,7 +1823,8 @@
                         const eventId = card.dataset.eventId;
                         if (eventId) { 
                             updateFavoriteButtonAppearance(newButton, eventId);
-                            newButton.addEventListener('click', () => {
+                            newButton.addEventListener('click', (e) => {
+                                e.stopPropagation(); 
                                 if (favorites.includes(eventId)) {
                                     favorites = favorites.filter(id => id !== eventId);
                                 } else {
@@ -1719,12 +1837,30 @@
                         }
                     }
                 });
+
+                const geminiButtons = workshopsTabsContainer.querySelectorAll('.gemini-btn');
+                geminiButtons.forEach(button => {
+                    const newButton = button.cloneNode(true);
+                    button.parentNode.replaceChild(newButton, button);
+                    
+                    const card = newButton.closest('.event-card');
+                    if (card) {
+                        const eventId = card.dataset.eventId;
+                        if (eventId) {
+                            newButton.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                handleGeminiRequest(eventId);
+                            });
+                        }
+                    }
+                });
             };
 
+
             const getLocationNameById = (locationId) => {
-                if (!embeddedTimetableData.locations) return 'Unbekannter Ort';
+                if (!embeddedTimetableData.locations) return 'Место не указано';
                 const locationObj = embeddedTimetableData.locations.find(loc => loc.locationId === locationId);
-                return locationObj ? locationObj.name_ru : 'Unbekannter Ort'; 
+                return locationObj ? locationObj.name_ru : 'Место не указано'; 
             };
 
             const parseTime = (timeStr) => { 
@@ -1746,7 +1882,7 @@
                 }
 
                 if (duration > 0 && duration <= 60) {
-                    return '(≤1h)';
+                    return '(≤1ч)';
                 }
                 return null;
             };
@@ -1756,7 +1892,7 @@
                 if (event.eventType === 'meal') {
                     return `
                         <div class="meal-item" data-event-id="${event.eventId}">
-                            <p>${event.title_ru} ${event.locationId ? `- Ort: ${getLocationNameById(event.locationId)}` : ''}</p>
+                            <p>${event.title_ru} ${event.locationId ? `- Место: ${getLocationNameById(event.locationId)}` : ''}</p>
                         </div>
                     `;
                 }
@@ -1772,10 +1908,10 @@
                     detailsHTML += `<p class="event-details">${event.details_ru}</p>`;
                 }
                 if (event.targetAudience_ru) {
-                    detailsHTML += `<p class="event-details">Zielgruppe: ${event.targetAudience_ru}</p>`;
+                    detailsHTML += `<p class="event-details">Целевая аудитория: ${event.targetAudience_ru}</p>`;
                 }
                  if (event.startTime && event.endTime && !durationBadgeText) { 
-                    detailsHTML += `<p class="event-details">Zeit: ${event.startTime} - ${event.endTime}</p>`;
+                    detailsHTML += `<p class="event-details">Время: ${event.startTime} - ${event.endTime}</p>`;
                 }
 
 
@@ -1786,10 +1922,11 @@
                 
                 let urlHTML = '';
                 if (event.url && event.url.trim() !== "") {
-                    urlHTML = `<p class="event-url"><a href="${event.url}" target="_blank" rel="noopener noreferrer">Weitere Infos</a></p>`;
+                    urlHTML = `<p class="event-url"><a href="${event.url}" target="_blank" rel="noopener noreferrer">Подробнее</a></p>`;
                 }
 
-                const favButtonHTML = (event.eventType !== 'meal' && event.eventType !== 'registration' && event.eventType !== 'general_activity' && event.eventType !== 'ceremony') ? '<button class="favorite-btn" aria-label="Als Favorit markieren">☆</button>' : '';
+                const favButtonHTML = (event.eventType !== 'meal' && event.eventType !== 'registration' && event.eventType !== 'general_activity' && event.eventType !== 'ceremony') ? '<button class="favorite-btn" aria-label="Добавить в избранное">☆</button>' : '';
+                const geminiButtonHTML = (event.eventType !== 'meal' && event.eventType !== 'registration' && event.eventType !== 'general_activity' && event.eventType !== 'ceremony') ? '<button class="gemini-btn">Детали от ИИ</button>' : '';
 
 
                 return `
@@ -1799,7 +1936,8 @@
                         ${detailsHTML}
                         ${descriptionHTML}
                         ${urlHTML}
-                        ${event.locationId ? `<p class="event-location">Ort: ${getLocationNameById(event.locationId)}</p>` : ''}
+                        ${event.locationId ? `<p class="event-location">Место: ${getLocationNameById(event.locationId)}</p>` : ''}
+                        ${geminiButtonHTML}
                     </div>
                 `;
             };
@@ -1821,7 +1959,7 @@
                 const daySchedule = embeddedTimetableData.schedule[activeDateKey];
 
                 if (!daySchedule || !daySchedule.events) {
-                    activePanel.innerHTML = `<h2 class="day-header">${activePanel.dataset.dayDe}</h2><p class="text-center text-gray-500 mt-4">Keine Veranstaltungen für diesen Tag geplant.</p>`;
+                    activePanel.innerHTML = `<h2 class="day-header">${activePanel.dataset.dayDe}</h2><p class="text-center text-gray-500 mt-4">Мероприятий на этот день не запланировано.</p>`;
                     hideLoading();
                     return;
                 }
@@ -1896,9 +2034,9 @@
                 }
 
                 if (favoriteToggleLabel && favoriteToggleSwitch) {
-                    favoriteToggleLabel.textContent = favoriteToggleSwitch.checked ? 'Nur Favoriten' : 'Alle anzeigen';
+                    favoriteToggleLabel.textContent = favoriteToggleSwitch.checked ? 'Только избранные' : 'Показать все';
                 }
-                attachFavoriteButtonListeners(); 
+                attachActionListeners(); 
                 hideLoading(); 
             };
             
@@ -1969,15 +2107,14 @@
                     const firstPanel = document.getElementById(firstPanelId);
                     if (firstPanel) firstPanel.classList.add('active');
                 }
-                setTimeout(renderWorkshops, 0); // Defer initial render slightly
+                setTimeout(renderWorkshops, 0); 
             } else {
                  console.error("Eingebettete Workshop-Daten (embeddedTimetableData.schedule) nicht gefunden oder fehlerhaft.");
                  if (workshopsTabsContainer) { 
-                    workshopsTabsContainer.innerHTML = "<p class='text-red-500 text-center'>Fehler: Workshop-Daten konnten nicht initialisiert werden.</p>";
+                    workshopsTabsContainer.innerHTML = "<p class='text-red-500 text-center'>Ошибка: Данные о мастер-классах не могут быть инициализированы.</p>";
                 }
                 hideLoading();
             }
-            // hideLoading() is now called within renderWorkshops or the catch block for embedded data
 
 
             if (favoriteToggleSwitch) {
@@ -2045,13 +2182,14 @@
     ============================================================================
     ```json
     {
-      "name": "Veranstaltungsplan Workshops",
-      "short_name": "Workshop Plan",
-      "description": "Ein übersichtlicher Plan für Workshops der Veranstaltung Mai/Juni 2025.",
+      "name": "Расписание Мастер-классов",
+      "short_name": "План МК",
+      "description": "Обзорный план мастер-классов мероприятия Май/Июнь 2025.",
       "start_url": "index.html", 
       "display": "standalone",
       "background_color": "#f3f4f6",
       "theme_color": "#1e3a8a",
+      "lang": "ru",
       "orientation": "portrait-primary",
       "icons": [
         {
@@ -2112,7 +2250,7 @@
     ```javascript
     // sw.js - Service Worker
 
-    const CACHE_NAME = 'veranstaltungsplan-cache-v1.18'; // Cache-Version erhöht
+    const CACHE_NAME = 'veranstaltungsplan-cache-v1.19'; // Cache-Version erhöht
     const urlsToCache = [
       './', 
       'index.html', // Wird nun mit eingebetteten Daten gecacht
