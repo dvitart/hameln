@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Расписание Мастер-классов</title>
+    <title>Гамельн</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
@@ -14,7 +14,7 @@
     <script>
         // Eingebettete Workshop-Daten (vollständig)
         const embeddedTimetableData = 
-        {
+       {
   "eventInfo": {
     "eventName": "Hameln",
     "startDate": "2025-05-28",
@@ -2268,7 +2268,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(243, 244, 246, 0.9);
+            background-color: rgba(243, 244, 246, 0.9); /* Light gray with opacity */
             z-index: 9999;
             text-align: center;
         }
@@ -2277,7 +2277,7 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            border-left-color: #1e3a8a;
+            border-left-color: #1e3a8a; /* Indigo */
             animation: spin 1s ease infinite;
             margin-bottom: 1rem;
         }
@@ -2319,9 +2319,9 @@
         .event-description { 
             font-size: 0.875rem;
             color: #374151; 
-            margin-top: 0.25rem; /* Kleinerer Abstand zur Beschreibung */
-            padding-left: 0; /* Kein zusätzlicher linker Einzug */
-            border-left: none; /* Keine linke Border */
+            margin-top: 0.25rem;
+            padding-left: 0; 
+            border-left: none; 
         }
         .event-url { 
             font-size: 0.875rem;
@@ -2520,7 +2520,7 @@
             font-size: 0.875rem;
             display: inline-flex; 
             align-items: center;
-            user-select: none; /* Verhindert Textauswahl beim Klicken */
+            user-select: none; 
         }
         .description-toggle:hover {
             text-decoration: underline;
@@ -2528,7 +2528,7 @@
         .description-toggle .chevron {
             margin-left: 0.25rem;
             transition: transform 0.2s ease-in-out;
-            display: inline-block; /* Für transform */
+            display: inline-block; 
         }
         .description-toggle[aria-expanded="true"] .chevron {
             transform: rotate(180deg);
@@ -2536,14 +2536,13 @@
         .event-description-content {
             margin-top: 0.3rem;
             padding-left: 0.5rem; 
-            border-left: 2px solid #e5e7eb; /* Dezentere Border */
-            max-height: 0; /* Für Transition */
+            border-left: 2px solid #e5e7eb; 
+            max-height: 0; 
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
         .event-description-content.expanded {
-             max-height: 500px; /* Ausreichend Höhe, anpassbar */
-             /* display: block !important; Stattdessen Transition */
+             max-height: 500px; 
         }
 
     </style>
@@ -2629,7 +2628,6 @@
             const attachActionListeners = () => {
                 if (!workshopsTabsContainer) return;
                 
-                // Favoriten-Buttons
                 const favoriteButtons = workshopsTabsContainer.querySelectorAll('.favorite-btn');
                 favoriteButtons.forEach(button => {
                     const newButton = button.cloneNode(true); 
@@ -2655,14 +2653,13 @@
                     }
                 });
 
-                // Description Toggles
                 const descriptionToggles = workshopsTabsContainer.querySelectorAll('.description-toggle');
                 descriptionToggles.forEach(toggle => {
-                    const newToggle = toggle.cloneNode(true); // Clone to remove old listeners
+                    const newToggle = toggle.cloneNode(true); 
                     toggle.parentNode.replaceChild(newToggle, toggle);
 
                     const contentId = newToggle.getAttribute('aria-controls');
-                    const contentElement = document.getElementById(contentId);
+                    const contentElement = document.getElementById(contentId); // ID ist global
                     const chevron = newToggle.querySelector('.chevron');
 
                     if (contentElement) {
@@ -2671,7 +2668,6 @@
                             newToggle.setAttribute('aria-expanded', isExpanded);
                             if(chevron) chevron.style.transform = isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
                         });
-                        // Allow keyboard activation
                         newToggle.addEventListener('keydown', (e) => {
                             if (e.key === 'Enter' || e.key === ' ') {
                                 e.preventDefault();
@@ -2717,17 +2713,19 @@
             const buildWorkshopHTML = (event) => {
                 if (event.eventType === 'meal') {
                     return `
-                        <div class="meal-item" data-event-id="${event.eventId}">
+                        <div class="meal-item" data-event-id="${event.eventId || 'meal-' + event.startTime}">
                             <p>${event.title_ru} ${event.locationId ? `- Место: ${getLocationNameById(event.locationId)}` : ''}</p>
                         </div>
                     `;
                 }
 
                 let titleHTML = event.title_ru;
-                const durationBadgeText = getDurationBadge(event.startTime, event.endTime);
-                if (durationBadgeText) {
-                    titleHTML += ` <span class="duration-badge">${durationBadgeText}</span>`;
-                }
+                // Duration badge removed from here
+                // const durationBadgeText = getDurationBadge(event.startTime, event.endTime);
+                // if (durationBadgeText) {
+                //     titleHTML += ` <span class="duration-badge">${durationBadgeText}</span>`;
+                // }
+
 
                 let detailsHTML = '';
                 if (event.details_ru) {
@@ -2736,7 +2734,8 @@
                 if (event.targetAudience_ru) {
                     detailsHTML += `<p class="event-details">Целевая аудитория: ${event.targetAudience_ru}</p>`;
                 }
-                 if (event.startTime && event.endTime && !durationBadgeText) { 
+                // Show full time if not a short event (or if duration badge was removed)
+                if (event.startTime && event.endTime) { 
                     detailsHTML += `<p class="event-details">Время: ${event.startTime} - ${event.endTime}</p>`;
                 }
 
@@ -2745,10 +2744,10 @@
                 if (event.description_ru && event.description_ru.trim() !== "") {
                     descriptionToggleHTML = `
                         <div class="description-toggle-wrapper">
-                            <span class="description-toggle" role="button" tabindex="0" aria-expanded="false" aria-controls="desc-${event.eventId}">
+                            <span class="description-toggle" role="button" tabindex="0" aria-expanded="false" aria-controls="desc-${event.eventId || event.title_ru.replace(/\s+/g, '-')}">
                                 Описание <span class="chevron">▼</span>
                             </span>
-                            <div id="desc-${event.eventId}" class="event-description-content hidden-by-default">
+                            <div id="desc-${event.eventId || event.title_ru.replace(/\s+/g, '-')}" class="event-description-content hidden-by-default">
                                 <p class="event-description">${event.description_ru}</p>
                             </div>
                         </div>
@@ -2763,7 +2762,7 @@
                 const favButtonHTML = (event.eventType !== 'meal' && event.eventType !== 'registration' && event.eventType !== 'general_activity' && event.eventType !== 'ceremony') ? '<button class="favorite-btn" aria-label="Добавить в избранное">☆</button>' : '';
                 
                 return `
-                    <div class="event-card" data-event-id="${event.eventId}">
+                    <div class="event-card" data-event-id="${event.eventId || event.title_ru.replace(/\s+/g, '-')}">
                         ${favButtonHTML}
                         <p class="event-title">${titleHTML}</p>
                         ${detailsHTML}
@@ -2958,7 +2957,6 @@
             }
         });
 
-        // Service Worker Registrierung und PWA Installations-Prompt
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
@@ -3007,5 +3005,192 @@
         }
     </script>
 
-    </body>
+    <!--
+    ============================================================================
+    manifest.json (Diese Datei separat im Hauptverzeichnis speichern)
+    ============================================================================
+    ```json
+    {
+      "name": "Расписание Мастер-классов",
+      "short_name": "План МК",
+      "description": "Обзорный план мастер-классов мероприятия Май/Июнь 2025.",
+      "start_url": "index.html", 
+      "display": "standalone",
+      "background_color": "#f3f4f6",
+      "theme_color": "#1e3a8a",
+      "lang": "ru",
+      "orientation": "portrait-primary",
+      "icons": [
+        {
+          "src": "icons/icon-72x72.png",
+          "sizes": "72x72",
+          "type": "image/png",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "icons/icon-128x128.png",
+          "sizes": "128x128",
+          "type": "image/png",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "icons/icon-144x144.png",
+          "sizes": "144x144",
+          "type": "image/png",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "icons/icon-152x152.png",
+          "sizes": "152x152",
+          "type": "image/png",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "icons/icon-384x384.png",
+          "sizes": "384x384",
+          "type": "image/png",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "icons/icon-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any maskable"
+        }
+      ]
+    }
+    ```
+
+    ============================================================================
+    sw.js (Diese Datei separat im Hauptverzeichnis speichern)
+    ============================================================================
+    ```javascript
+    // sw.js - Service Worker
+
+    const CACHE_NAME = 'veranstaltungsplan-cache-v1.20'; // Cache-Version erhöht
+    const urlsToCache = [
+      './', 
+      'index.html', // Wird nun mit eingebetteten Daten gecacht
+      'manifest.json',
+      // 'timetable.json', // Entfernt, da Daten eingebettet sind
+      '[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)',
+      '[https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap)',
+      'icons/icon-192x192.png',
+      'icons/icon-512x512.png'
+    ];
+
+    self.addEventListener('install', event => {
+      console.log('[ServiceWorker] Install');
+      event.waitUntil(
+        caches.open(CACHE_NAME)
+          .then(cache => {
+            console.log('[ServiceWorker] Caching app shell');
+            const requests = urlsToCache.map(url => new Request(url, {cache: 'reload'}));
+            return cache.addAll(requests);
+          })
+          .catch(error => {
+            console.error('[ServiceWorker] Caching failed during install:', error);
+            urlsToCache.forEach(url => {
+                fetch(new Request(url, {cache: 'reload'})).catch(err => console.error(`Failed to fetch ${url} individually during install:`, err));
+            });
+          })
+      );
+    });
+
+    self.addEventListener('activate', event => {
+      console.log('[ServiceWorker] Activate');
+      event.waitUntil(
+        caches.keys().then(cacheNames => {
+          return Promise.all(
+            cacheNames.map(cacheName => {
+              if (cacheName !== CACHE_NAME) {
+                console.log('[ServiceWorker] Removing old cache:', cacheName);
+                return caches.delete(cacheName);
+              }
+            })
+          );
+        }).then(() => self.clients.claim())
+      );
+    });
+
+    self.addEventListener('fetch', event => {
+      // Die spezielle Fetch-Strategie für timetable.json ist nicht mehr nötig.
+      
+      if (event.request.method !== 'GET') {
+        return;
+      }
+
+      if (event.request.mode === 'navigate') {
+        event.respondWith(
+          fetch(event.request)
+            .then(response => {
+              if (response && response.status === 200) {
+                const responseToCache = response.clone();
+                caches.open(CACHE_NAME).then(cache => {
+                  cache.put(event.request, responseToCache);
+                });
+              }
+              return response;
+            })
+            .catch(() => {
+              return caches.match(event.request)
+                        .then(cachedResponse => cachedResponse || caches.match('index.html')); 
+            })
+        );
+        return;
+      }
+
+      event.respondWith(
+        caches.match(event.request)
+          .then(cachedResponse => {
+            if (cachedResponse) {
+              return cachedResponse;
+            }
+            return fetch(event.request).then(
+              networkResponse => {
+                if (networkResponse && networkResponse.status === 200) {
+                  const urlString = event.request.url;
+                  const isCachable = urlsToCache.some(cacheUrl => {
+                      if (cacheUrl.startsWith('http')) { 
+                          return urlString === cacheUrl;
+                      }
+                      const requestPath = new URL(urlString).pathname; 
+                      let localCachePath = cacheUrl;
+                      if (localCachePath === './') localCachePath = 'index.html'; 
+                      const normalizedRequestPath = requestPath.startsWith('/') ? requestPath : '/' + requestPath;
+                      const normalizedCachePath = localCachePath.startsWith('/') ? localCachePath : '/' + localCachePath;
+                      return normalizedRequestPath.endsWith(normalizedCachePath) || normalizedRequestPath === normalizedCachePath;
+                  });
+
+                  if (isCachable) {
+                    const responseToCache = networkResponse.clone();
+                    caches.open(CACHE_NAME)
+                        .then(cache => {
+                            cache.put(event.request, responseToCache);
+                        });
+                  }
+                }
+                return networkResponse;
+              }
+            ).catch(error => {
+              console.error('[ServiceWorker] Fetch failed for non-navigation request:', event.request.url, error);
+            });
+          })
+      );
+    });
+    ```
+    -->
+</body>
 </html>
