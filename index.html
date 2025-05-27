@@ -2243,7 +2243,7 @@
 };
     </script>
 
-    <style>
+   <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6; 
@@ -2316,6 +2316,7 @@
         .event-url { 
             font-size: 0.875rem;
             margin-top: 0.25rem;
+			text-align: right;
         }
         .event-url a {
             color: #1d4ed8;
@@ -2512,17 +2513,19 @@
             align-items: center;
             user-select: none; 
         }
-        .description-toggle:hover {
+        .description-toggle:hover .toggle-text {
             text-decoration: underline;
         }
         .description-toggle .chevron {
             margin-left: 0.25rem;
             transition: transform 0.2s ease-in-out;
             display: inline-block; 
+			text-decoration: none;
         }
         .description-toggle[aria-expanded="true"] .chevron {
             transform: rotate(180deg);
         }
+		
         .event-description-content {
             margin-top: 0.3rem;
             padding-left: 0.5rem; 
@@ -2736,7 +2739,9 @@
                     descriptionToggleHTML = `
                         <div class="description-toggle-wrapper">
                             <span class="description-toggle" role="button" tabindex="0" aria-expanded="false" aria-controls="desc-${event.eventId || event.title_ru.replace(/\s+/g, '-')}">
-                                Описание <span class="chevron">▼</span>
+                                <span class="chevron">▼</span>
+								<span class="toggle-text"> Описание </span>
+							   
                             </span>
                             <div id="desc-${event.eventId || event.title_ru.replace(/\s+/g, '-')}" class="event-description-content hidden-by-default">
                                 <p class="event-description">${event.description_ru}</p>
@@ -2747,7 +2752,7 @@
                 
                 let urlHTML = '';
                 if (event.url && event.url.trim() !== "") {
-                    urlHTML = `<p class="event-url"><a href="${event.url}" target="_blank" rel="noopener noreferrer">Подробнее</a></p>`;
+                    urlHTML = `<p class="event-url"><a href="${event.url}" target="_blank" rel="noopener noreferrer">Подробнее &rarr;</a></p>`;
                 }
 
                 const favButtonHTML = (event.eventType !== 'meal' && event.eventType !== 'registration' && event.eventType !== 'general_activity' && event.eventType !== 'ceremony') ? '<button class="favorite-btn" aria-label="Добавить в избранное">☆</button>' : '';
@@ -2758,8 +2763,8 @@
                         <p class="event-title">${titleHTML}</p>
                         ${detailsHTML}
                         ${descriptionToggleHTML}
-                        ${urlHTML}
                         ${event.locationId ? `<p class="event-location">Место: ${getLocationNameById(event.locationId)}</p>` : ''}
+						${urlHTML}
                     </div>
                 `;
             };
