@@ -1,6 +1,6 @@
     {
-      "name": "Veranstaltungsplan Workshops",
-      "short_name": "Workshop Plan",
+      "name": "Гамельн",
+      "short_name": "Гамельн",
       "description": "Ein übersichtlicher Plan für Workshops der Veranstaltung Mai/Juni 2025.",
       "start_url": "index.html",
       "display": "standalone",
