@@ -1,0 +1,79 @@
+@use '@angular/material' as mat;
+
+// Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+
+:root {
+  --app-header-height: 80px;
+  --tab-header-height: 48px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: #fafafa;
+  font-family: 'Inter', sans-serif;
+  color-scheme: light;
+}
+
+// Fix scrolling and sticky support
+html {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+// CRITICAL: Force all tab parents to allow sticky overflow
+.mat-mdc-tab-group,
+.mat-mdc-tab-body-wrapper,
+.mat-mdc-tab-body,
+.mat-mdc-tab-body-content,
+.mat-mdc-tab-labels,
+.mat-mdc-tab-header {
+  overflow: visible !important;
+}
+
+// Tabs stick directly below the header
+.mat-mdc-tab-header {
+  position: sticky !important;
+  top: var(--app-header-height) !important;
+  z-index: 1000 !important;
+  background: white !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+// Day+date sticks directly below the tabs
+.day-header {
+  position: sticky !important;
+  top: calc(var(--app-header-height) + var(--tab-header-height)) !important;
+  z-index: 900 !important;
+  background: #fafafa !important;
+  padding: 1rem 0 !important;
+  box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+// Global UI Overrides
+.mat-toolbar.mat-primary {
+  background-color: #ffffff !important;
+  color: #333 !important;
+  border-bottom: 1px solid #eee;
+}
+
+.mat-mdc-tab-indicator .mdc-tab-indicator__content {
+  border-color: #EF6C00 !important;
+}
+
+.mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  color: #EF6C00 !important;
+}
+
+.mat-mdc-unelevated-button.mat-primary,
+.mat-mdc-flat-button.mat-primary {
+  background-color: #EF6C00 !important;
+}
+
+.mat-mdc-unelevated-button.mat-accent,
+.mat-mdc-flat-button.mat-accent {
+  background-color: #FFB300 !important;
+}
