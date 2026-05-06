@@ -64,11 +64,10 @@ import { DayScheduleComponent } from '../day-schedule/day-schedule.component';
     <!-- Info Note -->
     <mat-card class="note-card">
       <mat-card-content>
-        <mat-icon class="note-icon">warning_amber</mat-icon>
         <span>
           <strong>Важное замечание:</strong> У нас нет возможности гарантировать актуальность этого расписания.
           В случае сомнений всегда действует официальное и актуальное расписание от организаторов.
-          Нажмите на звёздочку (☆), чтобы сохранить мастерскую в избранное.
+          <br>Нажмите на звёздочку (☆), чтобы сохранить мастерскую в избранное.
         </span>
       </mat-card-content>
     </mat-card>
