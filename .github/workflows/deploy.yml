@@ -1,0 +1,32 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - hameln-angular # Triggers on push to your development branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21
+
+      - name: Install Dependencies
+        working-directory: ./hameln-app
+        run: npm ci
+
+      - name: Build
+        working-directory: ./hameln-app
+        run: npx ng build --configuration production --base-href /hameln/
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: hameln-app/dist/hameln-app/browser
+          branch: gh-pages # The branch the action will deploy to.
