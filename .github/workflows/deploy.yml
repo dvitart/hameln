@@ -6,6 +6,9 @@ on:
       - hameln-angular
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
