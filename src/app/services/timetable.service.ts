@@ -4,8 +4,12 @@ import { firstValueFrom } from 'rxjs';
 import { TimetableData, DaySchedule, EventLocation } from '../models/timetable.model';
 import { HamelnConverterService } from './hameln-converter.service';
 
+import { ExcelConverterService } from './excel-converter.service';
+
 const GOOGLE_SHEET_CSV_URL =
   'https://docs.google.com/spreadsheets/d/1N01z67kji_lReyBoVn0Uh18q5FOa5x2mLclceq1WtjI/export?format=csv&gid=1812892397';
+const GOOGLE_SHEET_EXCEL_URL =
+  'https://docs.google.com/spreadsheets/d/1N01z67kji_lReyBoVn0Uh18q5FOa5x2mLclceq1WtjI/export?format=xlsx';
 const WORKSHOP_DETAILS_CSV_URL =
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vSY24UZ5yWEh5zmtL5y_kyEbgpRJFTiE8ZgonH6XurZViY_gmZFWPnayGP9dGnheCT5N2EjjPUUtG3a/pub?gid=1187319932&single=true&output=csv';
 const CACHE_KEY = 'cachedTimetableData';
@@ -25,10 +29,12 @@ const DEFAULT_LOCATIONS: EventLocation[] = [
 @Injectable({ providedIn: 'root' })
 export class TimetableService {
   private readonly http = inject(HttpClient);
-  private readonly converter = inject(HamelnConverterService);
+  private readonly csvConverter = inject(HamelnConverterService);
+  private readonly excelConverter = inject(ExcelConverterService);
 
   private readonly _data = signal<TimetableData | null>(null);
   private readonly _isLoading = signal(false);
+  private useExcel = true; // Toggle between accurate Excel parser and CSV fallback
 
   readonly isLoading = this._isLoading.asReadonly();
   readonly schedule = computed(() => this._data()?.schedule ?? {});
@@ -45,7 +51,7 @@ export class TimetableService {
       if (raw) {
         const cachedSchedule: Record<string, DaySchedule> = JSON.parse(raw);
         this._data.set({
-          eventInfo: { eventName: 'Hameln', startDate: '2025-05-28', endDate: '2025-06-01', mainLanguage: 'ru' },
+          eventInfo: { eventName: 'Hameln', startDate: '2026-05-13', endDate: '2026-05-17', mainLanguage: 'ru' },
           locations: DEFAULT_LOCATIONS,
           schedule: cachedSchedule,
         });
@@ -67,12 +73,22 @@ export class TimetableService {
     this._isLoading.set(true);
     try {
       const ts = new Date().getTime();
-      const [timetableCsv, workshopsCsv] = await Promise.all([
-        firstValueFrom(this.http.get(`${GOOGLE_SHEET_CSV_URL}&_t=${ts}`, { responseType: 'text' })),
-        firstValueFrom(this.http.get(`${WORKSHOP_DETAILS_CSV_URL}&_t=${ts}`, { responseType: 'text' })),
-      ]);
+      let result: TimetableData | undefined;
 
-      const result = this.converter.convert(timetableCsv, workshopsCsv);
+      if (this.useExcel) {
+        const [timetableBuffer, workshopsCsv] = await Promise.all([
+          firstValueFrom(this.http.get(`${GOOGLE_SHEET_EXCEL_URL}&_t=${ts}`, { responseType: 'arraybuffer' })),
+          firstValueFrom(this.http.get(`${WORKSHOP_DETAILS_CSV_URL}&_t=${ts}`, { responseType: 'text' })),
+        ]);
+        result = this.excelConverter.convert(timetableBuffer, workshopsCsv);
+      } else {
+        const [timetableCsv, workshopsCsv] = await Promise.all([
+          firstValueFrom(this.http.get(`${GOOGLE_SHEET_CSV_URL}&_t=${ts}`, { responseType: 'text' })),
+          firstValueFrom(this.http.get(`${WORKSHOP_DETAILS_CSV_URL}&_t=${ts}`, { responseType: 'text' })),
+        ]);
+        result = this.csvConverter.convert(timetableCsv, workshopsCsv);
+      }
+
       if (result?.schedule && Object.keys(result.schedule).length > 0) {
         this._data.set({ ...result, locations: DEFAULT_LOCATIONS });
         this.saveToCache(result.schedule);

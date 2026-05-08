@@ -4,20 +4,9 @@ import { TimetableData, DaySchedule, TimetableEvent } from '../models/timetable.
 
 @Injectable({ providedIn: 'root' })
 export class HamelnConverterService {
-  private readonly locationMapping: Record<number, string> = {
-    2: 'loc_1',
-    3: 'loc_1a',
-    4: 'loc_2',
-    5: 'loc_3',
-    6: 'loc_4',
-    7: 'loc_7',
-    8: 'loc_8',
-    9: 'loc_10',
-    10: 'loc_11',
-  };
 
   parseCSV(text: string): string[][] {
-    const result = Papa.parse<string[]>(text, { skipEmptyLines: true });
+    const result = Papa.parse<string[]>(text, { skipEmptyLines: false });
     return result.data;
   }
 
@@ -39,6 +28,22 @@ export class HamelnConverterService {
     return match ? match[0].replace(/[()]/g, '') : null;
   }
 
+  /**
+   * Extract inline time range from event text like "8:00 - 13:00 Регистрация..."
+   * Returns { start, end, cleanedText } or null if no inline range found.
+   */
+  private extractInlineTimeRange(text: string): { start: string; end: string; cleanedText: string } | null {
+    const match = text.match(/^(\d{1,2}:\d{2})\s*-\s*(\d{1,2}:\d{2})\s+(.+)$/);
+    if (match) {
+      return {
+        start: this.formatTime(match[1]),
+        end: this.formatTime(match[2]),
+        cleanedText: match[3].trim(),
+      };
+    }
+    return null;
+  }
+
   convert(timetableCsv: string, workshopsCsv: string): TimetableData {
     const timetableRows = this.parseCSV(timetableCsv);
     const workshopsRows = this.parseCSV(workshopsCsv);
@@ -57,60 +62,160 @@ export class HamelnConverterService {
       }
     }
 
+    // CSV column layout (0-indexed):
+    //  0 = Wochentag
+    //  1 = Zeit or Datum
+    //  2 = Hauptzelt (1)       -> loc_1
+    //  3 = Pavillon (1a)       -> loc_1a
+    //  4 = Infozelt (2)        -> loc_2
+    //  5 = Rubikus (3)         -> loc_3
+    //  6 = Bastelzelt (4)      -> loc_4
+    //  7 = Zentrale Lichtung   -> loc_7
+    //  8 = Grüne Bänke (8)     -> loc_8
+    //  9 = Дальняя поляна (10) -> loc_10
+    // 10 = Fußballfeld (11)    -> loc_11
+    // 11 = Другое место – Was
+    // 12 = Другое место – Wo
+
+    const locationColMap: Record<number, string> = {
+      2: 'loc_1', 3: 'loc_1a', 4: 'loc_2', 5: 'loc_3',
+      6: 'loc_4', 7: 'loc_7', 8: 'loc_8', 9: 'loc_10', 10: 'loc_11',
+    };
+    const LOCATION_COLS = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+
     const schedule: Record<string, DaySchedule> = {};
     let currentDayKey: string | null = null;
+    let currentTime: string | null = null;
+
+    // Per-column tracking for merged cell reconstruction
+    const activeEvents: Map<number, TimetableEvent> = new Map();
+
+    const finalizeAllActive = (endTime: string): void => {
+      for (const [, evt] of activeEvents) {
+        evt.endTime = endTime;
+      }
+      activeEvents.clear();
+    };
+
+    const finalizeColumn = (col: number, endTime: string): void => {
+      const evt = activeEvents.get(col);
+      if (evt) {
+        evt.endTime = endTime;
+        activeEvents.delete(col);
+      }
+    };
 
     for (let i = 3; i < timetableRows.length; i++) {
       const row = timetableRows[i];
-
-      // Date detection
-      const dateStr =
-        (row[1] && /\d{2}\.\d{2}\.\d{4}/.test(row[1])) ? row[1] :
-        (row[2] && /\d{2}\.\d{2}\.\d{4}/.test(row[2])) ? row[2] : null;
-
-      if (dateStr) {
-        const m = dateStr.match(/(\d{2})\.(\d{2})\.(\d{4})/);
-        if (m) {
-          currentDayKey = `${m[3]}-${m[2]}-${m[1]}`;
+      // --- Day header detection (date can be in col1 OR col2) ---
+      const col1 = row[1]?.trim() ?? '';
+      const col2 = row[2]?.trim() ?? '';
+      const dateSource = /\d{2}\.\d{2}\.\d{4}/.test(col1) ? col1
+                       : /\d{2}\.\d{2}\.\d{4}/.test(col2) ? col2
+                       : null;
+      if (dateSource) {
+        const dateMatch = dateSource.match(/(\d{2})\.(\d{2})\.(\d{4})/);
+        if (dateMatch) {
+          // Finalize all active events from previous day
+          if (currentTime) {
+            finalizeAllActive(this.addOneHour(currentTime));
+          }
+          currentDayKey = `${dateMatch[3]}-${dateMatch[2]}-${dateMatch[1]}`;
           schedule[currentDayKey] = {
-            dayLabel_ru: dateStr.split(',')[0].trim(),
-            fullDayDescription_ru: dateStr.trim(),
+            dayLabel_ru: dateSource.split(',')[0].trim(),
+            fullDayDescription_ru: dateSource,
             events: [],
           };
+          currentTime = null;
           continue;
         }
       }
 
-      const timeStr = row[1];
-      if (timeStr && timeStr.includes(':') && currentDayKey) {
-        const startRaw = timeStr.split('-')[0].trim();
-        const endRaw = timeStr.includes('-') ? timeStr.split('-')[1].trim() : null;
-        const startTime = this.formatTime(startRaw);
-        const endTime = endRaw ? this.formatTime(endRaw) : this.addOneHour(startTime);
 
-        // Location columns 2–10
-        for (let col = 2; col <= 10; col++) {
-          const content = row[col];
-          if (content && content.trim()) {
-            const event = this.buildEvent(content, startTime, endTime, this.locationMapping[col] ?? null, workshopDetails, currentDayKey);
-            schedule[currentDayKey].events.push(event);
-          }
-        }
+      if (!currentDayKey) continue;
 
-        // "Other place" column 11
-        const other = row[11];
-        if (other && other.trim()) {
-          const event = this.buildEvent(other, startTime, endTime, null, workshopDetails, currentDayKey);
-          schedule[currentDayKey].events.push(event);
+      // --- Time parsing ---
+      if (/\d{1,2}:\d{2}/.test(col1)) {
+        const dashIdx = col1.indexOf('-');
+        const startRaw = dashIdx >= 0 ? col1.slice(0, dashIdx).trim() : col1;
+        currentTime = this.formatTime(startRaw);
+      }
+
+      if (!currentTime) continue;
+
+      // --- Determine if this row has any new content in location columns ---
+      const filledCols = new Set<number>();
+      for (const col of LOCATION_COLS) {
+        if (row[col]?.trim()) {
+          filledCols.add(col);
         }
       }
+      const hasAnyNewContent = filledCols.size > 0;
+
+      // --- If this row has new content: finalize active events in columns that NOW have new content ---
+      // --- If this row is entirely empty (continuation): extend all active events ---
+      for (const col of LOCATION_COLS) {
+        const content = row[col]?.trim();
+        if (content) {
+          // New content in this column → finalize any active event, start new one
+          finalizeColumn(col, currentTime);
+
+          // Check for inline time range (e.g. "8:00 - 13:00 Регистрация...")
+          const inline = this.extractInlineTimeRange(content);
+          const eventText = inline ? inline.cleanedText : content;
+          const startTime = inline ? inline.start : currentTime;
+          const endTime = inline ? inline.end : this.addOneHour(currentTime);
+
+          const event = this.buildEvent(
+            eventText, startTime, endTime,
+            locationColMap[col], workshopDetails, currentDayKey
+          );
+          schedule[currentDayKey].events.push(event);
+
+          // Only track for merge-extension if no inline range
+          if (!inline) {
+            activeEvents.set(col, event);
+          }
+        } else if (!hasAnyNewContent) {
+          // Truly empty continuation row → extend active event in this column
+          const active = activeEvents.get(col);
+          if (active) {
+            active.endTime = this.addOneHour(currentTime);
+          }
+        } else {
+          // Row has content in OTHER columns but not this one → finalize this column's event
+          finalizeColumn(col, currentTime);
+        }
+      }
+
+      // --- "Other place" columns 11 + 12 ---
+      const otherName = row[11]?.trim();
+      const otherPlace = row[12]?.trim();
+      if (otherName) {
+        // "Other" events always get exact 1-hour slots (no merge tracking)
+        const inline = this.extractInlineTimeRange(otherName);
+        const eventText = inline ? inline.cleanedText : otherName;
+        const startTime = inline ? inline.start : currentTime;
+        const endTime = inline ? inline.end : this.addOneHour(currentTime);
+
+        const event = this.buildEvent(
+          eventText, startTime, endTime,
+          otherPlace ?? null, workshopDetails, currentDayKey
+        );
+        schedule[currentDayKey].events.push(event);
+      }
+    }
+
+    // Finalize any remaining active events at end of data
+    if (currentTime) {
+      finalizeAllActive(this.addOneHour(currentTime));
     }
 
     return {
       eventInfo: {
         eventName: 'Hameln',
-        startDate: '2025-05-28',
-        endDate: '2025-06-01',
+        startDate: '2026-05-13',
+        endDate: '2026-05-17',
         mainLanguage: 'ru',
       },
       locations: [],
