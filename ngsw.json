@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1778188836685,
+  "timestamp": 1778276630908,
   "index": "/hameln/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/hameln/favicon.ico",
         "/hameln/index.html",
-        "/hameln/main-BOTGIDGI.js",
+        "/hameln/main-V5RTIYYJ.js",
         "/hameln/manifest.webmanifest",
         "/hameln/styles-TD7WWXZE.css"
       ],
@@ -67,8 +67,8 @@
     "/hameln/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
     "/hameln/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
     "/hameln/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
-    "/hameln/index.html": "6663a6a395f596a106b6fb9a63ac5409f2e75248",
-    "/hameln/main-BOTGIDGI.js": "57b959a2132890e02bfda73aa09ef6ab1aa7fa19",
+    "/hameln/index.html": "355ee3ff6e95f855d614982fbd7c192c4d8914a2",
+    "/hameln/main-V5RTIYYJ.js": "b8b49bdb3050b57cd835ea8e82ef1f358b888216",
     "/hameln/manifest.webmanifest": "80bf76a37e1ab79e33b30d16d588d7a4f3eca0bc",
     "/hameln/styles-TD7WWXZE.css": "547d2f119f57385e69e4ad4f4f7dfd672a942e5f"
   },
