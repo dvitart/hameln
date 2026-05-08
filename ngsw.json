@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1778277852641,
+  "timestamp": 1778278645213,
   "index": "/hameln/index.html",
   "assetGroups": [
     {
@@ -59,14 +59,14 @@
   "hashTable": {
     "/hameln/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
     "/hameln/hameln.png": "8cb40ea0d1b1c78cfbdf367452831af1efec8a1c",
-    "/hameln/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
-    "/hameln/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
-    "/hameln/icons/icon-152x152.png": "eae6e0f0c8afb8aaae339e2a569b43e9238e5e6c",
-    "/hameln/icons/icon-192x192.png": "15c4180454633880d98674aa7394656196c91584",
-    "/hameln/icons/icon-384x384.png": "94a915751ef6c9282df9aea405ad679230631814",
-    "/hameln/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
-    "/hameln/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
-    "/hameln/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
+    "/hameln/icons/icon-128x128.png": "25927c06c0dd8cd712ee3a2b5694968a3c2961c4",
+    "/hameln/icons/icon-144x144.png": "df428b674212ae0a92a111c665a0a2435d9df915",
+    "/hameln/icons/icon-152x152.png": "9c0b817c05f8f25d43a5e90e33480a9c3eca6bd9",
+    "/hameln/icons/icon-192x192.png": "03e2df811bf5e2a9905d33a7f3d995ff6bf3f2e5",
+    "/hameln/icons/icon-384x384.png": "53e629dd73efffa87f66923325e54388a34303a1",
+    "/hameln/icons/icon-512x512.png": "8e8a3235fefadec3482d53bc60f511d8204a6226",
+    "/hameln/icons/icon-72x72.png": "82ffe2876cadcd4990a36dd950a9371f8c220cae",
+    "/hameln/icons/icon-96x96.png": "ad1dedf9c2554373eaa1e7fc6e9fb3fb318ac819",
     "/hameln/index.html": "d9cb0e8dbdbfb8d6f474ed9916f4b0f819c44d67",
     "/hameln/main-YYU4H6NO.js": "62fa8d92a1a83600fe8cb37c02c7a1ca623891f9",
     "/hameln/manifest.webmanifest": "80bf76a37e1ab79e33b30d16d588d7a4f3eca0bc",
