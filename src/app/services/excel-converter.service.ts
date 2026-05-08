@@ -173,6 +173,16 @@ export class ExcelConverterService {
 
         // Find the time of the row AFTER the merge ends
         for (let nextR = r + rowSpan; nextR < data.length; nextR++) {
+           const nextRow = data[nextR];
+           if (nextRow) {
+             const c1 = String(nextRow[1] ?? '').trim();
+             const c2 = String(nextRow[2] ?? '').trim();
+             const isDayHeader = /\d{2}\.\d{2}\.\d{4}/.test(c1) || /\d{2}\.\d{2}\.\d{4}/.test(c2) || this.parseExcelDate(c1) || this.parseExcelDate(c2);
+             if (isDayHeader) {
+               break;
+             }
+           }
+
            if (rowTimes[nextR]) {
               endTime = rowTimes[nextR];
               break;
@@ -181,7 +191,14 @@ export class ExcelConverterService {
         
         if (!endTime) {
           // Fallback if it's the very last event of the day
-          endTime = this.addHours(currentTime!, 1);
+          let lastTime = currentTime!;
+          for (let prevR = r + rowSpan - 1; prevR >= r; prevR--) {
+            if (rowTimes[prevR]) {
+              lastTime = rowTimes[prevR];
+              break;
+            }
+          }
+          endTime = this.addHours(lastTime, 1);
         }
 
         const inline = this.extractInlineTimeRange(content);
