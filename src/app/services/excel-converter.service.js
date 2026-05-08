@@ -235,13 +235,22 @@ var ExcelConverterService = function () {
                 if (!currentTime)
                     return "continue";
                 var processEvent = function (content, colIdx, locationId) {
-                    var _a, _b, _c;
+                    var _a, _b, _c, _d, _e;
                     if (!content)
                         return;
                     var rowSpan = getRowSpan(r, colIdx);
                     var endTime = '';
                     // Find the time of the row AFTER the merge ends
                     for (var nextR = r + rowSpan; nextR < data.length; nextR++) {
+                        var nextRow = data[nextR];
+                        if (nextRow) {
+                            var c1 = String((_a = nextRow[1]) !== null && _a !== void 0 ? _a : '').trim();
+                            var c2 = String((_b = nextRow[2]) !== null && _b !== void 0 ? _b : '').trim();
+                            var isDayHeader = /\d{2}\.\d{2}\.\d{4}/.test(c1) || /\d{2}\.\d{2}\.\d{4}/.test(c2) || _this.parseExcelDate(c1) || _this.parseExcelDate(c2);
+                            if (isDayHeader) {
+                                break;
+                            }
+                        }
                         if (rowTimes[nextR]) {
                             endTime = rowTimes[nextR];
                             break;
@@ -249,7 +258,14 @@ var ExcelConverterService = function () {
                     }
                     if (!endTime) {
                         // Fallback if it's the very last event of the day
-                        endTime = _this.addHours(currentTime, 1);
+                        var lastTime = currentTime;
+                        for (var prevR = r + rowSpan - 1; prevR >= r; prevR--) {
+                            if (rowTimes[prevR]) {
+                                lastTime = rowTimes[prevR];
+                                break;
+                            }
+                        }
+                        endTime = _this.addHours(lastTime, 1);
                     }
                     var inline = _this.extractInlineTimeRange(content);
                     var eventText = inline ? inline.cleanedText : content;
@@ -261,10 +277,10 @@ var ExcelConverterService = function () {
                     schedule[currentDayKey].events.push({
                         dateKey: currentDayKey,
                         eventId: eventId,
-                        title_ru: title || ((_a = details === null || details === void 0 ? void 0 : details.title_ru) !== null && _a !== void 0 ? _a : ''),
+                        title_ru: title || ((_c = details === null || details === void 0 ? void 0 : details.title_ru) !== null && _c !== void 0 ? _c : ''),
                         eventType: 'workshop',
-                        description_ru: (_b = details === null || details === void 0 ? void 0 : details.description_ru) !== null && _b !== void 0 ? _b : '',
-                        url: (_c = details === null || details === void 0 ? void 0 : details.url) !== null && _c !== void 0 ? _c : '',
+                        description_ru: (_d = details === null || details === void 0 ? void 0 : details.description_ru) !== null && _d !== void 0 ? _d : '',
+                        url: (_e = details === null || details === void 0 ? void 0 : details.url) !== null && _e !== void 0 ? _e : '',
                         locationId: locationId,
                         startTime: finalStart,
                         endTime: finalEnd,
