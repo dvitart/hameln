@@ -16,6 +16,11 @@ export interface TimetableEvent {
   title_ru: string;
   eventType: EventType;
   description_ru: string;
+  host?: string;
+  category?: string;
+  nickName?: string;
+  wsId?: string;
+  blockId?: string;
   details_ru?: string;
   targetAudience_ru?: string;
   url: string;

@@ -14,7 +14,7 @@ import { EventCardComponent } from '../event-card/event-card.component';
         <h3 class="timeslot-time-header">
           {{ timeLabel() }}
         </h3>
-        @for (ev of events(); track (ev.eventId ?? ev.title_ru) + '|' + ev.locationId + '|' + $index) {
+        @for (ev of visibleEvents(); track ev.blockId || (ev.eventId ?? ev.title_ru) + '|' + ev.dateKey) {
           <app-event-card [event]="ev" [viewMode]="viewMode()" />
         }
       </div>
@@ -58,7 +58,8 @@ export class TimeslotGroupComponent {
     return this.events().filter((ev) => {
       if (mode === 'all') return true;
       if (ev.eventType === 'meal') return true;
-      const key = `${ev.eventId ?? ev.title_ru}|${ev.dateKey}`;
+      
+      const key = ev.blockId || `${ev.eventId ?? ev.title_ru}|${ev.dateKey}`;
       return this.favoritesService.isFavorite(key);
     });
   });
