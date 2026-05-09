@@ -41,8 +41,8 @@ interface TimeslotGroup {
       font-size: 1.4rem;
       font-weight: 700;
       color: #2d3748;
-      margin-top: 0;
-      margin-bottom: 1.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
       border-bottom: 3px solid #4FC3F7; /* Logo Blue */
     }
 

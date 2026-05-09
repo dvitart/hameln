@@ -1,7 +1,8 @@
-import { Component, signal, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { Component, signal, OnInit, inject } from '@angular/core';
+import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ScheduleComponent } from './components/schedule/schedule.component';
+import { TimetableService } from './services/timetable.service';
 
 @Component({
   selector: 'app-root',
@@ -28,13 +29,36 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
           </div>
         </div>
 
-        <!-- PWA Install Button -->
-        @if (showInstallBtn()) {
-          <button class="install-btn" (click)="installPwa()">
-            <mat-icon>install_mobile</mat-icon>
-            <span>Установить</span>
+        <!-- Actions -->
+        <div class="header-actions">
+          <!-- Disclaimer Toggle -->
+          <button
+            class="header-action-btn disclaimer-btn"
+            [class.active]="timetableService.showDisclaimer()"
+            (click)="timetableService.showDisclaimer.set(!timetableService.showDisclaimer())"
+            aria-label="Показать важное замечание"
+          >
+            <mat-icon>{{ timetableService.showDisclaimer() ? 'info' : 'warning' }}</mat-icon>
           </button>
-        }
+
+          <!-- Mobile Refresh Button -->
+          <button
+            class="header-action-btn mobile-refresh-btn"
+            (click)="onRefresh()"
+            [disabled]="timetableService.isLoading()"
+            aria-label="Refresh data"
+          >
+            <mat-icon [class.spinning]="timetableService.isLoading()">refresh</mat-icon>
+          </button>
+
+          <!-- PWA Install Button -->
+          @if (showInstallBtn()) {
+            <button class="install-btn" (click)="installPwa()">
+              <mat-icon>install_mobile</mat-icon>
+              <span>Установить</span>
+            </button>
+          }
+        </div>
       </div>
     </header>
 
@@ -138,6 +162,66 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
       letter-spacing: 0.1em;
     }
 
+    /* ---- Actions ---- */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .header-action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 2px solid #EF6C00;
+      border-radius: 50%;
+      background: transparent;
+      color: #EF6C00 !important;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      line-height: 0;
+    }
+
+    .header-action-btn:hover:not(:disabled) {
+      background: #EF6C00;
+      color: #fff !important;
+    }
+
+    .header-action-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .header-action-btn mat-icon {
+      margin: 0;
+      padding: 0;
+      display: block;
+      font-size: 1.25rem;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .mobile-refresh-btn {
+      display: none;
+    }
+
+    .disclaimer-btn.active {
+      background: #EF6C00;
+      color: #fff !important;
+    }
+
+    .spinning {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     /* ---- Install Button ---- */
     .install-btn {
       display: flex;
@@ -177,15 +261,33 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
     }
 
     /* ---- Responsive ---- */
+    @media (max-width: 520px) {
+      .app-header { height: 64px; }
+      .container { padding: 0.5rem; }
+      .header-inner { padding: 0 0.5rem; height: 64px; }
+      .header-brand { gap: 0.25rem; }
+      .logo-wrap { width: 40px; height: 40px; }
+      .app-title { font-size: 1.25rem; }
+      .header-actions { gap: 0.25rem; }
+      .header-action-btn { width: 34px; height: 34px; }
+      .header-action-btn mat-icon { font-size: 1rem; width: 1rem; height: 1rem; }
+    }
+
+    @media (max-width: 400px) {
+      .app-title { font-size: 1.2rem; }
+      .logo-wrap { width: 36px; height: 36px; }
+      .title-meta { display: none; } /* Hide year/date on very small screens to save space */
+    }
+
     @media (max-width: 480px) {
-      .app-title { font-size: 1.5rem; }
-      .logo-wrap { width: 50px; height: 50px; }
       .install-btn span { display: none; }
-      .install-btn { padding: 0.5rem; border-radius: 50%; }
+      .install-btn { padding: 0.5rem; border-radius: 50%; width: 36px; height: 36px; min-width: auto; }
+      .mobile-refresh-btn { display: flex; }
     }
   `],
 })
 export class AppComponent implements OnInit {
+  protected readonly timetableService = inject(TimetableService);
   protected readonly showInstallBtn = signal(false);
   private deferredPrompt: BeforeInstallPromptEvent | null = null;
 
@@ -200,6 +302,10 @@ export class AppComponent implements OnInit {
       this.showInstallBtn.set(false);
       this.deferredPrompt = null;
     });
+  }
+
+  protected async onRefresh(): Promise<void> {
+    await this.timetableService.fetchFromGoogleSheets(true);
   }
 
   protected async installPwa(): Promise<void> {

@@ -6,33 +6,37 @@
 
 :root {
   --app-header-height: 80px;
-  --tab-header-height: 48px;
+}
+
+@media (max-width: 520px) {
+  :root {
+    --app-header-height: 64px;
+  }
 }
 
 html, body {
   margin: 0;
   padding: 0;
   min-height: 100%;
+}
+
+html {
+  overflow-y: scroll;
+  overflow-x: clip; 
+}
+
+body {
   background-color: #fafafa;
   font-family: 'Inter', sans-serif;
   color-scheme: light;
+  max-width: 100vw;
 }
 
-// Fix scrolling and sticky support
-html {
-  overflow-x: hidden;
-  overflow-y: scroll;
+// Ensure tab header can be sticky
+.mat-mdc-tab-group {
+  max-width: 100vw;
 }
 
-// CRITICAL: Force all tab parents to allow sticky overflow
-.mat-mdc-tab-group,
-.mat-mdc-tab-body-wrapper,
-.mat-mdc-tab-body,
-.mat-mdc-tab-body-content,
-.mat-mdc-tab-labels,
-.mat-mdc-tab-header {
-  overflow: visible !important;
-}
 
 // Tabs stick directly below the header
 .mat-mdc-tab-header {
@@ -43,14 +47,15 @@ html {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-// Day+date sticks directly below the tabs
+// Remove sticky from day-header to prevent overlaps
 .day-header {
-  position: sticky !important;
-  top: calc(var(--app-header-height) + var(--tab-header-height)) !important;
-  z-index: 900 !important;
-  background: #fafafa !important;
-  padding: 1rem 0 !important;
-  box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  position: relative !important;
+  top: auto !important;
+  z-index: 1 !important;
+  background: transparent !important;
+  padding: 0.5rem 0 !important;
+  box-shadow: none !important;
+  margin-top: 1rem;
 }
 
 // Global UI Overrides

@@ -62,15 +62,17 @@ import { DayScheduleComponent } from '../day-schedule/day-schedule.component';
     </div>
 
     <!-- Info Note -->
-    <mat-card class="note-card">
-      <mat-card-content>
-        <span>
-          <strong>Важное замечание:</strong> У нас нет возможности гарантировать актуальность этого расписания.
-          В случае сомнений всегда действует официальное и актуальное расписание от организаторов.
-          <br>Нажмите на звёздочку (☆), чтобы сохранить мастерскую в избранное.
-        </span>
-      </mat-card-content>
-    </mat-card>
+    @if (timetableService.showDisclaimer()) {
+      <mat-card class="note-card">
+        <mat-card-content>
+          <span>
+            <strong>Важное замечание:</strong> У нас нет возможности гарантировать актуальность этого расписания.
+            В случае сомнений всегда действует официальное и актуальное расписание от организаторов.
+            <br>Нажмите на звёздочку (☆), чтобы сохранить мастерскую в избранное.
+          </span>
+        </mat-card-content>
+      </mat-card>
+    }
 
     <!-- No Favorites Message -->
     @if (viewMode() === 'favorites' && favoritesService.count() === 0) {
@@ -118,7 +120,7 @@ import { DayScheduleComponent } from '../day-schedule/day-schedule.component';
       align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 0.5rem;
     }
 
     .refresh-btn {
@@ -140,6 +142,10 @@ import { DayScheduleComponent } from '../day-schedule/day-schedule.component';
     .refresh-btn:disabled {
       background-color: #fff3e0 !important;
       color: #ffb74d !important;
+    }
+
+    @media (max-width: 480px) {
+      .refresh-btn { display: none; }
     }
 
     .spinning {
@@ -195,7 +201,9 @@ import { DayScheduleComponent } from '../day-schedule/day-schedule.component';
       background: linear-gradient(135deg, rgba(124,179,66,0.06), rgba(124,179,66,0.02));
       border-left: 4px solid #7CB342; /* Logo Green */
       border-radius: 20px !important;
+      margin-top: 1rem;
       margin-bottom: 1.5rem;
+      width: 100%;
 
       mat-card-content {
         display: flex;
@@ -204,12 +212,6 @@ import { DayScheduleComponent } from '../day-schedule/day-schedule.component';
         color: #4a6c2f;
         padding: 0.75rem;
       }
-    }
-
-    .note-icon {
-      color: #7CB342; /* Logo Green */
-      flex-shrink: 0;
-      margin-top: 0.1rem;
     }
 
     .no-favorites-card {
@@ -250,10 +252,24 @@ export class ScheduleComponent implements OnInit {
   protected showOnlyFavorites = this.viewMode() === 'favorites';
 
   constructor() {
-    // Persist viewMode changes to localStorage
+    // Persist viewMode changes to localStorage and handle migration
     effect(() => {
-      localStorage.setItem('workshopPlanView', this.viewMode());
+      const mode = this.viewMode();
+      localStorage.setItem('workshopPlanView', mode);
+      
+      if (mode === 'favorites') {
+        this.runMigration();
+      }
     });
+  }
+
+  private runMigration(): void {
+    const allEvents = Object.values(this.timetableService.schedule())
+      .flatMap(day => day.events);
+    
+    if (allEvents.length > 0) {
+      this.favoritesService.migrateToBlockIds(allEvents);
+    }
   }
 
   ngOnInit(): void {
@@ -271,7 +287,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   protected async onRefresh(): Promise<void> {
-    const success = await this.timetableService.fetchFromGoogleSheets();
+    const success = await this.timetableService.fetchFromGoogleSheets(true);
     if (!success) {
       console.warn('Daten konnten nicht aktualisiert werden.');
     }

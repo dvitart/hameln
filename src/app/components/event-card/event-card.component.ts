@@ -34,36 +34,55 @@ import { TimetableService } from '../../services/timetable.service';
         <mat-card class="event-card">
           <mat-card-header>
             <mat-card-title class="event-title">{{ event().title_ru }}</mat-card-title>
-            <button
-              mat-icon-button
-              class="favorite-btn"
-              [class.favorited]="isFav()"
-              [attr.aria-label]="isFav() ? 'Удалить из избранного' : 'Добавить в избранное'"
-              (click)="toggleFavorite($event)"
-            >
-              <mat-icon>{{ isFav() ? 'star' : 'star_border' }}</mat-icon>
-            </button>
+            
+            <div class="header-actions-container">
+              @if (event().category) {
+                <span class="category-tag" [style.backgroundColor]="categoryColor()">
+                  {{ event().category }}
+                </span>
+              }
+              <button
+                mat-icon-button
+                class="favorite-btn-inline"
+                [class.favorited]="isFav()"
+                [attr.aria-label]="isFav() ? 'Удалить из избранного' : 'Добавить в избранное'"
+                (click)="toggleFavorite($event)"
+              >
+                <mat-icon>{{ isFav() ? 'star' : 'star_border' }}</mat-icon>
+              </button>
+            </div>
           </mat-card-header>
 
           <mat-card-content>
-            @if (event().details_ru) {
-              <p class="event-details">{{ event().details_ru }}</p>
-            }
-            @if (event().targetAudience_ru) {
-              <p class="event-details">Целевая аудитория: {{ event().targetAudience_ru }}</p>
-            }
-            @if (event().startTime && event().endTime) {
-              <p class="event-details">
-                <mat-icon class="inline-icon">schedule</mat-icon>
-                {{ event().startTime }} – {{ event().endTime }}
-              </p>
-            }
-            @if (locationName()) {
-              <p class="event-location">
-                <mat-icon class="inline-icon">place</mat-icon>
-                {{ locationName() }}
-              </p>
-            }
+            <!-- Meta Data Row -->
+            <div class="event-meta-grid">
+              @if (event().host) {
+                <div class="meta-item">
+                  <mat-icon class="meta-icon host-icon">person</mat-icon>
+                  @if (event().nickName) {
+                    <a [href]="'https://hameln.rubikus.de/u/' + event().nickName" target="_blank" class="host-link">
+                      {{ event().host }}
+                    </a>
+                  } @else {
+                    {{ event().host }}
+                  }
+                </div>
+              }
+
+              @if (event().startTime && event().endTime) {
+                <div class="meta-item">
+                  <mat-icon class="meta-icon time-icon">schedule</mat-icon>
+                  <span>{{ event().startTime }} – {{ event().endTime }}</span>
+                </div>
+              }
+
+              @if (locationName()) {
+                <div class="meta-item location-item">
+                  <mat-icon class="meta-icon location-icon">place</mat-icon>
+                  <span class="location-text">{{ locationName() }}</span>
+                </div>
+              }
+            </div>
 
             @if (event().description_ru) {
               <div class="description-container" [class.expanded]="isExpanded()">
@@ -107,10 +126,11 @@ import { TimetableService } from '../../services/timetable.service';
     }
 
     mat-card-header {
-      padding: 1rem 1rem 0.5rem !important;
+      padding: 1rem 3.5rem 0.5rem 1rem !important; /* Space for absolute star on the right */
       display: flex;
+      flex-direction: column; /* Category always below title if needed, or we handle it */
       align-items: flex-start;
-      justify-content: space-between;
+      position: relative;
     }
 
     .event-title {
@@ -118,36 +138,103 @@ import { TimetableService } from '../../services/timetable.service';
       font-size: 1.1rem;
       font-weight: 700;
       color: #2d3748;
-      flex: 1;
-      padding-right: 2.5rem;
+      width: 100%;
       line-height: 1.3;
+      margin: 0 0 0.5rem 0;
     }
 
-    .favorite-btn {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      color: #d1d5db;
-      background: rgba(0,0,0,0.02);
-      border-radius: 50%;
+    .header-actions-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    .favorite-btn.favorited {
+    .favorite-btn-inline {
+      position: absolute !important;
+      top: 0.5rem;
+      right: 1rem;
+      z-index: 10;
       color: #FFB300; /* Logo Yellow */
-      background: rgba(255, 179, 0, 0.12);
+      background: transparent;
+      width: 32px;
+      height: 32px;
+    }
+
+    .favorite-btn-inline mat-icon {
+      font-size: 1.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .favorite-btn-inline.favorited {
+      color: #FFB300;
+    }
+
+    @media (max-width: 480px) {
+      .event-title {
+        font-size: 1rem;
+      }
+    }
+
+    .category-tag {
+      color: #000000;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+      border: none;
     }
 
     mat-card-content {
       padding: 0 1rem 1rem !important;
     }
 
-    .event-details {
-      font-size: 0.9rem;
-      color: #4b5563;
-      margin: 0.4rem 0;
+    /* ---- Meta Grid ---- */
+    .event-meta-grid {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    .meta-icon {
+      font-size: 1.2rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .host-icon { color: #FFD54F; }
+    .time-icon { color: #8BC34A; }
+    .location-icon { color: #FF7043; }
+
+    .location-item {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .location-text {
+      line-height: 1.3;
+    }
+
+    .host-link {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(0,0,0,0.2);
+    }
+
+    .host-link:hover {
+      color: #EF6C00;
+      border-bottom-color: #EF6C00;
     }
 
     .event-location {
@@ -270,6 +357,9 @@ export class EventCardComponent implements AfterViewInit {
 
   protected readonly favoriteKey = computed(() => {
     const ev = this.event();
+    // Prefer blockId as the unique identifier
+    if (ev.blockId) return ev.blockId;
+    
     const baseId = ev.eventId ?? ev.title_ru;
     return `${baseId}|${ev.dateKey}`;
   });
@@ -281,6 +371,18 @@ export class EventCardComponent implements AfterViewInit {
   protected readonly locationName = computed(() =>
     this.timetableService.getLocationName(this.event().locationId)
   );
+
+  protected readonly categoryColor = computed(() => {
+    const cat = this.event().category?.toLowerCase() || '';
+    if (cat.includes('просвещение')) return '#FFD54F'; // Yellow
+    if (cat.includes('рукоделие')) return '#A5D6A7'; // Green
+    if (cat.includes('спорт')) return '#81D4FA'; // Blue
+    if (cat.includes('музыка') || cat.includes('танцы')) return '#CE93D8'; // Purple
+    if (cat.includes('игры')) return '#FFAB91'; // Orange
+    if (cat.includes('психология')) return '#F48FB1'; // Pink
+    if (cat.includes('жизнеобеспечение')) return '#FFD54F'; // Yellow (from screenshot)
+    return '#E0E0E0'; // Default gray
+  });
 
   protected readonly isVisible = computed(() => {
     const ev = this.event();
