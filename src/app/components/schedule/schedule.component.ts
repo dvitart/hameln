@@ -146,6 +146,15 @@ import { DayScheduleComponent } from '../day-schedule/day-schedule.component';
 
     @media (max-width: 480px) {
       .refresh-btn { display: none; }
+      
+      .segmented-control {
+        width: 100%;
+      }
+      
+      .segment-btn {
+        flex: 1;
+        justify-content: center;
+      }
     }
 
     .spinning {
