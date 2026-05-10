@@ -99,7 +99,7 @@ import { TimetableService } from '../../services/timetable.service';
             @if (event().url) {
               <div class="event-url">
                 <a [href]="event().url" target="_blank" rel="noopener noreferrer" mat-button color="primary">
-                  Подробнее <mat-icon>open_in_new</mat-icon>
+                  Пост на форуме <mat-icon>open_in_new</mat-icon>
                 </a>
               </div>
             }
@@ -326,7 +326,7 @@ import { TimetableService } from '../../services/timetable.service';
 export class EventCardComponent implements AfterViewInit {
   event = input.required<TimetableEvent>();
   viewMode = input.required<'all' | 'favorites'>();
-  
+
   protected readonly isExpanded = signal(false);
   protected readonly hasOverflow = signal(false);
   private readonly descriptionContent = viewChild<ElementRef<HTMLParagraphElement>>('descriptionContent');
@@ -359,7 +359,7 @@ export class EventCardComponent implements AfterViewInit {
     const ev = this.event();
     // Prefer blockId as the unique identifier
     if (ev.blockId) return ev.blockId;
-    
+
     const baseId = ev.eventId ?? ev.title_ru;
     return `${baseId}|${ev.dateKey}`;
   });
