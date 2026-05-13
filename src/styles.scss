@@ -6,11 +6,13 @@
 
 :root {
   --app-header-height: 80px;
+  --app-controls-height: 60px;
 }
 
 @media (max-width: 520px) {
   :root {
     --app-header-height: 64px;
+    --app-controls-height: 56px;
   }
 }
 
@@ -38,10 +40,10 @@ body {
 }
 
 
-// Tabs stick directly below the header
+// Tabs stick directly below the header and controls
 .mat-mdc-tab-header {
   position: sticky !important;
-  top: var(--app-header-height) !important;
+  top: calc(var(--app-header-height) + var(--app-controls-height)) !important;
   z-index: 1000 !important;
   background: white !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
