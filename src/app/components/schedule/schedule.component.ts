@@ -125,11 +125,6 @@ import { DayScheduleComponent } from '../day-schedule/day-schedule.component';
       flex-wrap: wrap;
       gap: 1rem;
       margin-bottom: 0.5rem;
-      position: sticky;
-      top: var(--app-header-height);
-      z-index: 1010;
-      background: #fafafa;
-      padding: 0.5rem 0;
     }
 
     .refresh-btn {
