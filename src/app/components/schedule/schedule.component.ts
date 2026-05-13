@@ -267,9 +267,12 @@ export class ScheduleComponent implements OnInit {
     const keys = this.timetableService.dateKeys();
     if (keys.length === 0) return 0;
     
-    // Format current date as YYYY-MM-DD in local time
+    // Format current date as YYYY-MM-DD in local time (not UTC)
     const now = new Date();
-    const today = now.toISOString().split('T')[0];
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const today = `${year}-${month}-${day}`;
     
     const index = keys.indexOf(today);
     return index !== -1 ? index : 0;
