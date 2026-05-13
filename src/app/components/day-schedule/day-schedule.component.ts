@@ -1,4 +1,4 @@
-import { Component, input, computed, inject } from '@angular/core';
+import { Component, input, computed, inject, AfterViewInit } from '@angular/core';
 import { TimetableService } from '../../services/timetable.service';
 import { TimetableEvent } from '../../models/timetable.model';
 import { TimeslotGroupComponent } from '../timeslot-group/timeslot-group.component';
