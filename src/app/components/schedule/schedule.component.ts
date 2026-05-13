@@ -85,7 +85,11 @@ import { DayScheduleComponent } from '../day-schedule/day-schedule.component';
 
     <!-- Tabs -->
     @if (timetableService.dateKeys().length > 0) {
-      <mat-tab-group mat-stretch-tabs="false" animationDuration="200ms">
+      <mat-tab-group 
+        mat-stretch-tabs="false" 
+        animationDuration="200ms"
+        [selectedIndex]="selectedTabIndex()"
+      >
         @for (dateKey of timetableService.dateKeys(); track dateKey) {
           <mat-tab [label]="tabLabel(dateKey)">
             <ng-template matTabContent>
@@ -258,6 +262,19 @@ export class ScheduleComponent implements OnInit {
   protected readonly viewMode = signal<'all' | 'favorites'>(
     (localStorage.getItem('workshopPlanView') as 'all' | 'favorites') ?? 'all'
   );
+
+  protected readonly selectedTabIndex = computed(() => {
+    const keys = this.timetableService.dateKeys();
+    if (keys.length === 0) return 0;
+    
+    // Format current date as YYYY-MM-DD in local time
+    const now = new Date();
+    const today = now.toISOString().split('T')[0];
+    
+    const index = keys.indexOf(today);
+    return index !== -1 ? index : 0;
+  });
+
   protected showOnlyFavorites = this.viewMode() === 'favorites';
 
   constructor() {

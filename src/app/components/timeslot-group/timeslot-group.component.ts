@@ -10,7 +10,7 @@ import { EventCardComponent } from '../event-card/event-card.component';
   imports: [EventCardComponent],
   template: `
     @if (visibleEvents().length > 0) {
-      <div class="timeslot-group">
+      <div class="timeslot-group" [id]="'slot-' + startTime()">
         <h3 class="timeslot-time-header">
           {{ timeLabel() }}
         </h3>
