@@ -87,7 +87,8 @@ export class DayScheduleComponent implements AfterViewInit {
     if (targetSlot) {
       const el = document.getElementById('slot-' + targetSlot.startTime);
       if (el) {
-        const headerOffset = 180; // Height of header + sticky controls + tabs
+        const isMobile = window.innerWidth <= 520;
+        const headerOffset = isMobile ? 115 : 130; // Height of sticky header + tabs
         const elementPosition = el.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
