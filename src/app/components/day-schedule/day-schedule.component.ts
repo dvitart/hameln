@@ -53,11 +53,51 @@ interface TimeslotGroup {
     }
   `],
 })
-export class DayScheduleComponent {
+export class DayScheduleComponent implements AfterViewInit {
   dateKey = input.required<string>();
   viewMode = input.required<'all' | 'favorites'>();
 
   private readonly timetableService = inject(TimetableService);
+
+  ngAfterViewInit() {
+    // Small delay to ensure tabs animation and rendering are complete
+    setTimeout(() => this.scrollToCurrentTime(), 400);
+  }
+
+  private scrollToCurrentTime() {
+    // Only auto-scroll if it's today
+    const now = new Date();
+    const today = now.toISOString().split('T')[0];
+    if (this.dateKey() !== today) return;
+
+    const currentTimeStr = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+    const slots = this.timeslots();
+    if (slots.length === 0) return;
+
+    // Find the last slot that has already started
+    let targetSlot = slots[0];
+    for (const slot of slots) {
+      if (slot.startTime <= currentTimeStr) {
+        targetSlot = slot;
+      } else {
+        break;
+      }
+    }
+
+    if (targetSlot) {
+      const el = document.getElementById('slot-' + targetSlot.startTime);
+      if (el) {
+        const headerOffset = 130; // Height of sticky header + tabs
+        const elementPosition = el.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }
 
   protected readonly dayDescription = computed(() => {
     const day = this.timetableService.schedule()[this.dateKey()];
